@@ -1,6 +1,11 @@
 /bin/
-/distribution/src/
-/distribution/tmp/
-/distribution/web/
+/distribution/
+/test/
 /src-js/
 .svn/
+/.externalToolBuilders/
+/.settings/
+.buildpath
+.classpath
+.project
+
