@@ -1,0 +1,206 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>processing GUI, ##yourLibrary##</title>
+<meta name="google-site-verification" content="gVLhWGc-ng4qnw6Y519IoCeA4FSQmm7rd00nicqW_4A" />
+<meta name="description" content="a GUI library for the programming environment processing, controlP5." />
+<meta name="keywords" content="gui, processing, processing.org, library, slider, button, knob, toggle, checkbox, listbox, radiobutton" />
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="en-us" />
+<meta name="ROBOTS" content="index,follow,archive" />
+<meta http-equiv="imagetoolbar" content="false" />
+<meta name="MSSmartTagsPreventParsing" content="true" />
+<meta name="author" content="##author##" />
+<meta name="Rating" content="General" />
+<meta name="revisit-after" content="7 Days" />
+<meta name="doc-class" content="Living Document" />
+<link rel="stylesheet" type="text/css" href="./stylesheet.css">
+
+		<!-- www.sojamo.de google analytics -->
+		<script type="text/javascript">
+			var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+			document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+		</script>
+		
+		<script type="text/javascript">
+			var pageTracker = _gat._getTracker("UA-5366589-1");
+			pageTracker._trackPageview();
+		</script>
+
+</head>
+<body>
+	<div id="container">
+		<div id="sidebar">
+			<div id="header">
+				<h1>controlP5</h1>
+				<p>A GUI (graphical user interface) library for processing.</p>
+			</div>
+			<div id="menu" class="clear">
+					<ul>
+					<li><a href="#about">About</a></li>
+					<li><a href="#installation">Installation</a></li>
+					<li><a href="#resources">Details</a></li>
+					<li><a href="#features">Features</a></li>
+					<li><a href="#examples">Examples</a></li>
+					<li><a href="./reference/index.html">JavaDoc Reference</a></li>
+					<li><a href="http://code.google.com/p/controlp5" target="_blank">Source Code</a></li>
+					<li><a href="http://www.sojamo.de/libraries" title="back to libraries index">Back</a></li>
+					<!-- <li><a href="#demos">Demos</a> \ </li> -->				
+					<!-- <li><a href="#misc">Misc</a> \ </li> -->
+					<!-- <li><a href="#images">Images</a> \ </li> -->
+					</ul>
+				</div>
+		</div>
+		
+		
+		
+		<div id="content" class="clear">
+			
+			<div id="about">
+			<h2>About</h2>
+			<p>
+			##yourLibrary## is a library written by <a href="##yourLink##">##author##</a> for the programming environment <a href="http://www.processing.org" target="_blank">processing</a>. Last update, ##date##.
+			</p>
+			<p>ControlP5 is a GUI and controller library for processing that can be used in authoring, application, and applet mode. Controllers such as Sliders, Buttons, Toggles, Knobs, Textfields, RadioButtons, Checkboxes  amongst others are easily added to a processing sketch. They can be arranged in separate control windows, and can be organized in tabs or groups. &#8594; <a href="#features">read more</a>.</p>
+			</div>
+			
+			
+			
+			<div id="installation" class="clear">
+			<h2>Installation</h2>
+			<p>
+			Unzip and put the extracted ##yourLibrary## folder into the libraries folder of your processing sketches. Reference and examples are included in the ##yourLibrary## folder.
+			</p>
+			<h2>Export to Applet</h2>
+			<p>
+			The security regulations for applets are very high and strict, in order to make controlP5 work properly within an applet, you need to make fields and functions which are used by controlP5 <b>public</b> in your code. 
+			</p>
+			</div>	
+			
+			
+			
+				<div id="resources">
+				<h2>Details</h2>
+				<p><strong>Keywords</strong> ##keywords##</p>
+				<p><strong>Reference</strong>. Have a look at the javadoc reference <a href="./reference/index.html" target="_blank">here</a>. a copy of the reference is included in the .zip as well.</p>		
+				<p><strong>Source</strong>. The source code of ##yourLibrary## is available at <a href="##source:url##">##source:host##</a>, and its repository can be browsed <a href="##source:repository##" target="_blank">here</a>.</p>
+				<p>
+				<!-- on which platform has the library been tested? -->
+				<strong>Platform</strong> ##tested:platform##
+			
+				<!-- which processing version did you use for testing your library? -->
+				<br /><strong>Processing</strong> ##tested:processingVersion##
+				
+				<!-- does your library depend on any other library or framework? -->
+				<br /><strong>Dependencies</strong> ##tested:dependencies##
+				</p>
+				</div>	
+		
+				<div  style="position:relative; float:left;">
+				<img src="./images/controlP5-1.jpg" alt="" />
+				<p class="img-legend" style="position:absolute; left:0px; bottom:0px; background:#333; color:#ccc; width:300px; margin:0; padding:6px 14px 14px 8px; line-height:11px;"><i>A selection of controllers available with controlP5, more controllers in the examples section.</i></p>
+				</div>
+				<div  style="position:relative; float:left; margin-top:20px;">
+				<img src="./images/controlP5-2.jpg" alt="" />
+				<p class="img-legend" style="position:absolute; left:0px; bottom:0px; background:#333; color:#ccc; width:300px; margin:0; padding:6px 14px 14px 8px; line-height:11px;"><i>User interface for the 'vulcano generator'. project synthazards, syntfarm.</i></p>
+				</div>
+
+			<div id="features" class="clear">
+			<h2>Features</h2>
+			<p><b>Automatic controller-event detection</b><br />ControlP5 offers a range of controllers that allow you to easily change and adjust values while your sketch is running. Each controller is identified by a unique name assigned when creating a controller. ControlP5 locates variables and functions inside your sketch and will link controllers to matching variables or functions automatically ControlP5toggle &#8594; <a href="./examples/controllers/ControlP5toggle/ControlP5toggle.pde">example</a>. Controller changes can easily be captured within your sketch by implementing the controlEvent function ControlP5controlEvent &#8594; <a href="./examples/use/ControlP5controlEvent/ControlP5controlEvent.pde">example</a>. </p>
+			<p><b>Show, hide, load, save</b><br />Controllers that have been added to your sketch can be arranged in tabs and groups to keep your controller sets organized. All controllers are drawn on top of a processing sketch by default. Several key combinations allow you to show and hide the user interface, and to saved and loaded  ControlP5 properties, ControlP5properties &#8594; <a href="./examples/controllers/ControlP5properties/ControlP5properties.pde">example</a>. The position of a controller can be adjusted during runtime by moving a controller while the ALT-key is pressed.
+			<br /><br /><b>Key-commands</b><br />ALT-mouseMove move controllers<br />
+			ALT-h show and hide controllers<br />
+			ALT-shift-s save controller setup in an properties-document<br />
+			ALT-shift-l load a controller setup from a properties-document<br />
+			</p>
+			<p><b>Control Windows</b><br />Add separate windows to your sketch. These windows can contain controlP5 controllers or you can simply use a ControlWindow to render an additional sketch in any renderer available. ControlP5controlWindow &#8594; <a href="./examples/ControlP5controlFont/ControlP5controlWindow.pde">example</a>.</p>
+			<!--
+			<p><b>Custom Colors</b><br />TODO add colors example. ControlP5colors &#8594; <a href="./examples/ControlP5controlFont/ControlP5controlWindow.pde">example</a>.</p>
+			-->
+			<p><b>Custom Fonts</b><br />By default controlP5 uses a bitFont to render text. To display text in PFont-format, controlP5 uses a wrapper called ControlFont ControlP5controlFont &#8594; <a href="./examples/use/ControlP5controlFont/ControlP5controlFont.pde">example</a>.</p>
+			<p><b>Custom Controllers</b><br />Take a look at the ControlP5diyController &#8594; <a href="./examples/extra/ControlP5diyController/ControlP5diyController.pde">example</a> which demostrates how to create your own custom controller.</p>
+			<p><b>Custom Buttons</b><br />Create controllers which use image based states instead of the default controlP5-look ControlP5button &#8594; <a href="./examples/controllers/ControlP5button/ControlP5button.pde">example</a>. <i>experimental</i></p>
+			</div>
+			<div id="examples" class="clear">
+			<h2>Examples</h2>
+			<p>Find a list of examples in the current distribution of ##yourLibrary##, or have a look by following the links below. If you want to share any examples, please let me know (andi at sojamo dot de).</p>
+			</div>
+			<div>
+			<ul class="examples-list">
+			##examples##
+			</ul>
+			</div>
+			
+		
+			
+			<!-- use the demos section for a list of applets run in a browser. -->
+			<!--
+			<div id="demos" class="clear">
+				<h2>demos</h2>
+				<p>
+				find a list of online applet demos below.
+				
+				<ul>
+					<li><a href="./applets/demo/index.html">demo</a></li>
+				</ul>
+				</p>
+			</div>
+			-->
+			
+			<!-- use the misc section for other relevant information. Activate the link to the misc section in the menu above. -->
+			<!--
+			<div id="misc" class="clear">
+				<p></p>
+			</div>
+			-->
+			
+			<!-- use the images/screenshots section. Activate the link to the misc section in the menu above. -->
+			<!--
+			<div id="images" class="clear">
+			</div>
+			-->
+			
+			
+			<br class="clear" />
+		</div>
+		
+	</div>
+	<div id="sidebar-right">
+		<div id="download" class="clear">
+			<h2>Download</h2>
+			<p class='p-small'>
+			Download ##yourLibrary## version ##versionNumber## release ##date## in 
+			<a href="./download/##yourLibrary##-##versionNumber##.zip">.zip format</a>. 
+			</p>
+		</div>
+		<div id="olderversions">
+			<h2>Older Versions</h2>
+		<p class='p-small'>For older versions see the <a href="http://code.google.com/p/controlp5/downloads/list" target="_blank">download list</a> on the google code project page.</p>
+		</div>
+		<div id="faq">
+		<h2>FAQ</h2>
+		<p class='p-small'>Frequently Asked Questions might have been answered in processing's discourse, have a look <a href="http://processing.org/discourse/yabb2/YaBB.pl?num=1163646039/165" target="_blank">here</a>. Or, <a href="http://processing.org/discourse/yabb2/YaBB.pl?action=search" target="_blank">search</a> the discourse for 'controlP5'.</p>
+		</div>
+		<div id="references">
+			<h3>Some projects using controlP5</h3>
+			<ul style="margin-top:10px;">
+			<li><a href="http://code.google.com/p/decode/" target="_blank">decode</a></li>
+			<li><a href="http://www.okdeluxe.co.uk/cop15/index.html" target="_blank">cop15 identity</a></li>
+			<li><a href="http://www.generative-gestaltung.de" target="_blank">generative gestaltung</a></li>
+			<li><a href="http://www.yonaskolb.com/predray" target="_blank">predray</a></li>
+			<li><a href="http://www.raintone.com/2009/03/fractalwavetables-v2/" target="_blank">fractaltables</a></li>
+			<li><a href="http://scott.j38.net/interactive/typestar/" target="_blank">typestar</a></li>
+			<li><a href="http://www.syedrezaali.com/blog/?p=1119" target="_blank">2D SuperShapes</a></li>
+			</ul>
+		</div>
+		
+	</div>
+	<div id="footer">
+		<p>by ##author##, 2012. <a href="http://www.sojamo.de" target="_blank">sojamo.de</a></p>
+	</div>
+	<script src="http://static.getclicky.com/js" type="text/javascript"></script>
+  	<script type="text/javascript">clicky.init(221828);</script>
+</body>
+</html>

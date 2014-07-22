@@ -1,0 +1,17 @@
+{
+  "/slider3": {
+    "min": 0,
+    "max": 255,
+    "value": 0
+  },
+  "/slider2": {
+    "min": 0,
+    "max": 255,
+    "value": 0
+  },
+  "/slider4": {
+    "min": 0,
+    "max": 255,
+    "value": 0
+  }
+}

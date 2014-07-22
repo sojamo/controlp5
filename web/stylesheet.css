@@ -1,0 +1,377 @@
+/* processingLibs style by andreas schlegel, sojamo. */
+
+
+* {
+	margin:0;
+	padding:0;
+	border:0;
+}
+
+
+body {
+	font-family : Arial, Helvetica, sans-serif; 
+    font-size : 12px;
+	font-weight : normal;
+	line-height	: normal;
+}
+
+
+
+#container {
+	margin-left:440px;
+	background-color:#fff;
+	padding-top:170px;
+	padding-bottom:500px;
+	border-right:1px solid #ccc;
+	border-left:1px solid #ccc;
+	width:490px;
+}
+
+#sidebar {
+	position:fixed;
+	left:0px;
+	top:0;
+	height:100%;
+	width:240px;
+	border-right:1px solid #ccc;
+}
+
+
+#header {
+	margin:0;
+	height:140px;
+	padding:30px 0px 0px 20px;
+}
+
+
+#header h1 {
+	font-size:14px;
+	font-weight:bold;
+}
+
+#header p {
+	margin:4px 0px 0px 0px;
+	padding:0;
+	font-size:12px;
+	width:150px;
+	color:#999;
+	line-height:12px;
+	font-weight:normal;	
+}
+
+#menu {
+	margin:0;
+	padding:0;
+	float:left;
+}
+
+#sidebar-right {
+	width:200px;
+	position:fixed;
+	left:240px;
+	top:0;
+	
+}
+
+
+#about,
+#download,
+#olderversions,
+#installation,
+#examples,
+#demos,
+#misc,
+#resources, #info,
+#references, #faq,
+#features {
+	float:left;
+	padding-top:30px;
+	padding-right:100px;
+	border-top:1px solid #ccc;
+	padding-left:20px;
+	display:block;
+	padding-bottom:20px;
+}
+
+#references, #faq {
+	padding-top:20px;
+	padding-right:20px;
+	padding-bottom:20px;	
+	background:#ddd;
+	border:0;
+}
+
+#download {
+	padding-top:30px;
+	padding-right:20px;
+	height:120px;
+}
+
+#olderversions {
+	padding-top:30px;
+	padding-right:20px;
+	height:80px;
+}
+
+
+#resources p {
+	font-size:12px;
+}
+
+
+.clear {
+	clear:both;
+}
+
+
+p.img-legend {
+	margin-left:20px;
+	margin-top:4px;
+	font-size:11px;
+}
+
+#footer {
+	border-top:1px solid #ccc;
+	height:20px;
+	padding-bottom:32px;
+	margin:0;
+	position:fixed;
+	left:0px;
+	bottom:0px;
+	width:240px;
+}
+
+#footer p {
+	padding-left:20px;
+	font-size:11px;
+}
+
+
+ul {
+	list-style:none;
+	padding:0;
+	margin:0;
+}
+
+#menu ul {
+	width:240px;
+	border-top:1px solid #ccc;
+}
+
+
+
+#menu ul li, #subMenu ul li {
+	font-size:11px;
+	font-weight:bold;
+}
+
+#menu ul li {
+	border-bottom:1px solid #ccc;
+	background:#eee;
+}
+
+#menu ul li a {
+	margin:0;
+	padding:8px 10px 6px 20px;
+	font-weight:bold;
+	text-decoration:none;
+	display:block;
+}
+
+#menu ul li a:hover {
+	background:#00FF92;
+	color:#fff;
+}
+
+
+
+.examples-list {
+	clear:both;
+}
+
+ul.examples-list  {
+		border-top:1px solid #bbb;
+}
+
+
+.examples-list li {
+}
+
+.examples-list li a {
+	padding:10px 10px 10px 20px;
+	display:block;
+	text-decoration:none;
+	background:#f4f4f4;
+	border-bottom:1px solid #bbb;
+}
+
+
+.examples-list li a:hover {
+	background:#03FFF9;
+}
+
+
+
+/* Headings */
+
+h1 {
+	font-size:14px;
+	font-weight:bold;
+}
+
+
+h2, h3, h4, h5, th {
+	font-size:14px;
+	font-weight:bold;
+}
+
+
+h3, h4, h5, th { 
+	font-size:12px;
+}
+
+
+p { 
+	font-size:12px;
+	margin-bottom:20px;
+	margin-top:10px;
+	line-height:18px;
+}
+
+p.p-small {
+	font-size:11px;
+	line-height:13px;
+}
+
+pre, code {  
+	font-family:"Courier New", Courier, monospace; 
+	font-size:1em; 
+	line-height:normal;
+}
+
+
+
+
+hr {
+	border:0;
+	height:1px;
+	margin-bottom:24px;
+}
+
+
+a {
+	text-decoration: underline;
+}
+
+
+a:hover, 
+a:active {
+	text-decoration: underline;
+}
+
+
+a:visited,
+a:link:visited {
+	text-decoration: underline;
+	font-weight: normal;
+}
+
+
+
+img {
+	border:0;
+}
+
+
+
+
+
+/* COLORS */
+
+
+body {
+	color : #333;
+	background-color :#fff;
+}
+
+
+
+
+
+h1, h2, h3, h4, h5, h6 {
+	color:#000;
+}
+
+#header {
+	background-color:#fff;
+	color:#000;
+}
+
+
+#header h1 {
+	color:#000;
+}
+
+#header p {
+	color:#999;
+}
+
+
+pre, code {  
+	color: #000000;
+}
+
+
+a,strong {
+	color: #333;
+}
+
+
+a:hover, 
+a:active {
+	color: #333;
+}
+
+
+a:visited,
+a:link:visited {
+	color: #333;
+}
+
+
+
+#sidebar-right {
+	background:transparent;
+}
+
+#download, #download a {
+	background:#00FF92;
+	color:#333;
+	
+}
+
+
+#olderversions, #olderversions a {
+	background:#00c66e;
+	color:#333;
+	
+}
+
+#references {
+	background:#ddd;
+}
+
+#faq {
+	background:#bbb;
+}
+
+
+#footer, #menu {
+	background-color:#fff;
+	color:#333;
+}
+
+
+#footer a, #menu a {
+	color:#333;
+}

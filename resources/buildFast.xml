@@ -1,0 +1,160 @@
+<project name="controlP5 fast" default="build" basedir="../">
+
+	<description>
+        ant build file for controlP5, a gui processing library.
+    </description>
+
+
+<!-- #### (1) where are your processing libraries located? edit location. #### -->
+	<property name="processing" location="${user.home}/Documents/Processing/libraries"/>
+
+
+<!-- #### (2) where are the jar files located that are required for compiling
+		your library such as e.g. core.jar ? edit location. #### -->
+
+	<property name="libraryClasspath"  location="../libs"/>
+	<path id="library-classpath">
+		<fileset dir="${libraryClasspath}" >
+<!-- #### (3) add the jar files that are required for compiling. edit name.
+		for more include files. duplicate <include name="" /> #### -->
+			<include name="core.jar"/>
+		</fileset>
+	</path>
+
+
+<!-- #### (4) set the java version that should be used to compile your library. #### -->
+	<property name="javaVersion" value="1.5"/>
+
+
+
+	<!-- #### 	the following items are properties that will be used to make changes to
+				the html document template. values of properties will be
+				implemented ito the document automatically. #### -->
+
+<!-- #### (5) who is the author of this library?  edit value.  #### -->
+	<property name="author" value="Andreas Schlegel"/>
+
+<!-- #### (6) which copyright?  edit value.  #### -->
+	<property name="copyright" value="(c) 2010"/>
+
+<!-- #### (7) give your library a name. edit value.  #### -->
+	<property name="libraryName"  value="controlP5"/>
+
+<!-- #### (8) give your library a name. edit value.   #### -->
+	<property name="versionNumber"  value="2.1.5"/>
+
+<!-- #### (9) your contact url. edit value. #### -->
+	<property name="yourLink"  value="http://www.sojamo.de" />
+
+<!-- #### (10) a comma separated list of keywords describing your library. edit value. #### -->
+	<property name="keywords"  value="gui, controller, interface" />
+
+<!-- #### (11) a comma separated list of platforms the library has been tested. edit value. #### -->
+	<property name="tested:platform"  value="osx, windows" />
+
+<!-- #### (12) the processing version this library has been tested with. edit value. #### -->
+	<property name="tested:processingVersion"  value="1.0+" />
+
+<!-- #### (13) does the library depend on any other library, dll, jnilib, etc. edit value. #### -->
+	<property name="tested:dependencies"  value="none" />
+
+<!-- #### (14) where can the source code be found? edit value. #### -->
+	<property name="source:host"  value="google code" />
+	<property name="source:url"  value="controlp5" />
+	<property name="source:repository"  value="http://code.google.com/p/controlp5/source/browse/" />
+
+
+
+
+
+
+
+
+
+
+
+
+	<!-- no changes or adjustments required below -->
+
+
+
+
+
+
+
+
+
+
+	<taskdef resource="net/sf/antcontrib/antcontrib.properties">
+		<classpath>
+			<pathelement location="./resources/code/ant-contrib-1.0b3.jar"/>
+		</classpath>
+	</taskdef>
+	<property name="jarFile" value="${libraryName}.jar"/>
+	<property name="src" location="src"/>
+	<property name="bin" location="bin"/>
+	<property name="reference" location="reference"/>
+	<property name="dist" location="distribution"/>
+
+
+
+	<target name="init">
+	<echo>Properties initialized.
+	src path			${src}
+	bin path 			${bin}
+	libraryClasspath		${libraryClasspath}
+	processing Libraries	${processing}
+	java version		${javaVersion}
+	</echo>
+	<echo>building library ...</echo>
+	<!-- Create the time stamp -->
+	<tstamp>
+		<format property="date" pattern="MM/dd/yyyy" offset="0" unit="hour"/>
+	</tstamp>
+	<mkdir dir="${dist}"/>
+  </target>
+
+	<!-- compile the library -->
+  <target name="compile" depends="init" description="compile the source" >
+		<javac srcdir="${src}" destdir="${bin}" target="${javaVersion}" source="${javaVersion}">
+			<classpath>
+				<path refid="library-classpath"/>
+			</classpath>
+		</javac>
+  </target>
+
+	<!-- build the distribution of the library -->
+  <target name="build" depends="compile" description="generate the distribution" >
+  	<!-- delete the previous content of the ${dist} folder -->
+  	<delete dir="${dist}" />
+
+  	<!-- build the structure for ${dist} -->
+  	<mkdir dir="${dist}" />
+  	<mkdir dir="${dist}/library" />
+  	<mkdir dir="${dist}/examples" />
+  	<mkdir dir="${dist}/reference" />
+  	<mkdir dir="${dist}/src" />
+  	<jar jarfile="${dist}/library/${jarFile}" basedir="${bin}"/>
+    <!--
+  	<copy todir="${dist}/examples">
+  		<fileset dir="examples"/>
+  	</copy>
+  	<copy todir="${dist}/src">
+  		<fileset dir="src"/>
+  	</copy>
+  -->
+  	<copy file="src-js/controlP5.js" tofile="${dist}/library/controlP5.js" overwrite="true" />
+
+  	  	<!-- copy the jar file to processing's libraries -->
+  	  	<mkdir dir="${processing}/${libraryName}" />
+  		<copy todir="${processing}/${libraryName}">
+  			<fileset dir="${dist}"/>
+  		</copy>
+
+  	<copy todir="${libraryClasspath}">
+  		<fileset dir="${dist}/library/"/>
+  	</copy>
+
+
+ </target>
+</project>
