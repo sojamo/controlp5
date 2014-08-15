@@ -15,15 +15,15 @@
 	<property name="author"                     value="Andreas Schlegel"/>	
 	<property name="copyright"                  value="(c) 2006-2014"/>
 	<property name="libraryName"                value="controlP5"/>
-	<property name="versionNumber"              value="2.2.1"/>
+	<property name="versionNumber"              value="2.2.2"/>
 	<property name="yourLink"                   value="http://www.sojamo.de" />
 	<property name="keywords"                   value="gui, ui, controller, interface, user interface" />
 	<property name="tested:platform"            value="osx, windows, linux" />
-	<property name="tested:processingVersion"  	value="2.0" />	
+	<property name="tested:processingVersion"  	value="2.2.1" />	
 	<property name="tested:dependencies"        value="none" />
-	<property name="source:host"                value="google code" />
-	<property name="source:url"                 value="http://code.google.com/p/controlp5" />
-	<property name="source:repository"          value="http://code.google.com/p/controlp5/source/browse/" />
+	<property name="source:host"                value="github" />
+	<property name="source:url"                 value="https://github.com/sojamo/controlp5" />
+	<property name="source:repository"          value="https://github.com/sojamo/controlp5/tree/master/src" />
 
 
 	

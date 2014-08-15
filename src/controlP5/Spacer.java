@@ -13,7 +13,7 @@ public class Spacer extends Controller< Spacer > {
 
 	protected Spacer( ControlP5 theControlP5 , ControllerGroup< ? > theParent , String theName , float theX , float theY , int theWidth , int theHeight ) {
 		super( theControlP5 , theParent , theName , theX , theY , theWidth , theHeight );
-		_myControllerView = new SeparatorView( );
+		_myControllerView = new SpacerView( );
 	}
 
 	public Spacer setWeight( int theWeight ) {
@@ -26,7 +26,7 @@ public class Spacer extends Controller< Spacer > {
 		return this;
 	}
 
-	private class SeparatorView implements ControllerView< Spacer > {
+	private class SpacerView implements ControllerView< Spacer > {
 
 		public void display( PGraphics g , Spacer c ) {
 			g.fill( c.getColor( ).getForeground( ) );

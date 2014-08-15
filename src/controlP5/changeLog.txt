@@ -1,3 +1,11 @@
+2014-07-21  Andreas Schlegel  <andi at sojamo.de>
+
+      * src controlP5.Textfield:
+      making use of a graphics buffer now, simplifies cursor position calculation and 
+      prevents from throwing an ArrayIndexOutOfBoundsException which could occasionally 
+      happen with previous versions.
+       
+      
 2014-07-17  Andreas Schlegel  <andi at sojamo.de>
       * version 2.2.1
       

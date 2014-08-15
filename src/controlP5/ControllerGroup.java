@@ -38,9 +38,9 @@ import processing.event.KeyEvent;
  */
 public abstract class ControllerGroup< T > implements ControllerInterface< T > , ControlP5Constants , ControlListener {
 
-	protected float[] position = new float[2];
-	protected float[] positionBuffer = new float[2];
-	protected float[] absolutePosition = new float[2];
+	protected float[] position = new float[ 2 ];
+	protected float[] positionBuffer = new float[ 2 ];
+	protected float[] absolutePosition = new float[ 2 ];
 	protected ControllerList controllers;
 	protected List< ControlListener > _myControlListener;
 	// protected ControlWindow _myControlWindow;

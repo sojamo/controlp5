@@ -59,12 +59,9 @@ void setup() {
   l.getCaptionLabel().toUpperCase(true);
   l.getCaptionLabel().set("A Listbox");
   l.getCaptionLabel().setColor(0xffff0000);
-  l.getCaptionLabel().style().marginTop = 3;
-  l.getValueLabel().style().marginTop = 3;
-  
   for (int i=0;i<80;i++) {
-    ListBoxItem lbi = l.addItem("item "+i, i);
-    lbi.setColorBackground(0xffff0000);
+    l.addItem("item "+i, i);
+    l.getItem("item "+i).put("color", new CColor().setBackground(0xffff0000).setBackground(0xffff8800));
   }
   
 }

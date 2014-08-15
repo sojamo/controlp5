@@ -35,6 +35,7 @@ package controlP5;
  */
 @SuppressWarnings( "rawtypes" ) public class Accordion extends ControlGroup< Accordion > {
 
+	
 	protected int spacing = 1;
 	protected int minHeight = 100;
 	protected int itemheight;

@@ -9,6 +9,7 @@ import java.util.Map;
 import processing.core.PApplet;
 import processing.core.PFont;
 import processing.core.PGraphics;
+import processing.event.Event;
 import processing.event.KeyEvent;
 
 /**
@@ -63,13 +64,13 @@ public class Textfield extends Controller< Textfield > {
 	protected List< Integer > ignorelist;
 	protected LinkedList< String > _myHistory;
 	protected int _myHistoryIndex;
-	protected boolean changed;
 	protected int len = 0;
 	protected int offset = 2;
 	protected int margin = 2;
 	protected boolean isPasswordMode;
 	protected boolean autoclear = true;
 	protected int _myColorCursor = 0x88ffffff;
+	private PGraphics buffer;
 
 	public enum InputFilter {
 		INTEGER(Arrays.asList( '0' , '1' , '2' , '3' , '4' , '5' , '6' , '7' , '8' , '9' )), FLOAT(Arrays.asList( '0' , '1' , '2' , '3' , '4' , '5' , '6' , '7' , '8' , '9' , '.' )), BITFONT(Arrays.asList( '\n' , '\r' , ' ' , '!' , '"' , '#' , '$' , '%' ,
@@ -107,10 +108,9 @@ public class Textfield extends Controller< Textfield > {
 
 	public Textfield( ControlP5 theControlP5 , ControllerGroup< ? > theParent , String theName , String theDefaultValue , int theX , int theY , int theWidth , int theHeight ) {
 		super( theControlP5 , theParent , theName , theX , theY , theWidth , theHeight );
+
 		_myCaptionLabel = new Label( cp5 , theName.toUpperCase( ) , 0 , 0 , color.getCaptionLabel( ) );
-
 		_myValueLabel.setFont( cp5.controlFont == cp5.defaultFont ? cp5.defaultFontForText : cp5.controlFont );
-
 		_myCaptionLabel.align( ControlP5.LEFT , ControlP5.BOTTOM_OUTSIDE );
 		_myCaptionLabel.setPaddingX( 0 );
 
@@ -127,6 +127,8 @@ public class Textfield extends Controller< Textfield > {
 
 		_myHistory = new LinkedList< String >( );
 		_myHistory.addFirst( "" );
+
+		setSize( getWidth( ) , getHeight( ) );
 
 		keyMapping = new HashMap< Integer , TextfieldCommand >( );
 		keyMapping.put( ENTER , new Enter( ) );
@@ -146,7 +148,6 @@ public class Textfield extends Controller< Textfield > {
 		ignorelist.add( COMMANDKEY );
 
 		setInputFilter( DEFAULT );
-		changed = true;
 
 	}
 
@@ -162,7 +163,6 @@ public class Textfield extends Controller< Textfield > {
 
 	public Textfield setFocus( boolean theValue ) {
 		isTexfieldActive = isActive = theValue;
-		changed = true;
 		return this;
 	}
 
@@ -228,13 +228,11 @@ public class Textfield extends Controller< Textfield > {
 
 	@Override protected void updateFont( ControlFont theControlFont ) {
 		super.updateFont( theControlFont );
-		changed = true;
 	}
 
 	public Textfield setValue( String theText ) {
 		_myTextBuffer = new StringBuffer( theText );
 		setIndex( _myTextBuffer.length( ) );
-		changed = true;
 		return this;
 	}
 
@@ -294,11 +292,14 @@ public class Textfield extends Controller< Textfield > {
 		return this;
 	}
 
+	@Override public Textfield setSize( int theWidth , int theHeight ) {
+		super.setSize( theWidth , theHeight );
+		buffer = cp5.papplet.createGraphics( getWidth( ) , getHeight( ) );
+		return this;
+	}
+
 	@Override public void draw( PGraphics theGraphics ) {
-		if ( changed ) {
-			updateLabel( theGraphics );
-			changed = false;
-		}
+
 		theGraphics.pushStyle( );
 		theGraphics.fill( color.getBackground( ) );
 		theGraphics.pushMatrix( );
@@ -310,23 +311,20 @@ public class Textfield extends Controller< Textfield > {
 		theGraphics.pushMatrix( );
 		theGraphics.pushStyle( );
 
-		if ( _myTextBufferIndexPosition > len - offset ) {
-			// theApplet.textAlign(PApplet.RIGHT);
-			_myValueLabel.textAlign = PApplet.RIGHT;
-			theGraphics.translate( getWidth( ) - margin , 0 );
-			if ( isTexfieldActive ) {
-				theGraphics.rect( 0 , 0 , cursorWidth , getHeight( ) );
-			}
-		} else {
-			// theApplet.textAlign(PApplet.LEFT);
-			_myValueLabel.textAlign = PApplet.LEFT;
-			theGraphics.translate( margin , 0 );
-			if ( isTexfieldActive ) {
-				theGraphics.rect( PApplet.max( 0 , PApplet.min( _myTextBufferIndexPosition , getWidth( ) - margin ) ) , 0 , cursorWidth , getHeight( ) );
-			}
-		}
+		buffer.beginDraw( );
+		buffer.background( 0 , 0 );
+		final String text = passCheck( getText( ) );
+		final int textWidth = ControlFont.getWidthFor( text.substring( 0 , _myTextBufferIndex ) , _myValueLabel , buffer );
+		final int dif = PApplet.max( textWidth - _myValueLabel.getWidth( ) , 0 );
+		final int _myTextBufferIndexPosition = ControlFont.getWidthFor( text.substring( 0 , _myTextBufferIndex ) , _myValueLabel , buffer );
+		_myValueLabel.setText( text );
+		_myValueLabel.draw( buffer , -dif , 0 , this );
+		buffer.noStroke( );
+		buffer.fill( _myColorCursor );
+		buffer.rect( PApplet.max( 1 , PApplet.min( _myTextBufferIndexPosition , _myValueLabel.getWidth( ) - 3 ) ) , 0 , 1 , getHeight( ) );
+		buffer.endDraw( );
+		theGraphics.image( buffer , 0 , 0 );
 
-		_myValueLabel.draw( theGraphics , 0 , 0 , this );
 		theGraphics.popStyle( );
 		theGraphics.popMatrix( );
 
@@ -338,56 +336,6 @@ public class Textfield extends Controller< Textfield > {
 		_myCaptionLabel.draw( theGraphics , 0 , 0 , this );
 		theGraphics.popMatrix( );
 		theGraphics.popStyle( );
-	}
-
-	private void updateLabel( PGraphics theApplet ) {
-		if ( _myInputFilter == InputFilter.BITFONT ) {
-			setInputFilter( DEFAULT );
-		}
-		String str = passCheck( getText( ) );
-		String t1 = str;
-		int off = margin * 2;
-		int ww = ControlFont.getWidthFor( str , _myValueLabel , theApplet );
-		if ( ( ww < getWidth( ) - off ) ) {
-			_myTextBufferIndexPosition = ControlFont.getWidthFor( t1.substring( 0 , _myTextBufferIndex ) , _myValueLabel , theApplet );
-			len = getWidth( );
-		} else {
-			char[] c = str.toCharArray( );
-			int mx = 0;
-			int n = 0;
-			for ( int i = 0 ; i < c.length ; i++ ) {
-				n += theApplet.textWidth( c[ i ] );
-				if ( n > _myValueLabel.getWidth( ) - off ) {
-					break;
-				}
-				len = n;
-				mx++;
-			}
-			t1 = "";
-			n = 0;
-			// this is messed up and occasionally throws ArrayIndexOutOfBounds Exceptions
-			// sometimes the beginning of the text is not in order when text length exceeds
-			// length of textfield.
-			// needs fixing. TODO
-			for ( int i = PApplet.max( mx , _myTextBufferIndex - 1 ) ; i >= 0 ; i-- ) {
-				try {
-					n += theApplet.textWidth( c[ i ] );
-				} catch ( Exception e ) {}
-				try {
-				t1 = c[ i ] + t1;
-				if ( n >= _myValueLabel.getWidth( ) - off - 4 ) {
-					_myTextBufferOverflow = str.indexOf( t1 );
-					break;
-				}
-				} catch(java.lang.ArrayIndexOutOfBoundsException ex) {
-					//System.out.println("java.lang.ArrayIndexOutOfBoundsException");
-				}
-			}
-			int strn = PApplet.max( 0 , PApplet.min( t1.length( ) , _myTextBufferIndex - _myTextBufferOverflow ) );
-			_myTextBufferIndexPosition = ControlFont.getWidthFor( t1.substring( 0 , strn ) , _myValueLabel , theApplet );
-		}
-		_myValueLabel.setText( t1 );
-		changed = false;
 	}
 
 	private String passCheck( String label ) {
@@ -431,12 +379,10 @@ public class Textfield extends Controller< Textfield > {
 
 	private Textfield setIndex( int theIndex ) {
 		_myTextBufferIndex = theIndex;
-		changed = true;
 		return this;
 	}
 
 	interface TextfieldCommand {
-
 		void execute( );
 	}
 
@@ -484,14 +430,14 @@ public class Textfield extends Controller< Textfield > {
 	class MoveLeft implements TextfieldCommand {
 
 		public void execute( ) {
-			setIndex( ( cp5.isMetaDown( ) ) ? 0 : PApplet.max( 0 , _myTextBufferIndex - 1 ) );
+			setIndex( ( ( cp5.modifiers & Event.META ) > 0 ) ? 0 : PApplet.max( 0 , _myTextBufferIndex - 1 ) );
 		}
 	}
 
 	class MoveRight implements TextfieldCommand {
 
 		public void execute( ) {
-			setIndex( ( cp5.isMetaDown( ) ) ? _myTextBuffer.length( ) : PApplet.min( _myTextBuffer.length( ) , _myTextBufferIndex + 1 ) );
+			setIndex( ( ( cp5.modifiers & Event.META ) > 0 ) ? _myTextBuffer.length( ) : PApplet.min( _myTextBuffer.length( ) , _myTextBufferIndex + 1 ) );
 		}
 	}
 

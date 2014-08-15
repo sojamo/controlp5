@@ -72,12 +72,10 @@ public class Button extends Controller< Button > {
 	}
 
 	@Override protected void onEnter( ) {
-		System.out.println("enter button "+this.getName( )+" "+x(getPosition( ))+" "+y(getPosition( ))+" | "+" "+x(getAbsolutePosition( ))+" "+y(getAbsolutePosition( )));
 		isActive = true;
 	}
 
 	@Override protected void onLeave( ) {
-		System.out.println("leave button "+this.getName( )+" "+x(getPosition( ))+" "+y(getPosition( ))+" | "+" "+x(getAbsolutePosition( ))+" "+y(getAbsolutePosition( )));
 		isActive = false;
 		setIsInside( false ); // TODO setIsInside needs to be set false here if we remove setIsInside from activate; see below. 
 	}

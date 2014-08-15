@@ -17,14 +17,14 @@ ControlP5 cp5;
 
 int myColorBackground = color(0,0,0);
 
-RadioButton r;
+RadioButton r1, r2;
 
 void setup() {
   size(700,400);
   
   cp5 = new ControlP5(this);
-  r = cp5.addRadioButton("radioButton")
-         .setPosition(20,160)
+  r1 = cp5.addRadioButton("radioButton")
+         .setPosition(100,180)
          .setSize(40,20)
          .setColorForeground(color(120))
          .setColorActive(color(255))
@@ -38,13 +38,14 @@ void setup() {
          .addItem("250",5)
          ;
      
-     for(Toggle t:r.getItems()) {
+     for(Toggle t:r1.getItems()) {
        t.getCaptionLabel().setColorBackground(color(255,80));
-       t.getCaptionLabel().style().moveMargin(-7,0,0,-3);
-       t.getCaptionLabel().style().movePadding(7,0,0,3);
-       t.getCaptionLabel().style().backgroundWidth = 45;
-       t.getCaptionLabel().style().backgroundHeight = 13;
+       t.getCaptionLabel().getStyle().moveMargin(-7,0,0,-3);
+       t.getCaptionLabel().getStyle().movePadding(7,0,0,3);
+       t.getCaptionLabel().getStyle().backgroundWidth = 45;
+       t.getCaptionLabel().getStyle().backgroundHeight = 13;
      }
+   
 }
 
 
@@ -55,18 +56,18 @@ void draw() {
 
 void keyPressed() {
   switch(key) {
-    case('0'): r.deactivateAll(); break;
-    case('1'): r.activate(0); break;
-    case('2'): r.activate(1); break;
-    case('3'): r.activate(2); break;
-    case('4'): r.activate(3); break;
-    case('5'): r.activate(4); break;
+    case('0'): r1.deactivateAll(); break;
+    case('1'): r1.activate(0); break;
+    case('2'): r1.activate(1); break;
+    case('3'): r1.activate(2); break;
+    case('4'): r1.activate(3); break;
+    case('5'): r1.activate(4); break;
   }
   
 }
 
 void controlEvent(ControlEvent theEvent) {
-  if(theEvent.isFrom(r)) {
+  if(theEvent.isFrom(r1)) {
     print("got an event from "+theEvent.getName()+"\t");
     for(int i=0;i<theEvent.getGroup().getArrayValue().length;i++) {
       print(int(theEvent.getGroup().getArrayValue()[i]));

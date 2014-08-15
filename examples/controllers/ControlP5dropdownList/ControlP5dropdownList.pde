@@ -55,7 +55,6 @@ void setup() {
           ;
   
   customize(d2); // customize the second list
-  d2.setIndex(10);
 }
 
 
@@ -65,9 +64,6 @@ void customize(DropdownList ddl) {
   ddl.setItemHeight(20);
   ddl.setBarHeight(15);
   ddl.getCaptionLabel().set("dropdown");
-  ddl.getCaptionLabel().style().marginTop = 3;
-  ddl.getCaptionLabel().style().marginLeft = 3;
-  ddl.getValueLabel().style().marginTop = 3;
   for (int i=0;i<40;i++) {
     ddl.addItem("item "+i, i);
   }
