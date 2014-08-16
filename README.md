@@ -132,7 +132,7 @@ The example above adds 2 controllers to your sketch and renders them on top of y
 
 ### Bring a Controller to the front
 
-To change the order of controllers, use Controller.bringToFront() which will position the controller on top of all others. See example [ControlP5bringToFront](examples/use/ControlP5bringToFront/ControlP5bringToFront.pde)
+To change the order of controllers, use Controller.bringToFront() which will position the controller on top of all others. See example [ControlP5bringToFront](examples/use/ControlP5bringToFront/ControlP5bringToFront)
 
 ### Grouping Controllers
 
@@ -193,8 +193,12 @@ To change the order of controllers, use Controller.bringToFront() which will pos
 
 #### My code worked before now it doesn't anymore
 
+Methods such as value(), name(), controller() and all other methods that are used to get or set object variables have been prefixed with get and set - value() became getValue() and setValue(). In previous (before 2.2.1) version these deprecated methods were still available but have been removed with >= version 2.2.1
+
+
 #### Tooltip, MultiList, DropdownList, ListBox
 
+Due to various changes and modifications the tooltip has been removed for now since it became incompatible, the same goes for MultiList - will they come back? I doubt it. ListBox and DropdownList are still available but have been replace with the ScrollableList, please have a look at the ScrollableList source and example
 
 
 ## History
