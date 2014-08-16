@@ -1,4 +1,5 @@
-for d in $HOME/Documents/workspace/controlp5/examples/use/*/; do
-	echo "$d"
+for d in $HOME/Documents/workspace/controlp5/examples/**/*/; do
+	# echo "$d"
+	java -cp .:../../../distribution/tmp/controlP5/library/controlP5.jar:$HOME/Documents/workspace/libs/core.jar AddMethodList $d
 	processing-java --sketch="$d" --output=/tmp/processing-test --force --build
 done
