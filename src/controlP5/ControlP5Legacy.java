@@ -8,6 +8,7 @@ import static controlP5.Controller.*;
 public class ControlP5Legacy {
 
 	private ControlP5Base base;
+	public static boolean DEBUG = false;
 
 	void init( ControlP5Base theControlP5 ) {
 		base = theControlP5;
@@ -56,6 +57,7 @@ public class ControlP5Legacy {
 	}
 
 	public Tooltip addTooltip( ) {
+		println( "Tooltip is not available with this Version (" , ControlP5.VERSION , ") of ControlP5" );
 		return null;
 	}
 
@@ -542,6 +544,26 @@ public class ControlP5Legacy {
 		return addController( null , "" , theName , theClass , theX , theY );
 	}
 
+	static public void println( final Object ... strs ) {
+		for ( Object str : strs ) {
+			System.out.print( str + " " );
+		}
+		System.out.println( );
+	}
+
+	static public void debug( final Object ... strs ) {
+		if ( DEBUG ) {
+			println( strs );
+		}
+	}
+
+	static public void printerr( final Object ... strs ) {
+		for ( Object str : strs ) {
+			System.err.print( str + " " );
+		}
+		System.err.println( );
+	}
+
 	@Deprecated public Controller< ? > getController( String theName , Object theObject ) {
 		if ( base._myObjectToControllerMap.containsKey( theObject ) ) {
 			ArrayList< ControllerInterface< ? >> cs = base._myObjectToControllerMap.get( theObject );
@@ -570,27 +592,6 @@ public class ControlP5Legacy {
 	}
 
 	@Deprecated public ControlWindow addControlWindow( final String theName , final int theX , final int theY , final int theWidth , final int theHeight , String theRenderer , int theFrameRate ) {
-
-		// for (int i = 0; i < cp5.controlWindowList.size();
-		// i++) {
-		// if (((ControlWindow)
-		// cp5.controlWindowList.get(i)).name().equals(theWindowName))
-		// {
-		// ControlP5.logger().warning("ControlWindow with name "
-		// + theWindowName +
-		// " already exists. overwriting now.");
-		// }
-		// }
-		// PAppletWindow myPAppletWindow = new
-		// PAppletWindow(cp5, theWindowName, theX, theY,
-		// theWidth, theHeight, theRenderer,
-		// theFrameRate);
-		// myPAppletWindow.setParent(cp5);
-		// myPAppletWindow.setMode(PAppletWindow.ECONOMIC);
-		// ControlWindow myControlWindow = new
-		// ControlWindow(cp5, myPAppletWindow);
-		// cp5.controlWindowList.add(myControlWindow);
-		// return myControlWindow;
 		return addControlWindow( theName );
 	}
 

@@ -17,43 +17,24 @@ import processing.core.PVector;
 public class Tooltip {
 
 	private ControllerView< ? > _myView;
-
 	private PVector position = new PVector( );
-
 	private PVector currentPosition = new PVector( );
-
 	private PVector previousPosition = new PVector( );
-
 	private PVector offset = new PVector( );
-
 	private Controller< ? > _myController;
-
 	private long startTime = 0;
-
 	private long _myDelayInMillis = 500;
-
 	private int _myMode = ControlP5.INACTIVE;
-
 	private int _myHeight = 20;
-
 	private int _myBackgroundColor = 0xffffffb4;
-
 	private int _myMaxAlpha = 255;
-
 	private int _myAlpha = 0;
-
 	private Map< Controller< ? > , String > map;
-
 	private Label _myLabel;
-
 	private boolean enabled = true;
-
 	private int _myBorder;
-
 	private ControlP5 cp5;
-
 	private int _myAlignH = ControlP5.RIGHT;
-
 	private int _myColor = 0x00000000;
 
 	Tooltip( ControlP5 theControlP5 ) {
@@ -122,6 +103,7 @@ public class Tooltip {
 	 * @param theWindow
 	 */
 	void draw( ControlWindow theWindow ) {
+		/*
 		if ( enabled ) {
 
 			if ( _myMode >= ControlP5.WAIT ) {
@@ -180,11 +162,7 @@ public class Tooltip {
 							theWindow.papplet( ).pushMatrix( );
 							theWindow.papplet( ).translate( position.x , position.y );
 							theWindow.papplet( ).translate( offset.x , offset.y );
-							/* TODO should request the
-							 * current PGraphics element,
-							 * not only the PApplet context.
-							 * What if we render into a
-							 * PGraphics buffer? */
+							// TODO should request the current PGraphics element, not only the PApplet context. What if we render into a PGraphics buffer?
 							_myView.display( theWindow.papplet( ).g , null );
 							theWindow.papplet( ).popMatrix( );
 						}
@@ -197,6 +175,7 @@ public class Tooltip {
 				}
 			}
 		}
+		*/
 	}
 
 	private boolean moved( ) {
