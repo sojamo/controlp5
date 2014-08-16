@@ -583,7 +583,7 @@ import static controlP5.Controller.*;
 			str += s + "\n";
 		}
 		str += "\n\n*/\n\n";
-		System.out.println( str );
+		println( str );
 	}
 
 	public static void printPublicMethodsFor( Class< ? > theClass ) {
