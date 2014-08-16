@@ -189,6 +189,10 @@ To change the order of controllers, use Controller.bringToFront() which will pos
 
 ### Removing Controllers
 
+### Separate Windows
+
+To render controllers into separate windows please see example [ControlP5frames](examples/use/ControlP5frames/ControlP5frames), this example demonstrates how to open multiple frames each running its own instance of ControlP5. With previous version of ControlP5 the ControlWindow class would allow you to add and open new windows with 1 command, this comand though has been removed when all references to java.awt.* had been removed to make ControlP5 work with Android.
+
 ### Deprecated
 
 #### My code worked before now it doesn't anymore
@@ -216,6 +220,9 @@ ControlP5 has been in development for over 9 years and started as a small GUI li
 Why is the bit-font so blurry? it used to be crisp. Let me blame this on the OpenGL texture rendering. If you have a suggestion or a simple and easy to implement solution, please let me know inside the issues section.
 
 
+## Android
+
+Most controllers work in Android mode, the Textfield controller though does not due to keyboard/character-mapping irregularities between Android and Desktop mode. This has not been implemented yet.
 
 ## Javascript
 
