@@ -99,7 +99,6 @@ void b4(float v) {
 
 
 /*
-
  a list of all methods available for the ControllerProperties class
  use ControlP5.printPublicMethodsFor(ControllerProperties.class);
  to print the following list into the console.

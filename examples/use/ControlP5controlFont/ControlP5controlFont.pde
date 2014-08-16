@@ -97,4 +97,38 @@ public void button(float theValue) {
 
 
 
+/*
+a list of all methods available for the ControlFont Controller
+use ControlP5.printPublicMethodsFor(ControlFont.class);
+to print the following list into the console.
+
+You can find further details about class ControlFont in the javadoc.
+
+Format:
+ClassName : returnType methodName(parameter type)
+
+
+controlP5.ControlFont : PFont getFont() 
+controlP5.ControlFont : int getBaseline() 
+controlP5.ControlFont : int getBottom() 
+controlP5.ControlFont : int getCenter() 
+controlP5.ControlFont : int getHeight() 
+controlP5.ControlFont : int getOffset(int) 
+controlP5.ControlFont : int getOverflow() 
+controlP5.ControlFont : int getSize() 
+controlP5.ControlFont : int getTextHeight() 
+controlP5.ControlFont : int getTop() 
+controlP5.ControlFont : int getWidth() 
+controlP5.ControlFont : void adjust(PGraphics, Label) 
+controlP5.ControlFont : void draw(ControlP5, Label) 
+controlP5.ControlFont : void draw(PGraphics, Label) 
+controlP5.ControlFont : void init(Label) 
+controlP5.ControlFont : void setSize(int) 
+java.lang.Object : String toString() 
+java.lang.Object : boolean equals(Object) 
+
+created: 2014/08/16 19:13:03
+
+*/
+
 

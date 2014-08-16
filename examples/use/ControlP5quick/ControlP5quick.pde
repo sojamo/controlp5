@@ -16,19 +16,6 @@
  */
 
 
-// ControlP5quick
-// this example demonstrates how to quickly add Controllers such as
-// Button, Slider,Toggle and Numberbox to a sketch without having to set
-// positions, this is done automatically by cp5.
-// controllers will be aligned horizontally - .linebreak() will
-// force the next controller to the next line.
-// the example shows as well how to link variables and functions to
-// a controller. this is done by assigning the name of the variable
-// or function to a controller.
-//
-// by andreas schlegel 2010
-//
-
 import controlP5.*;
 
 ControlP5 cp5;

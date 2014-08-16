@@ -81,32 +81,39 @@ void controlEvent(ControlEvent theEvent) {
 
 
 /*
- a list of all methods available for ControlEvent
- use ControlP5.printPublicMethodsFor(ControlEvent.class);
- to print the following list into the console.
- 
- You can find further details about class ControlEvent in the javadoc.
- 
- Format:
- ClassName : returnType methodName(parameter type)
- 
- controlP5.ControlEvent : ControlGroup getGroup() 
- controlP5.ControlEvent : Controller getController() 
- controlP5.ControlEvent : String getLabel() 
- controlP5.ControlEvent : String getName() 
- controlP5.ControlEvent : String getStringValue() 
- controlP5.ControlEvent : Tab getTab() 
- controlP5.ControlEvent : boolean isController() 
- controlP5.ControlEvent : boolean isFrom(ControllerInterface) 
- controlP5.ControlEvent : boolean isFrom(String) 
- controlP5.ControlEvent : boolean isGroup() 
- controlP5.ControlEvent : boolean isTab() 
- controlP5.ControlEvent : float getValue() 
- controlP5.ControlEvent : float[] getArrayValue() 
- controlP5.ControlEvent : int getId() 
- controlP5.ControlEvent : int getType() 
- java.lang.Object : String toString() 
- java.lang.Object : boolean equals(Object) 
- */
- 
- 
+a list of all methods available for the ControlEvent Controller
+use ControlP5.printPublicMethodsFor(ControlEvent.class);
+to print the following list into the console.
+
+You can find further details about class ControlEvent in the javadoc.
+
+Format:
+ClassName : returnType methodName(parameter type)
+
+
+controlP5.ControlEvent : ControlGroup getGroup() 
+controlP5.ControlEvent : Controller getController() 
+controlP5.ControlEvent : String getLabel() 
+controlP5.ControlEvent : String getName() 
+controlP5.ControlEvent : String getStringValue() 
+controlP5.ControlEvent : String toString() 
+controlP5.ControlEvent : Tab getTab() 
+controlP5.ControlEvent : boolean isAssignableFrom(Class) 
+controlP5.ControlEvent : boolean isController() 
+controlP5.ControlEvent : boolean isFrom(ControllerInterface) 
+controlP5.ControlEvent : boolean isFrom(String) 
+controlP5.ControlEvent : boolean isGroup() 
+controlP5.ControlEvent : boolean isTab() 
+controlP5.ControlEvent : float getArrayValue(int) 
+controlP5.ControlEvent : float getValue() 
+controlP5.ControlEvent : float[] getArrayValue() 
+controlP5.ControlEvent : int getId() 
+controlP5.ControlEvent : int getType() 
+java.lang.Object : String toString() 
+java.lang.Object : boolean equals(Object) 
+
+created: 2014/08/16 19:13:02
+
+*/
+
+

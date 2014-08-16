@@ -155,19 +155,6 @@ class Info {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 /*
 a list of all methods available for the CallbackEvent Controller
  use ControlP5.printPublicMethodsFor(CallbackEvent.class);

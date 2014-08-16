@@ -3,11 +3,13 @@ import controlP5.*;
 ControlP5 cp5;
 Test t;
 void setup() {
+  size(400,400);
   cp5 = new ControlP5( this );
   t = new Test( "test" );
 }
 
 void draw() {
+  background(20);
   println( t.value );
 }
 

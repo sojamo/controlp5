@@ -153,10 +153,12 @@ controlP5.ControllerProperties : boolean load()
 controlP5.ControllerProperties : boolean load(String) 
 controlP5.ControllerProperties : boolean save() 
 controlP5.ControllerProperties : boolean saveAs(String) 
-controlP5.ControllerProperties : void setFormat(Format) 
+controlP5.ControllerProperties : void setFormat(PropertiesStorageFormat) 
+controlP5.ControllerProperties : void setFormat(String) 
 java.lang.Object : String toString() 
 java.lang.Object : boolean equals(Object) 
 
+created: 2014/08/16 19:11:40
 
 */
 

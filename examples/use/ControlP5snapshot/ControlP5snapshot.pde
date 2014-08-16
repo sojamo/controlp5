@@ -4,6 +4,8 @@
  * this example shows how to use the snapshot methods for ControllerProperties.
  * Snapshots allow you to save controller states in memory, recall, save and remove them.
  *
+ * How to load, save and remove snapshots? see keyPressed()
+ *
  * find a list of public methods available for the ControllerProperties Controller
  * at the bottom of this sketch.
  *

@@ -94,19 +94,21 @@ controlP5.Tooltip : Tooltip setBorder(int)
 controlP5.Tooltip : Tooltip setColorBackground(int) 
 controlP5.Tooltip : Tooltip setColorLabel(int) 
 controlP5.Tooltip : Tooltip setDelay(long) 
-controlP5.Tooltip : Tooltip setDisplay(ControllerDisplay) 
 controlP5.Tooltip : Tooltip setHeight(int) 
 controlP5.Tooltip : Tooltip setLabel(Label) 
 controlP5.Tooltip : Tooltip setPositionOffset(float, float) 
+controlP5.Tooltip : Tooltip setView(ControllerView) 
 controlP5.Tooltip : Tooltip setWidth(int) 
 controlP5.Tooltip : Tooltip unregister(Controller) 
 controlP5.Tooltip : Tooltip unregister(String) 
 controlP5.Tooltip : boolean isEnabled() 
 controlP5.Tooltip : int getBorder() 
+controlP5.Tooltip : int getWidth() 
 java.lang.Object : String toString() 
 java.lang.Object : boolean equals(Object) 
 
-*/
+created: 2014/08/16 19:12:10
 
+*/
 
 

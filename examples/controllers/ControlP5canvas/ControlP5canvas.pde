@@ -66,20 +66,24 @@ void draw() {
 
 
 /*
- a list of all methods available for the ControlWindowCanvas Controller
- use ControlP5.printPublicMethodsFor(Canvas.class);
- to print the following list into the console.
- 
- You can find further details about class Canvas in the javadoc.
- 
- Format:
- ClassName : returnType methodName(parameter type)
- 
- controlP5.Canvas : void moveTo(ControlWindow) 
- controlP5.Canvas : void setup(PApplet) 
- controlP5.Canvas : void draw(PApplet) 
- java.lang.Object : String toString() 
- java.lang.Object : boolean equals(Object) 
- */
- 
- 
+a list of all methods available for the Canvas Controller
+use ControlP5.printPublicMethodsFor(Canvas.class);
+to print the following list into the console.
+
+You can find further details about class Canvas in the javadoc.
+
+Format:
+ClassName : returnType methodName(parameter type)
+
+
+controlP5.Canvas : void moveTo(ControlWindow) 
+controlP5.Canvas : void setup(PGraphics) 
+controlP5.Canvas : void update(PApplet) 
+java.lang.Object : String toString() 
+java.lang.Object : boolean equals(Object) 
+
+created: 2014/08/16 19:11:32
+
+*/
+
+
