@@ -10,7 +10,7 @@ The range of available controllers includes Slider, Button, Toggle, Knob, Textfi
   * [How does ControlP5 work](#how)
 	* [Instantiate](#controllers)
     * [Controllers](#controllers)
-    * [Event Handling](#event)
+    * [Event Handling](#events)
     * [Customizing Controllers](#customize)
   * [Deprecated](#deprecated)    
   * [History](#history)
@@ -282,9 +282,9 @@ void draw() {
 ### What else is there?
 
   - **Chart** displays a list of numbers as line, pie or bar chart, useful to display real-time data coming for example from an Arduino SerialEvent [ControlP5chart](examples/controllers/ControlP5chart/ControlP5chart.pde)
-  - **FrameRate** a Textlabel that displays the current FrameRate [ControlP5frameRate](examples/use/ControlP5frameRate/ControlP5frameRate.pde)
+  - **FrameRate** a Textlabel that displays the current FrameRate [ControlP5frameRate](examples/extra/ControlP5frameRate/ControlP5frameRate.pde)
   - **Pointer** use custom xy coordinates to replace the mouse [ControlP5pointer](examples/extra/ControlP5pointer/ControlP5pointer.pde)
-  - **Println** hijacks the default Processing console output and displays the output inside your sketch window. [ControlP5console](examples/use/ControlP5console/ControlP5console.pde)
+  - **Println** hijacks the default Processing console output and displays the output inside your sketch window. [ControlP5console](examples/extra/ControlP5console/ControlP5console.pde)
   - **Properties** captures the state of Controllers which can then be saved or loaded from disk or memory [ControlP5propertiesSets](examples/extra/ControlP5propertiesSets/ControlP5propertiesSets.pde)
 
 
