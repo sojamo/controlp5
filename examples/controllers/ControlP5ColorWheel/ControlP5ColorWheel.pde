@@ -30,19 +30,6 @@ void draw() {
  println(cp5.get(ColorWheel.class,"c").getRGB()); 
 }
 
-
-/**
-* ControlP5 ColorWheel
-*
-*
-* find a list of public methods available for the ColorWheel Controller
-* at the bottom of this sketch.
-*
-* by Andreas Schlegel, 2012
-* www.sojamo.de/libraries/controlp5
-*
-*/
-
 /*
 a list of all methods available for the ColorWheel Controller
 use ControlP5.printPublicMethodsFor(ColorWheel.class);
