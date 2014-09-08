@@ -253,44 +253,44 @@ void draw() {
 ### What do all these Controllers do?
 
 
-  - **Accordion** use an accordion to arrange multiple groups in vertical order [ControlP5accordion](examples/controllers/ControlP5accordion/ControlP5accordion)
-  - **Bang** triggers an event on press without passing a value [ControlP5bang](examples/controllers/ControlP5bang/ControlP5bang)
-  - **Button** triggers an event and passes on a value [ControlP5button](examples/controllers/ControlP5button/ControlP5button)
-  - **ButtonBar** a horizontal multi-button bar [ControlP5buttonBar](examples/controllers/ControlP5buttonBar/ControlP5buttonBar)
-  - **Canvas** a abstract class to create and display an image buffer [ControlP5canvas](examples/controllers/ControlP5canvas/ControlP5canvas)
-  - **CheckBox** [ControlP5checkBox](examples/controllers/ControlP5checkBox/ControlP5checkBox)
-  - **ColorPicker** a 4 slider color picker to change the red, green, blue and alpha channel of a color [ControlP5colorPicker](examples/controllers/ControlP5colorPicker/ControlP5colorPicker)
-  - **ColorWheel** a color wheel picker, use the arrow on the left to change saturation [ControlP5colorWheel](examples/controllers/ControlP5colorWheel/ControlP5colorWheel)
+  - **Accordion** use an accordion to arrange multiple groups in vertical order [ControlP5accordion](examples/controllers/ControlP5accordion/ControlP5accordion.pde)
+  - **Bang** triggers an event on press without passing a value [ControlP5bang](examples/controllers/ControlP5bang/ControlP5bang.pde)
+  - **Button** triggers an event and passes on a value [ControlP5button](examples/controllers/ControlP5button/ControlP5button.pde)
+  - **ButtonBar** a horizontal multi-button bar [ControlP5buttonBar](examples/controllers/ControlP5ButtonBar/ControlP5ButtonBar.pde)
+  - **Canvas** a abstract class to create and display an image buffer [ControlP5canvas](examples/controllers/ControlP5canvas/ControlP5canvas.pde)
+  - **CheckBox** [ControlP5checkBox](examples/controllers/ControlP5checkBox/ControlP5checkBox.pde)
+  - **ColorPicker** a 4 slider color picker to change the red, green, blue and alpha channel of a color [ControlP5colorPicker](examples/controllers/ControlP5colorPicker/ControlP5colorPicker.pde)
+  - **ColorWheel** a color wheel picker, use the arrow on the left to change saturation [ControlP5colorWheel](examples/controllers/ControlP5colorWheel/ControlP5colorWheel.pde)
   - **DropdownList** (use ScrollableList instead)
-  - **Group** for grouping and nesting controllers [ControlP5group](examples/controllers/ControlP5group/ControlP5group)
-  - **Icon** adds Icon support, an Icon behaves like a Button or Toggle [ControlP5icon](examples/controllers/ControlP5icon/ControlP5icon)
+  - **Group** for grouping and nesting controllers [ControlP5group](examples/controllers/ControlP5group/ControlP5group.pde)
+  - **Icon** adds Icon support, an Icon behaves like a Button or Toggle [ControlP5icon](examples/controllers/ControlP5icon/ControlP5icon.pde)
   - **ListBox** (use ScrollableList instead)  
-  - **Knob** a rotary slider, mousewheel support [ControlP5knob](examples/controllers/ControlP5knob/ControlP5knob)
-  - **Matrix** a 2D array of toggles [ControlP5matrix](examples/controllers/ControlP5matrix/ControlP5matrix)
-  - **Numberbox** changes values when dragging horizontally or vertically, mousewheel support [ControlP5numberbox](examples/controllers/ControlP5numberbox/ControlP5numberbox)
-  - **RadioButton** [ControlP5radioButton](examples/controllers/ControlP5radioButton/ControlP5radioButton)
-  - **Range** a slider like Controller with adjustable end points [ControlP5range](examples/controllers/ControlP5range/ControlP5range)
-  - **ScrollableList** a list that currently implements and replaces ListBox and DropdownList, mousewheel support [ControlP5scrollableList](examples/controllers/ControlP5scrollableList/ControlP5scrollableList)
-  - **Slider** a number slider, can be horizontal or vertical, mousewheel support [ControlP5slider](examples/controllers/ControlP5slider/ControlP5slider)
-  - **Slider2D** a 2D draggable Controller [ControlP5slider2D](examples/controllers/ControlP5slider2D/ControlP5slider2D)
-  - **Tab** arrange Controllers inside separate Tabs [ControlP5tab](examples/controllers/ControlP5tab/ControlP5tab)
-  - **Textfield** a field for single line text input [ControlP5textfield](examples/controllers/ControlP5textfield/ControlP5textfield)
-  - **Textarea** a multi line area for text output, mousewheel support [ControlP5textarea](examples/controllers/ControlP5textarea/ControlP5textarea)
-  - **Textlabel** a Controller to display a single line text element [ControlP5textlabel](examples/controllers/ControlP5textlabel/ControlP5textlabel)
-  - **Toggle** switches between 2 states, true and false [ControlP5chart](examples/controllers/ControlP5chart/ControlP5chart)
+  - **Knob** a rotary slider, mousewheel support [ControlP5knob](examples/controllers/ControlP5knob/ControlP5knob.pde)
+  - **Matrix** a 2D array of toggles [ControlP5matrix](examples/controllers/ControlP5matrix/ControlP5matrix.pde)
+  - **Numberbox** changes values when dragging horizontally or vertically, mousewheel support [ControlP5numberbox](examples/controllers/ControlP5numberbox/ControlP5numberbox.pde)
+  - **RadioButton** [ControlP5radioButton](examples/controllers/ControlP5radioButton/ControlP5radioButton.pde)
+  - **Range** a slider like Controller with adjustable end points [ControlP5range](examples/controllers/ControlP5range/ControlP5range.pde)
+  - **ScrollableList** a list that currently implements and replaces ListBox and DropdownList, mousewheel support [ControlP5scrollableList](examples/controllers/ControlP5scrollableList/ControlP5scrollableList.pde)
+  - **Slider** a number slider, can be horizontal or vertical, mousewheel support [ControlP5slider](examples/controllers/ControlP5slider/ControlP5slider.pde)
+  - **Slider2D** a 2D draggable Controller [ControlP5slider2D](examples/controllers/ControlP5slider2D/ControlP5slider2D.pde)
+  - **Tab** arrange Controllers inside separate Tabs [ControlP5tab](examples/controllers/ControlP5tab/ControlP5tab.pde)
+  - **Textfield** a field for single line text input [ControlP5textfield](examples/controllers/ControlP5textfield/ControlP5textfield.pde)
+  - **Textarea** a multi line area for text output, mousewheel support [ControlP5textarea](examples/controllers/ControlP5textarea/ControlP5textarea.pde)
+  - **Textlabel** a Controller to display a single line text element [ControlP5textlabel](examples/controllers/ControlP5textlabel/ControlP5textlabel.pde)
+  - **Toggle** switches between 2 states, true and false [ControlP5chart](examples/controllers/ControlP5chart/ControlP5chart.pde)
 
 ### What else is there?
 
-  - **Chart** displays a list of numbers as line, pie or bar chart, useful to display real-time data coming for example from an Arduino SerialEvent [ControlP5chart](examples/controllers/ControlP5chart/ControlP5chart)
-  - **FrameRate** a Textlabel that displays the current FrameRate [ControlP5frameRate](examples/use/ControlP5frameRate/ControlP5frameRate)
-  - **Pointer** use custom xy coordinates to replace the mouse [ControlP5pointer](examples/extra/ControlP5pointer/ControlP5pointer)
-  - **Println** hijacks the default Processing console output and displays the output inside your sketch window. [ControlP5console](examples/use/ControlP5console/ControlP5console)
-  - **Properties** captures the state of Controllers which can then be saved or loaded from disk or memory [ControlP5propertiesSets](examples/extra/ControlP5propertiesSets/ControlP5propertiesSets)
+  - **Chart** displays a list of numbers as line, pie or bar chart, useful to display real-time data coming for example from an Arduino SerialEvent [ControlP5chart](examples/controllers/ControlP5chart/ControlP5chart.pde)
+  - **FrameRate** a Textlabel that displays the current FrameRate [ControlP5frameRate](examples/use/ControlP5frameRate/ControlP5frameRate.pde)
+  - **Pointer** use custom xy coordinates to replace the mouse [ControlP5pointer](examples/extra/ControlP5pointer/ControlP5pointer.pde)
+  - **Println** hijacks the default Processing console output and displays the output inside your sketch window. [ControlP5console](examples/use/ControlP5console/ControlP5console.pde)
+  - **Properties** captures the state of Controllers which can then be saved or loaded from disk or memory [ControlP5propertiesSets](examples/extra/ControlP5propertiesSets/ControlP5propertiesSets.pde)
 
 
 ### Bring a Controller to the front
 
-To change the order of controllers, use Controller.bringToFront() which will position a controller on top of all others. See example [ControlP5bringToFront](examples/use/ControlP5bringToFront/ControlP5bringToFront)
+To change the order of controllers, use Controller.bringToFront() which will position a controller on top of all others. See example [ControlP5bringToFront](examples/use/ControlP5bringToFront/ControlP5bringToFront.pde)
 
 
 ### Rendering
@@ -305,7 +305,7 @@ To change the order of controllers, use Controller.bringToFront() which will pos
 
 ### Separate Windows
 
-To render controllers into separate windows please see example [ControlP5frames](examples/use/ControlP5frames/ControlP5frames), this example demonstrates how to open multiple frames each running its own instance of ControlP5. With previous version of ControlP5 the ControlWindow class would allow you to add and open new windows with 1 command, this comand though has been removed when all references to java.awt.* had been removed to make ControlP5 work with Android.
+To render controllers into separate windows please see example [ControlP5frames](examples/use/ControlP5frames/ControlP5frames.pde), this example demonstrates how to open multiple frames each running its own instance of ControlP5. With previous version of ControlP5 the ControlWindow class would allow you to add and open new windows with 1 command, this comand though has been removed when all references to java.awt.* had been removed to make ControlP5 work with Android.
 
 ## <a name="events"></a>Event Handling
 
