@@ -24,7 +24,7 @@ The range of available controllers includes Slider, Button, Toggle, Knob, Textfi
 
 To install the library from inside the Processing IDE, use the Library Manager from the menu under Sketch &rarr; Import Library &rarr; Add Library and search for ControlP5.
 
-If you want to install ControlP5 manually, download (the latest) version from the [releases](releases) directory. Inside the downloaded .zip file you will find [install_instructions](resources/install_instructions.txt) that guide you through the installation details and tell you where the controlP5 folder needs to be put. In case you are looking for an earlier release, please check the [archive on google code](https://code.google.com/p/controlp5/downloads/list?can=1&q=&colspec=Filename+Summary+Uploaded+ReleaseDate+Size+DownloadCount).
+If you want to install ControlP5 manually, download (the latest) version from the [releases](https://github.com/sojamo/controlp5/releases) directory. Inside the downloaded .zip file you will find [install_instructions](resources/install_instructions.txt) that guide you through the installation details and tell you where the controlP5 folder needs to be put. In case you are looking for an earlier release, please check the [archive on google code](https://code.google.com/p/controlp5/downloads/list?can=1&q=&colspec=Filename+Summary+Uploaded+ReleaseDate+Size+DownloadCount).
 
 After you have installed ControlP5, restart the Processing IDE to make the library available.
 
@@ -364,5 +364,6 @@ In case you run into problems and issues, please use ControlP5's issues section 
 
 If you want to help improve ControlP5, the first place for me to do so would be the source code documentation where supporting comments are desperately needed to create a concise and comprehensive javadoc.  
 
+If you have used ControlP5 in any of your projects, let me know, send me details, send me links, send me screeshots.
 
 Copyright 2006-2014 Andreas Schlegel
