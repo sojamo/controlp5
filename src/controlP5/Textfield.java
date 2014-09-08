@@ -320,8 +320,14 @@ public class Textfield extends Controller< Textfield > {
 		_myValueLabel.setText( text );
 		_myValueLabel.draw( buffer , -dif , 0 , this );
 		buffer.noStroke( );
-		buffer.fill( _myColorCursor );
-		buffer.rect( PApplet.max( 1 , PApplet.min( _myTextBufferIndexPosition , _myValueLabel.getWidth( ) - 3 ) ) , 0 , 1 , getHeight( ) );
+		if ( isTexfieldActive ) {
+			if ( !cp5.papplet.keyPressed ) {
+				buffer.fill( _myColorCursor , PApplet.abs( PApplet.sin( cp5.papplet.frameCount * 0.05f )) * 255 );
+			} else {
+				buffer.fill( _myColorCursor );
+			}
+			buffer.rect( PApplet.max( 1 , PApplet.min( _myTextBufferIndexPosition , _myValueLabel.getWidth( ) - 3 ) ) , 0 , 1 , getHeight( ) );
+		}
 		buffer.endDraw( );
 		theGraphics.image( buffer , 0 , 0 );
 

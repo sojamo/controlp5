@@ -30,7 +30,7 @@ import processing.core.PGraphics;
 
 /**
  * A knob is a circular slider which can be used with a limited and unlimited range. Knobs come in 3
- * designs LINE, ARC and ELIPSE and can be controller with both the mouse and the mouse wheel.
+ * designs LINE, ARC and ELLIPSE and can be controller with both the mouse and the mouse wheel.
  * 
  * @example controllers/ControlP5knob
  */

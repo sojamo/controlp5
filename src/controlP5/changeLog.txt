@@ -1,3 +1,22 @@
+2014-09-08  Andreas Schlegel  <andi at sojamo.de>
+
+      * src controlP5.Icon:
+      adding Icon class, acts like a button; can be used with images and font-icons
+      from "Font Awesome".
+      
+      * src controlP5.Button:
+      when theButton acts as a switch (setSwitch(true)), the corresponding
+      method inside a sketch should use type boolean as argument instead of float;
+      a java.lang.IllegalArgumentException will be thrown in case of a float argument
+
+
+2014-08-28  Andreas Schlegel  <andi at sojamo.de>
+
+      * src controlP5.Background:
+      adding Background class, a convenience class for grouping controllers with 
+      the top bar disabled by default.  
+	
+
 2014-07-21  Andreas Schlegel  <andi at sojamo.de>
 
       * src controlP5.Textfield:

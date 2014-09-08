@@ -67,6 +67,14 @@ public class Slider2D extends Controller< Slider2D > {
 		return setValue( 0 );
 	}
 
+	public Slider2D setMinMax( float theMinX , float theMinY , float theMaxX , float theMaxY ) {
+		_myMinX = theMinX;
+		_myMinY = theMinY;
+		_myMaxX = theMaxX;
+		_myMaxY = theMaxY;
+		return setValue( _myArrayValue[ 0 ] , _myArrayValue[ 1 ] );
+	}
+
 	/**
 	 * sets the minimum value for the x-axis
 	 * 
@@ -188,6 +196,12 @@ public class Slider2D extends Controller< Slider2D > {
 		_myValueLabel.set( adjustValue( _myArrayValue[ 0 ] , 0 ) + _myValueLabelSeparator + adjustValue( _myArrayValue[ 1 ] , 0 ) );
 		broadcast( FLOAT );
 		return this;
+	}
+
+	public Slider2D setValue( float theValue1 , float theValue2 ) {
+		cursorX = PApplet.map( theValue1 , _myMinX , _myMaxX , 0 , getWidth( ) - cursorWidth );
+		cursorY = PApplet.map( theValue2 , _myMinY , _myMaxY , 0 , getHeight( ) - cursorHeight );
+		return setValue( 0 );
 	}
 
 	/**

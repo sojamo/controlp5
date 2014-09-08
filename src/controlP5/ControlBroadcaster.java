@@ -2,9 +2,9 @@ package controlP5;
 
 /**
  * controlP5 is a processing gui library.
- *
- *  2006-2012 by Andreas Schlegel
- *
+ * 
+ * 2006-2012 by Andreas Schlegel
+ * 
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public License
  * as published by the Free Software Foundation; either version 2.1
@@ -13,16 +13,16 @@ package controlP5;
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * Lesser General Public License for more details.
- *
+ * 
  * You should have received a copy of the GNU Lesser General
  * Public License along with this library; if not, write to the
  * Free Software Foundation, Inc., 59 Temple Place, Suite 330,
  * Boston, MA 02111-1307 USA
- *
- * @author 		Andreas Schlegel (http://www.sojamo.de)
- * @modified	##date##
- * @version		##version##
- *
+ * 
+ * @author Andreas Schlegel (http://www.sojamo.de)
+ * @modified ##date##
+ * @version ##version##
+ * 
  */
 
 import java.lang.reflect.Field;
@@ -259,7 +259,6 @@ public class ControlBroadcaster {
 	}
 
 	public ControlBroadcaster broadcast( final ControlEvent theControlEvent , final int theType ) {
-
 		if ( broadcast ) {
 			for ( ControlListener cl : _myControlListeners ) {
 				cl.controlEvent( theControlEvent );
@@ -274,6 +273,17 @@ public class ControlBroadcaster {
 						}
 					} else if ( theType == ControlP5Constants.ARRAY ) {
 
+					} else if ( theType == ControlP5Constants.BOOLEAN ) {
+						for ( ControllerPlug cp : theControlEvent.getController( ).getControllerPlugList( ) ) {
+							Controller controller = theControlEvent.getController( );
+							if ( controller instanceof Icon ) {
+								callTarget( cp , ( ( Icon ) controller ).getBooleanValue( ) );
+							} else if ( controller instanceof Button ) {
+								callTarget( cp , ( ( Button ) controller ).getBooleanValue( ) );
+							} else if ( controller instanceof Toggle ) {
+								callTarget( cp , ( ( Toggle ) controller ).getBooleanValue( ) );
+							}
+						}
 					} else {
 
 						for ( ControllerPlug cp : theControlEvent.getController( ).getControllerPlugList( ) ) {
@@ -295,7 +305,6 @@ public class ControlBroadcaster {
 
 	protected void callTarget( final ControllerPlug thePlug , final float theValue ) {
 		if ( thePlug.checkType( ControlP5Constants.METHOD ) ) {
-
 			invokeMethod( thePlug.getObject( ) , thePlug.getMethod( ) , thePlug.getMethodParameter( theValue ) );
 		} else if ( thePlug.checkType( ControlP5Constants.FIELD ) ) {
 			invokeField( thePlug.getObject( ) , thePlug.getField( ) , thePlug.getFieldParameter( theValue ) );
@@ -303,6 +312,14 @@ public class ControlBroadcaster {
 	}
 
 	protected void callTarget( final ControllerPlug thePlug , final String theValue ) {
+		if ( thePlug.checkType( ControlP5Constants.METHOD ) ) {
+			invokeMethod( thePlug.getObject( ) , thePlug.getMethod( ) , new Object[] { theValue } );
+		} else if ( thePlug.checkType( ControlP5Constants.FIELD ) ) {
+			invokeField( thePlug.getObject( ) , thePlug.getField( ) , theValue );
+		}
+	}
+
+	protected void callTarget( final ControllerPlug thePlug , final boolean theValue ) {
 		if ( thePlug.checkType( ControlP5Constants.METHOD ) ) {
 			invokeMethod( thePlug.getObject( ) , thePlug.getMethod( ) , new Object[] { theValue } );
 		} else if ( thePlug.checkType( ControlP5Constants.FIELD ) ) {
@@ -386,8 +403,7 @@ public class ControlBroadcaster {
 			// TODO Auto-generated constructor stub
 		}
 
-		@Override
-		public EmptyController setValue( float theValue ) {
+		@Override public EmptyController setValue( float theValue ) {
 			// TODO Auto-generated method stub
 			return this;
 		}
@@ -397,8 +413,7 @@ public class ControlBroadcaster {
 	/**
 	 * @exclude
 	 */
-	@Deprecated
-	public void plug( final String theControllerName , final String theTargetMethod ) {
+	@Deprecated public void plug( final String theControllerName , final String theTargetMethod ) {
 		plug( cp5.papplet , theControllerName , theTargetMethod );
 	}
 }

@@ -77,7 +77,7 @@ public class Button extends Controller< Button > {
 
 	@Override protected void onLeave( ) {
 		isActive = false;
-		setIsInside( false ); // TODO setIsInside needs to be set false here if we remove setIsInside from activate; see below. 
+		setIsInside( false );
 	}
 
 	/**
@@ -122,9 +122,6 @@ public class Button extends Controller< Button > {
 	protected void activate( ) {
 		if ( isActive ) {
 			isActive = false;
-			if ( getParent( ) instanceof Tab ) {
-				//setIsInside( false ); // TODO why do we setIsInside to false here?
-			}
 			isOn = !isOn;
 			setValue( _myValue );
 
@@ -158,13 +155,14 @@ public class Button extends Controller< Button > {
 	 * Turns a button into a switch, or use a Toggle
 	 * instead.
 	 * 
-	 * @see controlP5.Toggle
-	 * @param theFlag turns the button into a switch when
-	 *            true
-	 * @return Button
 	 */
 	public Button setSwitch( boolean theFlag ) {
 		isSwitch = theFlag;
+		if ( isSwitch ) {
+			_myBroadcastType = BOOLEAN;
+		} else {
+			_myBroadcastType = FLOAT;
+		}
 		return this;
 	}
 
@@ -207,6 +205,10 @@ public class Button extends Controller< Button > {
 	 */
 	public boolean isOn( ) {
 		return isOn;
+	}
+
+	public boolean isSwitch( ) {
+		return isSwitch;
 	}
 
 	/**
@@ -312,5 +314,4 @@ public class Button extends Controller< Button > {
 		return super.toString( ) + " [ " + getValue( ) + " ] " + "Button" + " (" + this.getClass( ).getSuperclass( ) + ")";
 	}
 
-	
 }

@@ -43,6 +43,8 @@ public class Chart extends Controller< Chart > {
 		super( theControlP5 , theParent , theName , theX , theY , theWidth , theHeight );
 		setRange( 0 , theHeight );
 		_myDataSet = new LinkedHashMap< String , ChartDataSet >( );
+		getCaptionLabel( ).align( LEFT, BOTTOM_OUTSIDE ).paddingX = 0;
+		
 	}
 
 	public Chart setRange( float theMin , float theMax ) {
@@ -418,6 +420,7 @@ public class Chart extends Controller< Chart > {
 			}
 			theGraphics.noStroke( );
 			theGraphics.popStyle( );
+			getCaptionLabel( ).draw( theGraphics , 0 , 0 , theController );
 		}
 	}
 

@@ -37,15 +37,10 @@ import processing.core.PImage;
 public class Toggle extends Controller< Toggle > {
 
 	protected int cnt;
-
 	protected boolean isOn = false;
-
 	protected float internalValue = -1;
-
 	public static int autoWidth = 39;
-
 	public static int autoHeight = 19;
-
 	protected float[] autoSpacing = new float[] { 10 , 20 };
 
 	/**
@@ -72,7 +67,7 @@ public class Toggle extends Controller< Toggle > {
 	 */
 	@ControlP5.Invisible public void draw( PGraphics theGraphics ) {
 		theGraphics.pushMatrix( );
-		theGraphics.translate( x(position) , y(position) );
+		theGraphics.translate( x( position ) , y( position ) );
 		_myControllerView.display( theGraphics , this );
 		theGraphics.popMatrix( );
 	}
@@ -113,6 +108,10 @@ public class Toggle extends Controller< Toggle > {
 		return this;
 	}
 
+	public boolean getBooleanValue( ) {
+		return getState( );
+	}
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -132,10 +131,6 @@ public class Toggle extends Controller< Toggle > {
 		return this;
 	}
 
-	/**
-	 * 
-	 * @return
-	 */
 	public boolean getState( ) {
 		return isOn;
 	}
@@ -245,18 +240,11 @@ public class Toggle extends Controller< Toggle > {
 
 		public void display( PGraphics theGraphics , Toggle theController ) {
 
-			// if ( isActive ) {
-			// theGraphics.image( ( availableImages[ ACTIVE ] == true ) ? images[ ACTIVE ] : images[
-			// DEFAULT ] , 0 , 0 );
-			// } else {
 			if ( isOn ) {
 				theGraphics.image( ( availableImages[ ACTIVE ] == true ) ? images[ ACTIVE ] : images[ DEFAULT ] , 0 , 0 );
 			} else {
 				theGraphics.image( images[ DEFAULT ] , 0 , 0 );
 			}
-			// }
-
-			//theGraphics.rect( 0 , 0 , getWidth( ) , getHeight( ) );
 		}
 	}
 
@@ -265,9 +253,7 @@ public class Toggle extends Controller< Toggle > {
 		public void display( PGraphics theGraphics , Toggle theController ) {
 
 			theGraphics.fill( color.getBackground( ) );
-
 			theGraphics.rect( 0 , 0 , getWidth( ) , getHeight( ) );
-
 			theGraphics.fill( color.getActive( ) );
 
 			if ( isOn ) {

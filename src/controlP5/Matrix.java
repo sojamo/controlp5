@@ -2,9 +2,9 @@ package controlP5;
 
 /**
  * controlP5 is a processing gui library.
- *
- *  2006-2012 by Andreas Schlegel
- *
+ * 
+ * 2006-2012 by Andreas Schlegel
+ * 
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public License
  * as published by the Free Software Foundation; either version 2.1
@@ -13,16 +13,16 @@ package controlP5;
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * Lesser General Public License for more details.
- *
+ * 
  * You should have received a copy of the GNU Lesser General
  * Public License along with this library; if not, write to the
  * Free Software Foundation, Inc., 59 Temple Place, Suite 330,
  * Boston, MA 02111-1307 USA
- *
- * @author 		Andreas Schlegel (http://www.sojamo.de)
- * @modified	##date##
- * @version		##version##
- *
+ * 
+ * @author Andreas Schlegel (http://www.sojamo.de)
+ * @modified ##date##
+ * @version ##version##
+ * 
  */
 
 import java.lang.reflect.InvocationTargetException;
@@ -117,14 +117,13 @@ public class Matrix extends Controller< Matrix > {
 		return _myInterval;
 	}
 
-	@ControlP5.Invisible
-	public Matrix updateInternalEvents( PApplet theApplet ) {
+	@ControlP5.Invisible public Matrix updateInternalEvents( PApplet theApplet ) {
 		setIsInside( inside( ) );
 
 		if ( getIsInside( ) ) {
 			if ( isPressed ) {
-				int tX = ( int ) ( ( theApplet.mouseX - x(position) ) / stepX );
-				int tY = ( int ) ( ( theApplet.mouseY - y(position) ) / stepY );
+				int tX = ( int ) ( ( theApplet.mouseX - x( position ) ) / stepX );
+				int tY = ( int ) ( ( theApplet.mouseY - y( position ) ) / stepY );
 
 				if ( tX != currentX || tY != currentY ) {
 					tX = PApplet.min( PApplet.max( 0 , tX ) , _myCellX );
@@ -164,8 +163,7 @@ public class Matrix extends Controller< Matrix > {
 		isActive = false;
 	}
 
-	@ControlP5.Invisible
-	public void mousePressed( ) {
+	@ControlP5.Invisible public void mousePressed( ) {
 		isActive = getIsInside( );
 		if ( getIsInside( ) ) {
 			isPressed = true;
@@ -176,8 +174,7 @@ public class Matrix extends Controller< Matrix > {
 		mouseReleased( );
 	}
 
-	@ControlP5.Invisible
-	public void mouseReleased( ) {
+	@ControlP5.Invisible public void mouseReleased( ) {
 		if ( isActive ) {
 			isActive = false;
 		}
@@ -186,8 +183,7 @@ public class Matrix extends Controller< Matrix > {
 		currentY = -1;
 	}
 
-	@Override
-	public Matrix setValue( float theValue ) {
+	@Override public Matrix setValue( float theValue ) {
 		_myValue = theValue;
 		broadcast( FLOAT );
 		return this;
@@ -232,7 +228,7 @@ public class Matrix extends Controller< Matrix > {
 				} catch ( SecurityException ex ) {
 					ex.printStackTrace( );
 				} catch ( NoSuchMethodException ex ) {
-					ex.printStackTrace( );
+					//ex.printStackTrace( );
 				} catch ( IllegalArgumentException ex ) {
 					ex.printStackTrace( );
 				} catch ( IllegalAccessException ex ) {
@@ -245,8 +241,7 @@ public class Matrix extends Controller< Matrix > {
 		return this;
 	}
 
-	@Override
-	public Matrix update( ) {
+	@Override public Matrix update( ) {
 		return setValue( _myValue );
 	}
 
@@ -346,8 +341,7 @@ public class Matrix extends Controller< Matrix > {
 		}
 	}
 
-	@Override
-	public void remove( ) {
+	@Override public void remove( ) {
 		if ( t != null ) {
 			t.interrupt( );
 		}
@@ -377,9 +371,7 @@ public class Matrix extends Controller< Matrix > {
 		return this;
 	}
 
-	@Override
-	@ControlP5.Invisible
-	public Matrix updateDisplayMode( int theMode ) {
+	@Override @ControlP5.Invisible public Matrix updateDisplayMode( int theMode ) {
 		_myDisplayMode = theMode;
 		switch ( theMode ) {
 		case ( DEFAULT ):
@@ -400,16 +392,14 @@ public class Matrix extends Controller< Matrix > {
 			theGraphics.noStroke( );
 			theGraphics.fill( bg );
 			theGraphics.rect( 0 , 0 , getWidth( ) , getHeight( ) );
+
+			float gx = gapX / 2;
+			float gy = gapY / 2;
 			for ( int x = 0 ; x < _myCellX ; x++ ) {
 				for ( int y = 0 ; y < _myCellY ; y++ ) {
 
-					if ( _myCells[ x ][ y ] == 1 ) {
-						theGraphics.fill( color.getActive( ) );
-						theGraphics.rect( x * stepX , y * stepY , stepX - gapX , stepY - gapY );
-					} else {
-						theGraphics.fill( color.getBackground( ) );
-						theGraphics.rect( x * stepX , y * stepY , stepX - gapX , stepY - gapY );
-					}
+					theGraphics.fill( _myCells[ x ][ y ] == 1 ? color.getActive( ) : color.getBackground( ) );
+					theGraphics.rect( x * stepX + gx , y * stepY + gy , stepX - gapX , stepY - gapY );
 				}
 			}
 			if ( isInside( ) ) {

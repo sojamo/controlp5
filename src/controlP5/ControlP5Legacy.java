@@ -25,8 +25,26 @@ public class ControlP5Legacy {
 		return myController;
 	}
 
+	public Background addBackground( final String theName ) {
+		return addBackground( null , "" , theName , 0 , 0 , 300 , base.cp5.papplet.height );
+	}
+
+	public Background addBackground( Object theObject , final String theIndex , String theName , int theX , int theY , int theW , int theHeight ) {
+		Background myController = new Background( base.cp5 , ( ControllerGroup< ? > ) base.cp5.controlWindow.getTabs( ).get( 1 ) , theName , theX , theY , theW , theHeight );
+		base.cp5.register( theObject , theIndex , myController );
+		return myController;
+	}
+
 	public Button addButton( final Object theObject , String theIndex , final String theName , final float theValue , final int theX , final int theY , final int theW , final int theH ) {
 		Button myController = new Button( base.cp5 , ( ControllerGroup< ? > ) base.cp5.controlWindow.getTabs( ).get( 1 ) , theName , theValue , theX , theY , theW , theH );
+		base.cp5.register( theObject , theIndex , myController );
+		myController.registerProperty( "value" );
+		myController.getProperty( "value" ).disable( );
+		return myController;
+	}
+
+	public Icon addIcon( final Object theObject , String theIndex , final String theName , final float theValue , final int theX , final int theY , final int theW , final int theH ) {
+		Icon myController = new Icon( base.cp5 , ( ControllerGroup< ? > ) base.cp5.controlWindow.getTabs( ).get( 1 ) , theName , theValue , theX , theY , theW , theH );
 		base.cp5.register( theObject , theIndex , myController );
 		myController.registerProperty( "value" );
 		myController.getProperty( "value" ).disable( );
@@ -423,6 +441,23 @@ public class ControlP5Legacy {
 		base.linebreak( b , false , Button.autoWidth , Button.autoHeight , Button.autoSpacing );
 		b.moveTo( base.currentGroupPointer );
 		return b;
+	}
+
+	public Icon addIcon( Object theObject , final String theIndex , String theName ) {
+		return addIcon( theObject , theIndex , theName , 1 );
+	}
+
+	public Icon addIcon( String theName , float theValue ) {
+		return addIcon( null , "" , theName , theValue );
+	}
+
+	public Icon addIcon( Object theObject , final String theIndex , String theName , float theValue ) {
+		int x = ( int ) x( base.currentGroupPointer.autoPosition );
+		int y = ( int ) y( base.currentGroupPointer.autoPosition );
+		Icon icon = addIcon( theObject , theIndex , theName , theValue , x , y , Icon.autoWidth , Icon.autoHeight );
+		base.linebreak( icon , false , Icon.autoWidth , Icon.autoHeight , Icon.autoSpacing );
+		icon.moveTo( base.currentGroupPointer );
+		return icon;
 	}
 
 	public Bang addBang( Object theObject , final String theIndex , String theName ) {
