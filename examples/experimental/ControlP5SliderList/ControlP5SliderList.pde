@@ -26,7 +26,7 @@ float[] rotation = new float[NUM];
 
 
 void setup() {
-  size(800, 500 ,P3D);
+  size(800, 400 ,P3D);
   f1 = createFont("Helvetica", 12);
 
   cp5 = new ControlP5( this );
@@ -37,7 +37,7 @@ void setup() {
 
   SilderList m = new SilderList( cp5, "menu", 250, 350 );
 
-  m.setPosition(40, 40);
+  m.setPosition(40, 20);
   // add some items to our SilderList
   for (int i=0;i<NUM;i++) {
     m.addItem(makeItem("slider-"+i, 0, -PI, PI ));
@@ -70,11 +70,11 @@ public void controlEvent(ControlEvent theEvent) {
 }
 
 void draw() {
-  background( 255 );
+  background( 220 );
   fill(0, 128, 255);
   noStroke();
   pushMatrix();
-  translate(width/2, 50 );
+  translate(width/2, 30 );
   for (int i=0;i<NUM;i++) {
     pushMatrix();
     translate((i%10)*35, int(i/10)*35);

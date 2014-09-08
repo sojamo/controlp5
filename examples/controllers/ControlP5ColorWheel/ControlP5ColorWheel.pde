@@ -1,6 +1,13 @@
 /**
- * ColorWheel is working but still under development as of 22.April 2014.
- * for API see source code of controlP5/ColorWheel.java
+* ControlP5 ColorWheel
+*
+*
+* find a list of public methods available for the Group Controller
+* at the bottom of this sketch.
+*
+* by Andreas Schlegel, 2014
+* www.sojamo.de/libraries/controlp5
+*
 */
 
 import controlP5.*;
@@ -8,9 +15,8 @@ import controlP5.*;
 ControlP5 cp5;
 
 void setup() {
-  size(500, 500);
+  size(800, 400);
   cp5 = new ControlP5( this );
-  cp5.printPublicMethodsFor(ColorWheel.class);
   cp5.addColorWheel("c" , 250 , 10 , 200 ).setRGB(color(128,0,255));
   noStroke();
 }
@@ -203,7 +209,7 @@ controlP5.Controller : void setView(ControllerView, int)
 java.lang.Object : String toString() 
 java.lang.Object : boolean equals(Object) 
 
-created: 2014/08/16 19:11:25
+created: 2014/09/08 01:18:40
 
 */
 

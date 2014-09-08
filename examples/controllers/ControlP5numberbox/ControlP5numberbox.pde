@@ -25,15 +25,15 @@ void setup() {
   
   cp5.addNumberbox("numberbox")
      .setPosition(100,160)
-     .setSize(100,14)
+     .setSize(100,20)
      .setScrollSensitivity(1.1)
      .setValue(50)
      ;
   
 
   cp5.addNumberbox("numberboxValue")
-     .setPosition(100,200)
-     .setSize(100,14)
+     .setPosition(100,220)
+     .setSize(100,20)
      .setRange(0,200)
      .setMultiplier(0.1) // set the sensitifity of the numberbox
      .setDirection(Controller.HORIZONTAL) // change the control direction to left/right
@@ -207,7 +207,7 @@ controlP5.Numberbox : float getMultiplier()
 java.lang.Object : String toString() 
 java.lang.Object : boolean equals(Object) 
 
-created: 2014/08/16 19:11:52
+created: 2014/09/08 01:19:09
 
 */
 

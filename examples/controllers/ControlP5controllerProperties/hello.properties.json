@@ -12,7 +12,7 @@
   "/sliderTicks1": {
     "min": 0,
     "max": 255,
-    "value": 127.5
+    "value": 0
   },
   "/sliderTicks2": {
     "min": 0,

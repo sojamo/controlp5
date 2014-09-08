@@ -22,7 +22,8 @@ void setup() {
   s = cp5.addSlider2D("wave")
          .setPosition(30,40)
          .setSize(100,100)
-         .setArrayValue(new float[] {50, 50})
+         .setMinMax(20,10,100,100)
+         .setValue(50,50)
          //.disableCrosshair()
          ;
          
@@ -211,9 +212,11 @@ controlP5.Slider2D : Slider2D setCursorX(float)
 controlP5.Slider2D : Slider2D setCursorY(float) 
 controlP5.Slider2D : Slider2D setMaxX(float) 
 controlP5.Slider2D : Slider2D setMaxY(float) 
+controlP5.Slider2D : Slider2D setMinMax(float, float, float, float) 
 controlP5.Slider2D : Slider2D setMinX(float) 
 controlP5.Slider2D : Slider2D setMinY(float) 
 controlP5.Slider2D : Slider2D setValue(float) 
+controlP5.Slider2D : Slider2D setValue(float, float) 
 controlP5.Slider2D : Slider2D shuffle() 
 controlP5.Slider2D : float getCursorHeight() 
 controlP5.Slider2D : float getCursorWidth() 
@@ -228,7 +231,7 @@ controlP5.Slider2D : void setValueLabelSeparator(String)
 java.lang.Object : String toString() 
 java.lang.Object : boolean equals(Object) 
 
-created: 2014/08/16 19:12:00
+created: 2014/09/08 01:19:18
 
 */
 

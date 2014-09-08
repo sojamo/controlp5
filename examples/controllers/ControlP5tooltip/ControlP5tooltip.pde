@@ -1,6 +1,8 @@
   /**
 * ControlP5 Tooltip
 *
+* Broken with version 2.2.1+
+*
 * add a tooltip to a controller.
 * hover your mouse on top of a slider in the example and wait 
 * for 1 second for the tooltip to appear.
@@ -107,7 +109,7 @@ controlP5.Tooltip : int getWidth()
 java.lang.Object : String toString() 
 java.lang.Object : boolean equals(Object) 
 
-created: 2014/08/16 19:12:10
+created: 2014/09/08 01:19:27
 
 */
 

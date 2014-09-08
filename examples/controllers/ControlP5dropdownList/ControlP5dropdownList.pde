@@ -1,4 +1,7 @@
 /**
+ *
+ * DEPRECATED, use ScrollableList instead.
+ * 
  * Control5 DropdownList
  * A dropdownList controller, extends the ListBox controller.
  * the most recently selected dropdownlist item is displayed inside
@@ -7,7 +10,6 @@
  * find a list of public methods available for the DropdownList Controller 
  * at the bottom of this sketch's source code
  *
- * DEPRECATED, use ScrollableList instead.
  *
  * by andreas schlegel, 2012
  * www.sojamo.de/libraries/controlp5
@@ -302,7 +304,7 @@ controlP5.DropdownList : void updateItemIndexOffset()
 java.lang.Object : String toString() 
 java.lang.Object : boolean equals(Object) 
 
-created: 2014/08/16 19:11:42
+created: 2014/09/08 01:18:58
 
 */
 

@@ -289,7 +289,7 @@ controlP5.Matrix : void remove()
 java.lang.Object : String toString() 
 java.lang.Object : boolean equals(Object) 
 
-created: 2014/08/16 19:11:48
+created: 2014/09/08 01:19:06
 
 */
 

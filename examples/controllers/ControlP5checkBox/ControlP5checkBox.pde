@@ -23,7 +23,7 @@ CheckBox checkbox;
 int myColorBackground;
 
 void setup() {
-  size(700, 400);
+  size(800, 400);
   smooth();
   cp5 = new ControlP5(this);
   checkbox = cp5.addCheckBox("checkBox")
@@ -235,7 +235,7 @@ controlP5.ControllerGroup : void remove()
 java.lang.Object : String toString() 
 java.lang.Object : boolean equals(Object) 
 
-created: 2014/08/16 19:11:35
+created: 2014/09/08 01:18:51
 
 */
 

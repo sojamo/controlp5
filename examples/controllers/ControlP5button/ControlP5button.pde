@@ -127,6 +127,7 @@ controlP5.Button : String toString()
 controlP5.Button : boolean getBooleanValue() 
 controlP5.Button : boolean isOn() 
 controlP5.Button : boolean isPressed() 
+controlP5.Button : boolean isSwitch() 
 controlP5.Controller : Button addCallback(CallbackListener) 
 controlP5.Controller : Button addListener(ControlListener) 
 controlP5.Controller : Button addListenerFor(int, CallbackListener) 
@@ -259,7 +260,7 @@ controlP5.Controller : void setView(ControllerView, int)
 java.lang.Object : String toString() 
 java.lang.Object : boolean equals(Object) 
 
-created: 2014/08/16 19:11:30
+created: 2014/09/08 01:18:47
 
 */
 

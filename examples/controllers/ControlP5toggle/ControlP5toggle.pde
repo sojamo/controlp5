@@ -226,11 +226,12 @@ controlP5.Toggle : Toggle setValue(boolean)
 controlP5.Toggle : Toggle setValue(float) 
 controlP5.Toggle : Toggle toggle() 
 controlP5.Toggle : Toggle update() 
+controlP5.Toggle : boolean getBooleanValue() 
 controlP5.Toggle : boolean getState() 
 java.lang.Object : String toString() 
 java.lang.Object : boolean equals(Object) 
 
-created: 2014/08/16 19:12:08
+created: 2014/09/08 01:19:26
 
 */
 

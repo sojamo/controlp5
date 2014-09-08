@@ -1,12 +1,13 @@
 /**
+*
+* DEPRECATED, use ScrollableList instead.
+*
 * ControlP5 ListBox
 *
 * find a list of public methods available for the ListBox Controller
 * at the bottom of this sketch.
 * use the scrollwheel, up or down cursors to scroll through 
 * a listbox when hovering with the mouse.
-*
-* DEPRECATED, use ScrollableList instead.
 *
 * by Andreas Schlegel, 2012
 * www.sojamo.de/libraries/controlp5
@@ -311,7 +312,7 @@ controlP5.ListBox : void updateItemIndexOffset()
 java.lang.Object : String toString() 
 java.lang.Object : boolean equals(Object) 
 
-created: 2014/08/16 19:11:47
+created: 2014/09/08 01:19:04
 
 */
 

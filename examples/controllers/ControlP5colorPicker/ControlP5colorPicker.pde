@@ -18,7 +18,7 @@ ControlP5 cp5;
 ColorPicker cp;
 
 void setup() {
-  size(400, 600);
+  size(800, 400);
   noStroke();
   cp5 = new ControlP5(this);
   cp = cp5.addColorPicker("picker")
@@ -181,7 +181,7 @@ controlP5.ControllerGroup : void remove()
 java.lang.Object : String toString() 
 java.lang.Object : boolean equals(Object) 
 
-created: 2014/08/16 19:11:37
+created: 2014/09/08 01:18:53
 
 */
 
