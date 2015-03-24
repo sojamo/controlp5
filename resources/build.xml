@@ -15,7 +15,7 @@
 	<property name="author"                     value="Andreas Schlegel"/>	
 	<property name="copyright"                  value="(c) 2006-2015"/>
 	<property name="libraryName"                value="controlP5"/>
-	<property name="versionNumber"              value="2.2.3"/>
+	<property name="versionNumber"              value="2.2.4"/>
 	<property name="yourLink"                   value="http://www.sojamo.de" />
 	<property name="keywords"                   value="gui, ui, controller, interface, user interface" />
 	<property name="tested:platform"            value="osx, windows, linux" />
