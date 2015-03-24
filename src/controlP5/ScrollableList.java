@@ -75,6 +75,7 @@ public class ScrollableList extends Controller< ScrollableList > implements Cont
 		super( theControlP5 , theGroup , theName , theX , theY , theW , theH );
 		items = new ArrayList< Map< String , Object > >( );
 		updateHeight( );
+		getValueLabel( ).align( PApplet.LEFT , PApplet.CENTER );
 	}
 
 	public boolean isOpen( ) {
@@ -397,7 +398,8 @@ public class ScrollableList extends Controller< ScrollableList > implements Cont
 				}
 				g.popMatrix( );
 
-				c.getCaptionLabel( ).align( PApplet.LEFT , PApplet.CENTER ).draw( g , 4 , c.barHeight / 2 );
+				c.getCaptionLabel( ).draw( g , 4 , c.barHeight / 2 );
+
 			}
 
 			if ( c.isOpen( ) ) {
@@ -419,7 +421,7 @@ public class ScrollableList extends Controller< ScrollableList > implements Cont
 					CColor color = ( CColor ) item.get( "color" );
 					g.fill( ( b( item.get( "state" ) ) ) ? color.getActive( ) : ( i == c.itemHover ) ? ( c.isMousePressed ? color.getActive( ) : color.getForeground( ) ) : color.getBackground( ) );
 					g.rect( 0 , 0 , c.getWidth( ) , c.itemHeight - 1 );
-					c.getValueLabel( ).align( PApplet.LEFT , PApplet.CENTER ).set( item.get( "text" ).toString( ) ).draw( g , 4 , c.itemHeight / 2 );
+					c.getValueLabel( ).set( item.get( "text" ).toString( ) ).draw( g , 4 , c.itemHeight / 2 );
 					g.translate( 0 , c.itemHeight );
 				}
 				g.popMatrix( );

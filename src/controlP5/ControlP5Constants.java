@@ -169,6 +169,8 @@ public interface ControlP5Constants {
 	public final static CColor THEME_GREY = new CColor( 0xffeeeeee, 0xffbbbbbb , 0xffffffff , 0xff555555 , 0xff555555 );
 	public final static CColor THEME_A = new CColor( 0xff00FFC8 , 0xff00D7FF , 0xffffff00 , 0xff00B0FF , 0xff00B0FF );
 
+	// other colors: #ff3838 red-salmon; #08ffb4 turquoise; #40afff light-blue; #f3eddb beige; 
+	
 	public static final int standard58 = 0;
 	public static final int standard56 = 1;
 	public static final int synt24 = 2;
@@ -179,5 +181,8 @@ public interface ControlP5Constants {
 
 	public final static String JSON = "JSON";
 	public final static String SERIALIZED = "SERIALIZED";
+	
+	static public final String delimiter = " ";
+	static public final String pathdelimiter = "/";
 	
 }

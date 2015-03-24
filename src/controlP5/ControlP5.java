@@ -33,11 +33,14 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -87,12 +90,15 @@ public class ControlP5 extends ControlP5Base {
 	 */
 	@ControlP5.Invisible PGraphics pg;
 	int pgx = 0 , pgy = 0 , pgw = 0 , pgh = 0;
+	int ox = 0;
+	int oy = 0;
+
 	boolean isGraphics = false;
 
 	/**
 	 * @exclude
 	 */
-	@ControlP5.Invisible public static final String VERSION = "2.2.2";// "##version##";
+	@ControlP5.Invisible public static final String VERSION = "2.2.3";// "##version##";
 
 	/**
 	 * @exclude
@@ -253,6 +259,12 @@ public class ControlP5 extends ControlP5Base {
 		pgw = pg.width;
 		pgh = pg.height;
 		isGraphics = true;
+		return this;
+	}
+
+	public ControlP5 setPosition( int theX , int theY ) {
+		ox = theX;
+		oy = theY;
 		return this;
 	}
 
@@ -1359,12 +1371,42 @@ public class ControlP5 extends ControlP5Base {
 		return str.matches( "(-|\\+)?\\d+(\\.\\d+)?" );
 	}
 
+	static public List toList( final Object ... args ) {
+		List l = new ArrayList( );
+		Collections.addAll( l , args );
+		return l;
+	}
+
 	static public List toList( Object o ) {
 		return o != null ? ( o instanceof List ) ? ( List ) o : ( o instanceof String ) ? toList( o.toString( ) ) : Collections.EMPTY_LIST : Collections.EMPTY_LIST;
 	}
 
+	static public Map toMap( final String s ) {
+		/* similar to mapFrom(Object ... args) but with type
+		 * (Number,String) sensitivity */
+		String[] arr = s.trim( ).split( delimiter );
+		Map m = new LinkedHashMap( );
+		if ( arr.length % 2 == 0 ) {
+			for ( int i = 0 ; i < arr.length ; i += 2 ) {
+				String s1 = arr[ i + 1 ];
+				m.put( arr[ i ] , isNumeric( s1 ) ? s1.indexOf( "." ) == -1 ? i( s1 ) : f( s1 ) : s1 );
+			}
+		}
+		return m;
+	}
+
 	static public Map toMap( Object o ) {
 		return o != null ? ( o instanceof Map ) ? ( Map ) o : Collections.EMPTY_MAP : Collections.EMPTY_MAP;
+	}
+
+	static public Map toMap( final Object ... args ) {
+		Map m = new LinkedHashMap( );
+		if ( args.length % 2 == 0 ) {
+			for ( int i = 0 ; i < args.length ; i += 2 ) {
+				m.put( args[ i ] , args[ i + 1 ] );
+			}
+		}
+		return m;
 	}
 
 	static public String s( String o ) {
@@ -1381,6 +1423,18 @@ public class ControlP5 extends ControlP5Base {
 			put( Long.class , long.class );
 		}
 	};
+
+	static public void sleep( long theMillis ) {
+		try {
+			Thread.sleep( theMillis );
+		} catch ( Exception e ) {
+
+		}
+	}
+
+	static public String timestamp( ) {
+		return new SimpleDateFormat( "yyyyMMdd-HHmmss" ).format( new Date( ) );
+	}
 
 	/* add Objects with Annotation */
 

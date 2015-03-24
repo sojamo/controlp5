@@ -195,7 +195,7 @@ public final class ControlWindow {
 	/**
 	 * Sets the position of the tab bar which is set to 0,0
 	 * by default. to move the tabs to y-position 100, use
-	 * cp5.window().setPositionOfTabs(new PVector(0,100,0));
+	 * cp5.getWindow().setPositionOfTabs(new PVector(0,100,0));
 	 * 
 	 * @param thePVector
 	 */
@@ -413,8 +413,8 @@ public final class ControlWindow {
 	 */
 	public void mouseEvent( int theX , int theY , boolean pressed ) {
 
-		mouseX = theX - cp5.pgx;
-		mouseY = theY - cp5.pgy;
+		mouseX = theX - cp5.pgx - cp5.ox;
+		mouseY = theY - cp5.pgy - cp5.oy;
 
 		if ( pressed && !pmousePressed ) {
 			updateEvents( );
@@ -451,8 +451,8 @@ public final class ControlWindow {
 	 */
 	public void mouseEvent( MouseEvent theMouseEvent ) {
 		if ( isMouse ) {
-			mouseX = theMouseEvent.getX( ) - cp5.pgx;
-			mouseY = theMouseEvent.getY( ) - cp5.pgy;
+			mouseX = theMouseEvent.getX( ) - cp5.pgx - cp5.ox;
+			mouseY = theMouseEvent.getY( ) - cp5.pgy - cp5.oy;
 			if ( theMouseEvent.getAction( ) == MouseEvent.PRESS ) {
 				mousePressedEvent( );
 			}
@@ -526,7 +526,8 @@ public final class ControlWindow {
 	}
 
 	public void draw( PGraphics pg ) {
-
+		pg.pushMatrix( );
+		pg.translate( cp5.ox , cp5.oy );
 		if ( cp5.blockDraw == false ) {
 			if ( cp5.isAndroid ) {
 				mouseEvent( cp5.papplet.mouseX , cp5.papplet.mouseY , cp5.papplet.mousePressed );
@@ -625,7 +626,7 @@ public final class ControlWindow {
 				}
 			}
 		}
-
+		pg.popMatrix( );
 	}
 
 	/**

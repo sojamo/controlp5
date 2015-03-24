@@ -47,29 +47,17 @@ import java.util.Set;
 public class ControlBroadcaster {
 
 	private int _myControlEventType = ControlP5Constants.INVALID;
-
 	private ControllerPlug _myControlEventPlug = null;
-
 	private ControllerPlug _myControllerCallbackEventPlug = null;
-
 	private ControlP5 cp5;
-
 	private String _myEventMethod = "controlEvent";
-
 	private String _myControllerCallbackEventMethod = "controlEvent";
-
 	private ArrayList< ControlListener > _myControlListeners;
-
 	private Set< Entry< CallbackListener , Controller< ? >>> _myControllerCallbackListeners;
-
 	private static boolean setPrintStackTrace = true;
-
 	private static boolean ignoreErrorMessage = false;
-
 	private static Map< Class< ? > , Field[] > fieldcache = new HashMap< Class< ? > , Field[] >( );
-
 	private static Map< Class< ? > , Method[] > methodcache = new HashMap< Class< ? > , Method[] >( );
-
 	boolean broadcast = true;
 
 	protected ControlBroadcaster( ControlP5 theControlP5 ) {

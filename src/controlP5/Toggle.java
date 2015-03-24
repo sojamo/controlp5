@@ -167,6 +167,10 @@ public class Toggle extends Controller< Toggle > {
 		return this;
 	}
 
+	public int getMode( ) {
+		return _myDisplayMode;
+	}
+
 	/**
 	 * by default a toggle returns 0 (for off) and 1 (for on). the internal value variable can be
 	 * used to store an additional value for a toggle event.

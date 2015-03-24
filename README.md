@@ -366,4 +366,4 @@ If you want to help improve ControlP5, the first place for me to do so would be 
 
 If you have used ControlP5 in any of your projects, let me know, send me details, send me links, send me screeshots.
 
-Copyright 2006-2014 Andreas Schlegel
+Copyright 2006-2015 Andreas Schlegel
