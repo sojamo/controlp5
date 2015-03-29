@@ -18,7 +18,7 @@ The range of available controllers includes Slider, Button, Toggle, Knob, Textfi
   * [Javascript](#javascript)
   * [Problems and Issues](#issues)
   * [Help](#help)
-  * Digital Object Identifiers 
+  * [Digital Object Identifiers ](#doi)
 
   
 ## <a name"install"></a>Installation
@@ -367,7 +367,7 @@ If you want to help improve ControlP5, the first place for me to do so would be 
 
 If you have used ControlP5 in any of your projects, let me know, send me details, send me links, send me screeshots.
 
-## <a name="issues"></a>Digital Object Identifiers
+## <a name="doi"></a>Digital Object Identifiers
 
 Digital Object Identifiers (DOI) are the backbone of the academic reference and metrics system which allows researchers writing software to make their work they share on GitHub citable by archiving one of their GitHub repositories and assigning a DOI with the data archiving tool Zenodo [(link)](https://guides.github.com/activities/citable-code/).
 
