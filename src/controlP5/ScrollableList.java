@@ -134,7 +134,11 @@ public class ScrollableList extends Controller< ScrollableList > implements Cont
 
 				// n += itemRange; /* UP */
 				int index = ( int ) n + itemIndexOffset;
-
+				
+				if ( index >= items.size( ) ) {
+					return;
+				}
+				
 				Map m = items.get( index );
 
 				switch ( _myType ) {

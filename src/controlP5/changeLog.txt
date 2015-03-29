@@ -1,3 +1,8 @@
+2015-03-29  Andreas Schlegel  <andi at sojamo.de>
+
+      * src controlP5.ScrollabelList:
+      fixing ArrayOutOfBounds error as reported on github under issue 3 https://github.com/sojamo/controlp5/issues/3
+
 2014-09-08  Andreas Schlegel  <andi at sojamo.de>
 
       * src controlP5.Icon:
