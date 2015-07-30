@@ -124,7 +124,6 @@ public class Button extends Controller< Button > {
 			isActive = false;
 			isOn = !isOn;
 			setValue( _myValue );
-
 		}
 	}
 

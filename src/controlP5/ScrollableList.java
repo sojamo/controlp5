@@ -134,33 +134,41 @@ public class ScrollableList extends Controller< ScrollableList > implements Cont
 
 				// n += itemRange; /* UP */
 				int index = ( int ) n + itemIndexOffset;
-				
-				if ( index >= items.size( ) ) {
-					return;
-				}
-				
-				Map m = items.get( index );
-
-				switch ( _myType ) {
-				case ( LIST ):
-					setValue( index );
-					for ( Object o : items ) {
-						( ( Map ) o ).put( "state" , false );
-					}
-					m.put( "state" , !ControlP5.b( m.get( "state" ) ) );
-					break;
-				case ( DROPDOWN ):
-					setValue( index );
-					setOpen( false );
-					getCaptionLabel( ).setText( ( m.get( "text" ).toString( ) ) );
-					break;
-				case ( CHECKBOX ):
-					m.put( "state" , !ControlP5.b( m.get( "state" ) ) );
-					break;
-				}
-
+				updateIndex( index );
 			}
 		}
+	}
+
+	private void updateIndex( int theIndex ) {
+		if ( theIndex >= items.size( ) ) {
+			return;
+		}
+
+		Map m = items.get( theIndex );
+
+		switch ( _myType ) {
+		case ( LIST ):
+			super.setValue( theIndex );
+			for ( Object o : items ) {
+				( ( Map ) o ).put( "state" , false );
+			}
+			m.put( "state" , !ControlP5.b( m.get( "state" ) ) );
+			break;
+		case ( DROPDOWN ):
+			super.setValue( theIndex );
+			setOpen( false );
+			getCaptionLabel( ).setText( ( m.get( "text" ).toString( ) ) );
+			break;
+		case ( CHECKBOX ):
+			m.put( "state" , !ControlP5.b( m.get( "state" ) ) );
+			break;
+		}
+
+	}
+
+	public ScrollableList setValue( float theValue ) {
+		updateIndex( ( int ) ( theValue ) );
+		return this;
 	}
 
 	@Override protected void onDrag( ) {

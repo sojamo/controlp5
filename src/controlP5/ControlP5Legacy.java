@@ -294,7 +294,7 @@ public class ControlP5Legacy {
 	public ScrollableList addScrollableList( final Object theObject , String theIndex , final String theName , final int theX , final int theY , final int theW , final int theH ) {
 		ScrollableList myController = new ScrollableList( base.cp5 , ( Tab ) base.cp5.controlWindow.getTabs( ).get( 1 ) , theName , theX , theY , theW , theH );
 		base.cp5.register( theObject , theIndex , myController );
-		myController.registerProperty( "listBoxItems" ).registerProperty( "value" );
+		myController.registerProperty( "items" ).registerProperty( "value" );
 		return myController;
 	}
 

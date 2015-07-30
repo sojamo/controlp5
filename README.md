@@ -35,7 +35,7 @@ To get started, here a simple example that demonstrates how to create a slider a
 
 
 
-![example 1](resources/images/cp5-example-1_s.png)
+![example 1](./resources/images/cp5-example-1_s.png)
 _example 1, see code below_
 
 

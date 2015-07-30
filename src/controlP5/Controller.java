@@ -695,6 +695,7 @@ public abstract class Controller< T > implements ControllerInterface< T > , CDra
 			cp5.getControlBroadcaster( ).invokeAction( new CallbackEvent( this , ACTION_LEAVE ) );
 			_myControlWindow.removeMouseOverFor( this );
 			cp5.getTooltip( ).deactivate( );
+			setIsInside( false ); /* added after issue 6 has been reported */
 		}
 		return me;
 	}
