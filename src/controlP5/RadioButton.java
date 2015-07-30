@@ -138,13 +138,15 @@ public class RadioButton extends ControlGroup< RadioButton > {
 	 */
 	public RadioButton removeItem( final String theName ) {
 		int n = _myRadioToggles.size( );
-		for ( int i = 0 ; i < n ; i++ ) {
+		for ( int i = n-1 ; i >= 0 ; i-- ) {
 			if ( ( _myRadioToggles.get( i ) ).getName( ).equals( theName ) ) {
 				( _myRadioToggles.get( i ) ).removeListener( this );
+				_myRadioToggles.get( i ).remove();
 				_myRadioToggles.remove( i );
 			}
 		}
 		updateValues( false );
+		updateLayout( );
 		return this;
 	}
 
