@@ -125,8 +125,8 @@ Alternatively, ControlP5 can be instantiated from other places as well for examp
 
 	class GUI {
 		ControlP5 cp5;
-		GUI(ControlP5 theControlP5) {
-			cp5 = new ControlP5(theControlP5);
+		GUI(PApplet thePApplet) {
+			cp5 = new ControlP5(thePApplet);
 		}
 	}
 ```
