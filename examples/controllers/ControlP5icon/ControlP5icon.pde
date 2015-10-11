@@ -36,7 +36,7 @@ void draw() {
 }
 
 void icon(boolean theValue) {
-  println("got an event for icon", theValue);
+  println("got an event for icon" + theValue);
 } 
 
 /*
