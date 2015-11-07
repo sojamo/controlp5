@@ -451,18 +451,32 @@ public final class ControlWindow {
 	 */
 	public void mouseEvent( MouseEvent theMouseEvent ) {
 		if ( isMouse ) {
+			final int action = theMouseEvent.getAction();
+
+			if ( cp5.isTouch ) {
+				// Ignore certain events when touch-enabled
+ 				if ( action == MouseEvent.CLICK || action == MouseEvent.MOVE ) {
+					return;
+				}
+			}
+
 			mouseX = theMouseEvent.getX( ) - cp5.pgx - cp5.ox;
 			mouseY = theMouseEvent.getY( ) - cp5.pgy - cp5.oy;
-			if ( theMouseEvent.getAction( ) == MouseEvent.PRESS ) {
+
+			if ( cp5.isTouch && ( action == MouseEvent.PRESS || action == MouseEvent.RELEASE ) ) {
+				// Use 'Android Mode' which is really just touchscreen support
+				mouseEvent( theMouseEvent.getX( ), theMouseEvent.getY( ), action == MouseEvent.PRESS );
+				return;
+			}
+
+			if ( action == MouseEvent.PRESS ) {
 				mousePressedEvent( );
 			}
-			if ( theMouseEvent.getAction( ) == MouseEvent.RELEASE ) {
+			if ( action == MouseEvent.RELEASE ) {
 				mouseReleasedEvent( );
 			}
-			if ( theMouseEvent.getAction( ) == MouseEvent.WHEEL ) {
-
+			if ( action == MouseEvent.WHEEL ) {
 				setMouseWheelRotation( theMouseEvent.getCount( ) );
-
 			}
 		}
 	}
@@ -531,7 +545,7 @@ public final class ControlWindow {
 		if ( cp5.blockDraw == false ) {
 			if ( cp5.isAndroid ) {
 				mouseEvent( cp5.papplet.mouseX , cp5.papplet.mouseY , cp5.papplet.mousePressed );
-			} else {
+			} else if ( !cp5.isTouch ) {
 				updateEvents( );
 			}
 			if ( isVisible ) {
