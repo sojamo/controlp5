@@ -471,7 +471,7 @@ convey the exclusion of warranty; and each file should have at least the
 "copyright" line and a pointer to where the full notice is found.
 
     controlP5 is a processing gui library.
-    Copyright (C) 2006-2014  andreas schlegel
+    Copyright (C) 2006-2015  andreas schlegel
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public

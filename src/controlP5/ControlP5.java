@@ -3,23 +3,21 @@ package controlP5;
 /**
  * controlP5 is a processing gui library.
  * 
- * 2006-2012 by Andreas Schlegel
+ * 2006-2015 by Andreas Schlegel
  * 
- * This library is free software; you can redistribute it
- * and/or modify it under the terms of the GNU Lesser
- * General Public License as published by the Free Software
- * Foundation; either version 2.1 of the License, or (at
- * your option) any later version. This library is
- * distributed in the hope that it will be useful, but
- * WITHOUT ANY WARRANTY; without even the implied warranty
- * of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU Lesser General Public License for more
- * details.
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public License
+ * as published by the Free Software Foundation; either version 2.1
+ * of the License, or (at your option) any later version.
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
  * 
  * You should have received a copy of the GNU Lesser General
- * Public License along with this library; if not, write to
- * the Free Software Foundation, Inc., 59 Temple Place,
- * Suite 330, Boston, MA 02111-1307 USA
+ * Public License along with this library; if not, write to the
+ * Free Software Foundation, Inc., 59 Temple Place, Suite 330,
+ * Boston, MA 02111-1307 USA
  * 
  * @author Andreas Schlegel (http://www.sojamo.de)
  * @modified ##date##
@@ -98,7 +96,7 @@ public class ControlP5 extends ControlP5Base {
 	/**
 	 * @exclude
 	 */
-	@ControlP5.Invisible public static final String VERSION = "2.2.5";// "##version##";
+	@ControlP5.Invisible public static final String VERSION = "2.2.6";// "##version##";
 
 	/**
 	 * @exclude
@@ -954,7 +952,8 @@ public class ControlP5 extends ControlP5Base {
 	public boolean loadProperties( final String theFilePath ) {
 		String path = theFilePath.endsWith( _myProperties.format.getExtension( ) ) ? theFilePath : theFilePath + "." + _myProperties.format.getExtension( );
 		path = checkPropertiesPath( path );
-		File f = new File( path );
+		File f = new File( path);
+		
 		if ( f.exists( ) ) {
 			return _myProperties.load( path );
 		}
@@ -1226,8 +1225,14 @@ public class ControlP5 extends ControlP5Base {
 	/* static helper functions including Object-to-Type
 	 * conversions, invokes */
 
-	static public Object invoke( Object theObject , String theMember , Object ... theParams ) {
+	static public Object invoke( final Object theObject , final String theMember , final Object ... theParams ) {
+		return invoke( theObject , theObject.getClass( ) , theMember , theParams );
+	}
 
+	static public Object invoke( final Object theObject , final Class< ? > theClass , final String theMember , final Object ... theParams ) {
+		if ( theClass == null ) {
+			return null;
+		}
 		Class[] cs = new Class[ theParams.length ];
 
 		for ( int i = 0 ; i < theParams.length ; i++ ) {
@@ -1235,7 +1240,7 @@ public class ControlP5 extends ControlP5Base {
 			cs[ i ] = classmap.containsKey( c ) ? classmap.get( c ) : c;
 		}
 		try {
-			final Field f = theObject.getClass( ).getDeclaredField( theMember );
+			final Field f = theClass.getDeclaredField( theMember );
 			/* TODO check super */
 			f.setAccessible( true );
 			Object o = theParams[ 0 ];
@@ -1257,8 +1262,7 @@ public class ControlP5 extends ControlP5Base {
 			}
 		} catch ( NoSuchFieldException e1 ) {
 			try {
-				final Method m = theObject.getClass( ).getDeclaredMethod( theMember , cs );
-				/* TODO check super */
+				final Method m = theClass.getDeclaredMethod( theMember , cs );
 				m.setAccessible( true );
 				try {
 					return m.invoke( theObject , theParams );
@@ -1273,7 +1277,7 @@ public class ControlP5 extends ControlP5Base {
 			} catch ( SecurityException e ) {
 				System.err.println( e );
 			} catch ( NoSuchMethodException e ) {
-				System.err.println( e );
+				invoke( theObject , theClass.getSuperclass( ) , theMember , theParams );
 			}
 		} catch ( IllegalArgumentException e ) {
 			System.err.println( e );

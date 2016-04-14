@@ -1,16 +1,9 @@
 package controlP5;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.List;
-
-import processing.core.PImage;
-
 /**
  * controlP5 is a processing gui library.
  * 
- * 2006-2012 by Andreas Schlegel
+ * 2006-2015 by Andreas Schlegel
  * 
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public License
@@ -31,6 +24,13 @@ import processing.core.PImage;
  * @version ##version##
  * 
  */
+
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
+import processing.core.PImage;
+
 
 /**
  * A multiple-choice radioButton. items are added to a checkBox and can be organized in rows and
