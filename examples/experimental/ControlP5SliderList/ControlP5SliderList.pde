@@ -1,6 +1,6 @@
 
 /**
- * ControlP5 SilderList
+ * ControlP5 SliderList
  * 
  * A custom Controller, a scrollable Menu List, using a PGraphics buffer.
  * Allows custom designs for List Item.
@@ -32,20 +32,20 @@ void setup() {
   cp5 = new ControlP5( this );
 
 
-  // create a custom SilderList with name menu, notice that function 
+  // create a custom SliderList with name menu, notice that function 
   // menu will be called when a menu item has been clicked.
 
-  SilderList m = new SilderList( cp5, "menu", 250, 350 );
+  SliderList m = new SliderList( cp5, "menu", 250, 350 );
 
   m.setPosition(40, 20);
-  // add some items to our SilderList
+  // add some items to our SliderList
   for (int i=0;i<NUM;i++) {
     m.addItem(makeItem("slider-"+i, 0, -PI, PI ));
   }
 }
 
 // a convenience function to build a map that contains our key-value  
-// pairs which we will then use to render each item of the SilderList.
+// pairs which we will then use to render each item of the SliderList.
 //
 Map<String, Object> makeItem(String theLabel, float theValue, float theMin, float theMax) {
   Map m = new HashMap<String, Object>();
@@ -63,7 +63,7 @@ void menu(int i) {
 public void controlEvent(ControlEvent theEvent) {
   if (theEvent.isFrom("menu")) {
     int index = int(theEvent.getValue());
-    Map m = ((SilderList)theEvent.getController()).getItem(index);
+    Map m = ((SliderList)theEvent.getController()).getItem(index);
     println("got a slider event from item : "+m);
     rotation[index] = f(m.get("sliderValue"));
   }
@@ -86,14 +86,14 @@ void draw() {
 }
 
 
-// A custom Controller that implements a scrollable SilderList.  
+// A custom Controller that implements a scrollable SliderList.  
 // Here the controller uses a PGraphics element to render customizable 
-// list items. The SilderList can be scrolled using the scroll-wheel,  
+// list items. The SliderList can be scrolled using the scroll-wheel,  
 // touchpad, or mouse-drag. Slider are triggered by a press or drag.  
 // clicking the scrollbar to the right makes the list scroll to the item  
 // correspoinding to the click-location.  
  
-class SilderList extends Controller<SilderList> {
+class SliderList extends Controller<SliderList> {
 
   float pos, npos;
   int itemHeight = 60;
@@ -110,14 +110,14 @@ class SilderList extends Controller<SilderList> {
   PGraphics menu;
   boolean updateMenu;
 
-  SilderList(ControlP5 c, String theName, int theWidth, int theHeight) {
+  SliderList(ControlP5 c, String theName, int theWidth, int theHeight) {
     super( c, theName, 0, 0, theWidth, theHeight );
     c.register( this );
     menu = createGraphics(getWidth(), getHeight());
 
-    setView(new ControllerView<SilderList>() {
+    setView(new ControllerView<SliderList>() {
 
-      public void display(PGraphics pg, SilderList t ) {
+      public void display(PGraphics pg, SliderList t ) {
         if (updateMenu) {
           updateMenu();
         }
@@ -254,4 +254,3 @@ public static float f( Object o ) {
 public static boolean within(int theX, int theY, int theX1, int theY1, int theW1, int theH1) {
   return (theX>theX1 && theX<theX1+theW1 && theY>theY1 && theY<theY1+theH1);
 }
-
