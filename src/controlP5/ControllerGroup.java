@@ -266,7 +266,7 @@ public abstract class ControllerGroup< T > implements ControllerInterface< T > ,
 		return me;
 	}
 
-	public T updateAbsolutePosition( ) {
+	public synchronized T updateAbsolutePosition( ) {
 		set( absolutePosition , x( position ) , y( position ) );
 		set( absolutePosition , x( absolutePosition ) + x( _myParent.getAbsolutePosition( ) ) , y( absolutePosition ) + y( _myParent.getAbsolutePosition( ) ) );
 		for ( int i = 0 ; i < controllers.size( ) ; i++ ) {
@@ -275,7 +275,7 @@ public abstract class ControllerGroup< T > implements ControllerInterface< T > ,
 		return me;
 	}
 
-	@ControlP5.Invisible public void continuousUpdateEvents( ) {
+	@ControlP5.Invisible synchronized public void continuousUpdateEvents( ) {
 		if ( controllers.size( ) <= 0 ) {
 			return;
 		}
@@ -284,7 +284,7 @@ public abstract class ControllerGroup< T > implements ControllerInterface< T > ,
 		}
 	}
 
-	public T update( ) {
+	public synchronized T update( ) {
 		if ( controllers.size( ) <= 0 ) {
 			return me;
 		}
@@ -299,7 +299,7 @@ public abstract class ControllerGroup< T > implements ControllerInterface< T > ,
 	/**
 	 * enables or disables the update function of a controller.
 	 */
-	@Override public T setUpdate( boolean theFlag ) {
+	@Override synchronized public T setUpdate( boolean theFlag ) {
 		isUpdate = theFlag;
 		for ( int i = 0 ; i < controllers.size( ) ; i++ ) {
 			( ( ControllerInterface< ? > ) controllers.get( i ) ).setUpdate( theFlag );
@@ -314,7 +314,7 @@ public abstract class ControllerGroup< T > implements ControllerInterface< T > ,
 		return isUpdate;
 	}
 
-	@ControlP5.Invisible public T updateEvents( ) {
+	@ControlP5.Invisible synchronized public T updateEvents( ) {
 		if ( isOpen ) {
 			for ( int i = controllers.size( ) - 1 ; i >= 0 ; i-- ) {
 				( ( ControllerInterface< ? > ) controllers.get( i ) ).updateEvents( );
@@ -364,7 +364,7 @@ public abstract class ControllerGroup< T > implements ControllerInterface< T > ,
 		return mouseover;
 	}
 
-	public T setMouseOver( boolean theFlag ) {
+	public synchronized T setMouseOver( boolean theFlag ) {
 
 		mouseover = ( !isBarVisible ) ? false : theFlag;
 
@@ -383,7 +383,7 @@ public abstract class ControllerGroup< T > implements ControllerInterface< T > ,
 		return me;
 	}
 
-	@ControlP5.Invisible public final void draw( PGraphics theGraphics ) {
+	@ControlP5.Invisible public synchronized final void draw( PGraphics theGraphics ) {
 		if ( isVisible ) {
 			theGraphics.pushMatrix( );
 			theGraphics.translate( x( position ) , y( position ) );
@@ -397,7 +397,7 @@ public abstract class ControllerGroup< T > implements ControllerInterface< T > ,
 		}
 	}
 
-	protected void drawControllers( PApplet theApplet , PGraphics theGraphics ) {
+	protected synchronized void drawControllers( PApplet theApplet , PGraphics theGraphics ) {
 		if ( isOpen ) {
 
 			for ( Canvas cc : _myCanvas ) {
@@ -451,7 +451,7 @@ public abstract class ControllerGroup< T > implements ControllerInterface< T > ,
 	/**
 	 * Adds a controller to the group, but use Controller.setGroup() instead.
 	 */
-	public T add( ControllerInterface< ? > theElement ) {
+	public synchronized T add( ControllerInterface< ? > theElement ) {
 		controllers.add( theElement );
 		return me;
 	}
@@ -460,7 +460,7 @@ public abstract class ControllerGroup< T > implements ControllerInterface< T > ,
 		return bringToFront( this );
 	}
 
-	@Override public T bringToFront( ControllerInterface< ? > theController ) {
+	@Override public synchronized T bringToFront( ControllerInterface< ? > theController ) {
 		if ( _myParent instanceof Tab ) {
 			moveTo( ( Tab ) _myParent );
 		} else {
@@ -479,7 +479,7 @@ public abstract class ControllerGroup< T > implements ControllerInterface< T > ,
 	 * Removes a controller from the group, but use Controller.setGroup() instead.
 	 */
 
-	public T remove( ControllerInterface< ? > theElement ) {
+	public synchronized T remove( ControllerInterface< ? > theElement ) {
 		if ( theElement != null ) {
 			theElement.setMouseOver( false );
 		}
@@ -487,12 +487,12 @@ public abstract class ControllerGroup< T > implements ControllerInterface< T > ,
 		return me;
 	}
 
-	@ControlP5.Invisible public T addDrawable( CDrawable theElement ) {
+	@ControlP5.Invisible synchronized public T addDrawable( CDrawable theElement ) {
 		controllers.addDrawable( theElement );
 		return me;
 	}
 
-	public T remove( CDrawable theElement ) {
+	public synchronized T remove( CDrawable theElement ) {
 		controllers.removeDrawable( theElement );
 		return me;
 	}
@@ -500,7 +500,7 @@ public abstract class ControllerGroup< T > implements ControllerInterface< T > ,
 	/**
 	 * removes the group from controlP5.
 	 */
-	public void remove( ) {
+	public synchronized void remove( ) {
 		cp5.getWindow( ).removeMouseOverFor( this );
 		if ( _myParent != null ) {
 			_myParent.remove( this );
@@ -539,13 +539,13 @@ public abstract class ControllerGroup< T > implements ControllerInterface< T > ,
 		return cp5.getWindow( );
 	}
 
-	@ControlP5.Invisible public void keyEvent( KeyEvent theEvent ) {
+	@ControlP5.Invisible public synchronized void keyEvent( KeyEvent theEvent ) {
 		for ( int i = 0 ; i < controllers.size( ) ; i++ ) {
 			( ( ControllerInterface< ? > ) controllers.get( i ) ).keyEvent( theEvent );
 		}
 	}
 
-	public boolean setMousePressed( boolean theStatus ) {
+	public synchronized boolean setMousePressed( boolean theStatus ) {
 		if ( !isVisible ) {
 			return false;
 		}
@@ -593,14 +593,14 @@ public abstract class ControllerGroup< T > implements ControllerInterface< T > ,
 		return _myId;
 	}
 
-	public T setColor( CColor theColor ) {
+	public synchronized T setColor( CColor theColor ) {
 		for ( ControllerInterface< ? > ci : controllers.get( ) ) {
 			ci.setColor( theColor );
 		}
 		return me;
 	}
 
-	public T setColorActive( int theColor ) {
+	public synchronized T setColorActive( int theColor ) {
 		color.setActive( theColor );
 		for ( ControllerInterface< ? > ci : controllers.get( ) ) {
 			ci.setColorActive( theColor );
@@ -608,7 +608,7 @@ public abstract class ControllerGroup< T > implements ControllerInterface< T > ,
 		return me;
 	}
 
-	public T setColorForeground( int theColor ) {
+	public synchronized T setColorForeground( int theColor ) {
 		color.setForeground( theColor );
 		for ( ControllerInterface< ? > ci : controllers.get( ) ) {
 			ci.setColorForeground( theColor );
@@ -616,7 +616,7 @@ public abstract class ControllerGroup< T > implements ControllerInterface< T > ,
 		return me;
 	}
 
-	public T setColorBackground( int theColor ) {
+	public synchronized T setColorBackground( int theColor ) {
 		color.setBackground( theColor );
 		for ( ControllerInterface< ? > ci : controllers.get( ) ) {
 			ci.setColorBackground( theColor );
@@ -624,7 +624,7 @@ public abstract class ControllerGroup< T > implements ControllerInterface< T > ,
 		return me;
 	}
 
-	public T setColorLabel( int theColor ) {
+	public synchronized T setColorLabel( int theColor ) {
 		color.setCaptionLabel( theColor );
 		if ( _myLabel != null ) {
 			_myLabel.setColor( color.getCaptionLabel( ) );
@@ -635,7 +635,7 @@ public abstract class ControllerGroup< T > implements ControllerInterface< T > ,
 		return me;
 	}
 
-	public T setColorValue( int theColor ) {
+	public synchronized T setColorValue( int theColor ) {
 		color.setValueLabel( theColor );
 		if ( _myValueLabel != null ) {
 			_myValueLabel.setColor( color.getValueLabel( ) );
