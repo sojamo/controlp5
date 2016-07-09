@@ -32,7 +32,7 @@ import java.util.RandomAccess;
  * Stores objects of type ControllerInterface and CDrawable, mainly for internal use.
  */
 public class ControllerList implements RandomAccess {
-	protected final List< ControllerInterface< ? >> controllers = new ArrayList< >( );
+	protected final List< ControllerInterface< ? > > controllers = new ArrayList< >( );
 	protected final List< CDrawable > drawables = new ArrayList< >( );
 
 	public ControllerList add( final ControllerInterface< ? > theController ) {
