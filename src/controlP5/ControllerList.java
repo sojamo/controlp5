@@ -32,10 +32,10 @@ import java.util.RandomAccess;
  * Stores objects of type ControllerInterface and CDrawable, mainly for internal use.
  */
 public class ControllerList implements RandomAccess {
-	protected final List< ControllerInterface< ? > > controllers = new ArrayList< >( );
+	protected final List< ControllerInterface< ? extends ControllerInterface< ? > > > controllers = new ArrayList< >( );
 	protected final List< CDrawable > drawables = new ArrayList< >( );
 
-	public ControllerList add( final ControllerInterface< ? > theController ) {
+	public ControllerList add( final ControllerInterface< ? extends ControllerInterface< ? > > theController ) {
 		if ( !contains( theController ) )  synchronized ( controllers ) {
 			controllers.add( theController );
 		}
@@ -49,7 +49,7 @@ public class ControllerList implements RandomAccess {
 		return this;
 	}
 
-	public ControllerList remove( final ControllerInterface< ? > theController ) {
+	public ControllerList remove( final ControllerInterface< ? extends ControllerInterface< ? > > theController ) {
 		if ( !isEmpty( ) )  synchronized ( controllers ) {
 			controllers.remove( theController );
 		}
@@ -77,11 +77,11 @@ public class ControllerList implements RandomAccess {
 		return this;
 	}
 
-	public ControllerInterface< ? > get( final int theIndex ) {
+	public ControllerInterface< ? extends ControllerInterface< ? > > get( final int theIndex ) {
 		return controllers.get( theIndex );
 	}
 
-	public List< ControllerInterface< ? >> get( ) {
+	public List< ControllerInterface< ? extends ControllerInterface< ? > > > get( ) {
 		return controllers;
 	}
 
@@ -93,7 +93,7 @@ public class ControllerList implements RandomAccess {
 		return drawables;
 	}
 
-	public boolean contains( final ControllerInterface< ? > theController ) {
+	public boolean contains( final ControllerInterface< ? extends ControllerInterface< ? > > theController ) {
 		return controllers.contains( theController );
 	}
 
