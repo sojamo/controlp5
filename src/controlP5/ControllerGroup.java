@@ -1,5 +1,3 @@
-package controlP5;
-
 /**
  * controlP5 is a processing gui library.
  * 
@@ -25,6 +23,8 @@ package controlP5;
  * 
  */
 
+package controlP5;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,7 +43,7 @@ public abstract class ControllerGroup< T > implements ControllerInterface< T > ,
 	protected final float[] positionBuffer = new float[ 2 ];
 	protected final float[] absolutePosition = new float[ 2 ];
 	protected final ControllerList controllers = new ControllerList( );
-	protected final List< ControlListener > _myControlListener = new ArrayList< ControlListener >( );
+	protected final List< ControlListener > _myControlListener = new ArrayList< >( );
 	// protected ControlWindow _myControlWindow;
 	protected ControlP5 cp5;
 	protected ControllerGroup< ? > _myParent;
@@ -66,7 +66,7 @@ public abstract class ControllerGroup< T > implements ControllerInterface< T > ,
 	protected int _myWidth = 99;
 	protected int _myHeight = 9;
 	protected boolean isUpdate;
-	protected final List< Canvas > _myCanvas = new ArrayList< Canvas >( );
+	protected final List< Canvas > _myCanvas = new ArrayList< >( );
 	protected float _myValue;
 	protected String _myStringValue;
 	protected float[] _myArrayValue;
@@ -90,14 +90,9 @@ public abstract class ControllerGroup< T > implements ControllerInterface< T > ,
 	public ControllerGroup( ControlP5 theControlP5 , ControllerGroup< ? > theParent , 
 				String theName , float theX , float theY ) {
 		set( position , theX , theY );
-		//position = new float[] { theX , theY };
 		cp5 = theControlP5;
-		//me = ( T ) this;
 		color.set( theParent == null ? cp5.color : theParent.color );
 		_myName = theName;
-		//controllers = new ControllerList( );
-		//_myCanvas = new ArrayList< Canvas >( );
-		//_myControlListener = new ArrayList< ControlListener >( );
 		_myLabel = new Label( cp5 , _myName );
 		_myLabel.setText( _myName ).setColor( color.getCaptionLabel( ) ).align( LEFT , TOP );
 		setParent( theParent == null ? this : theParent );
@@ -105,10 +100,6 @@ public abstract class ControllerGroup< T > implements ControllerInterface< T > ,
 
 	protected ControllerGroup( int theX , int theY ) {
 		set( position , theX , theY );
-		//position = new float[] { theX , theY };
-		//me = ( T ) this;
-		//controllers = new ControllerList( );
-		//_myCanvas = new ArrayList< Canvas >( );
 	}
 
 	@ControlP5.Invisible @Override public void init( ) {
@@ -193,12 +184,8 @@ public abstract class ControllerGroup< T > implements ControllerInterface< T > ,
 	}
 
 	@Override public Tab getTab( ) {
-		if ( this instanceof Tab ) {
-			return ( Tab ) this;
-		}
-		if ( _myParent instanceof Tab ) {
-			return ( Tab ) _myParent;
-		}
+		if ( this instanceof Tab )  return ( Tab ) this;
+		if ( _myParent instanceof Tab )  return ( Tab ) _myParent;
 		return _myParent.getTab( );
 	}
 
@@ -246,9 +233,8 @@ public abstract class ControllerGroup< T > implements ControllerInterface< T > ,
 		final float y = y( position ) + y( _myParent.getAbsolutePosition( ) );
 		set( absolutePosition , x , y );
 		if ( controllers.size( ) != 0 )  synchronized ( controllers.get( ) ) {
-			for ( final ControllerInterface< ? > ci : controllers.get( ) ) {
+			for ( final ControllerInterface< ? > ci : controllers.get( ) )
 				ci.updateAbsolutePosition( );
-			}
 		}
 		return me;
 	}
@@ -408,7 +394,7 @@ public abstract class ControllerGroup< T > implements ControllerInterface< T > ,
 	 * Removes a canvas from a controller group.
 	 */
 	public T removeCanvas( final Canvas theCanvas ) {
-		if ( !_myCanvas.isEmpty( ) ) synchronized (_myCanvas) {
+		if ( !_myCanvas.isEmpty( ) )  synchronized (_myCanvas) {
 			_myCanvas.remove( theCanvas );
 		}
 		return me;
@@ -485,9 +471,7 @@ public abstract class ControllerGroup< T > implements ControllerInterface< T > ,
 	}
 
 	@Override public T setAddress( String theAddress ) {
-		if ( _myAddress.length( ) == 0 ) {
-			_myAddress = theAddress;
-		}
+		if ( _myAddress.length( ) == 0 )  _myAddress = theAddress;
 		return me;
 	}
 
@@ -497,9 +481,8 @@ public abstract class ControllerGroup< T > implements ControllerInterface< T > ,
 
 	@ControlP5.Invisible @Override public void keyEvent( final KeyEvent theEvent ) {
 		if ( controllers.size( ) != 0 )  synchronized ( controllers.get( ) ) {
-			for ( final ControllerInterface< ? > ci : controllers.get( ) ) {
+			for ( final ControllerInterface< ? > ci : controllers.get( ) )
 				ci.keyEvent( theEvent );
-			}
 		}
 	}
 
