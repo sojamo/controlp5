@@ -1,3 +1,5 @@
+package controlP5;
+
 /**
  * controlP5 is a processing gui library.
  * 
@@ -20,64 +22,47 @@
  * @author Andreas Schlegel (http://www.sojamo.de)
  * @modified ##date##
  * @version ##version##
+ * 
  */
 
-package controlP5;
-
 import java.util.List;
-import java.util.ArrayList;
-import java.util.RandomAccess;
+import java.util.Vector;
 
 /**
  * Stores objects of type ControllerInterface and CDrawable, mainly for internal use.
  */
-public class ControllerList implements RandomAccess {
-	protected final List< ControllerInterface< ? >> controllers = new ArrayList< >( );
-	protected final List< CDrawable > drawables = new ArrayList< >( );
+public class ControllerList {
 
-	public ControllerList add( final ControllerInterface< ? > theController ) {
-		if ( !contains( theController ) )  synchronized ( controllers ) {
+	protected List< ControllerInterface< ? >> controllers;
+
+	protected List< CDrawable > drawables;
+
+	public ControllerList( ) {
+		controllers = new Vector< ControllerInterface< ? >>( );
+		drawables = new Vector< CDrawable >( );
+	}
+
+	public void add( ControllerInterface< ? > theController ) {
+		if ( controllers.indexOf( theController ) < 0 ) {
 			controllers.add( theController );
 		}
-		return this;
 	}
 
-	public ControllerList addDrawable( final CDrawable theController ) {
-		if ( !containsDrawable( theController ) )  synchronized ( drawables ) {
+	protected void remove( ControllerInterface< ? > theController ) {
+		controllers.remove( theController );
+	}
+
+	protected void addDrawable( CDrawable theController ) {
+		if ( drawables.indexOf( theController ) < 0 ) {
 			drawables.add( theController );
 		}
-		return this;
 	}
 
-	public ControllerList remove( final ControllerInterface< ? > theController ) {
-		if ( !isEmpty( ) )  synchronized ( controllers ) {
-			controllers.remove( theController );
-		}
-		return this;
+	protected void removeDrawable( CDrawable theController ) {
+		drawables.remove( theController );
 	}
 
-	public ControllerList removeDrawable( final CDrawable theController ) {
-		if ( !isEmptyDrawable( ) )  synchronized ( drawables ) {
-			drawables.remove( theController );
-		}
-		return this;
-	}
-
-	public ControllerList clear( ) {
-		if ( !isEmpty( ) )  synchronized ( controllers ) {
-			controllers.clear( );
-		}
-		return this;
-	}
-
-	public ControllerList clearDrawable( ) {
-		if ( !isEmptyDrawable( ) )  synchronized ( drawables ) {
-			drawables.clear( );
-		}
-		return this;
-	}
-
-	public ControllerInterface< ? > get( final int theIndex ) {
+	public ControllerInterface< ? > get( int theIndex ) {
 		return controllers.get( theIndex );
 	}
 
@@ -85,7 +70,7 @@ public class ControllerList implements RandomAccess {
 		return controllers;
 	}
 
-	public CDrawable getDrawable( final int theIndex ) {
+	public CDrawable getDrawable( int theIndex ) {
 		return drawables.get( theIndex );
 	}
 
@@ -93,27 +78,20 @@ public class ControllerList implements RandomAccess {
 		return drawables;
 	}
 
-	public boolean contains( final ControllerInterface< ? > theController ) {
-		return controllers.contains( theController );
-	}
-
-	public boolean containsDrawable( final CDrawable theController ) {
-		return drawables.contains( theController );
-	}
-
-	public boolean isEmpty( ) {
-		return controllers.isEmpty( );
-	}
-
-	public boolean isEmptyDrawable( ) {
-		return drawables.isEmpty( );
+	public int sizeDrawable( ) {
+		return drawables.size( );
 	}
 
 	public int size( ) {
 		return controllers.size( );
 	}
 
-	public int sizeDrawable( ) {
-		return drawables.size( );
+	protected void clear( ) {
+		controllers.clear( );
 	}
+
+	protected void clearDrawable( ) {
+		drawables.clear( );
+	}
+
 }
