@@ -37,16 +37,15 @@ import processing.event.KeyEvent;
  * ControllerGroup is an abstract class and is extended by class ControlGroup, Tab, or the ListBox.
  * 
  */
-public abstract class ControllerGroup< T > implements ControllerInterface< T > , 
-						      ControlP5Constants , ControlListener {
+public abstract class ControllerGroup< T extends ControllerInterface< T > >
+		implements ControllerInterface< T > , ControlListener , ControlP5Constants {
 	protected final float[] position = new float[ 2 ];
 	protected final float[] positionBuffer = new float[ 2 ];
 	protected final float[] absolutePosition = new float[ 2 ];
 	protected final ControllerList controllers = new ControllerList( );
 	protected final List< ControlListener > _myControlListener = new ArrayList< >( );
-	// protected ControlWindow _myControlWindow;
 	protected ControlP5 cp5;
-	protected ControllerGroup< ? > _myParent;
+	protected ControllerGroup< ? extends ControllerInterface< ? > > _myParent;
 	protected String _myName;
 	protected int _myId = -1;
 	protected final CColor color = new CColor( );
@@ -105,11 +104,12 @@ public abstract class ControllerGroup< T > implements ControllerInterface< T > ,
 	@ControlP5.Invisible @Override public void init( ) {
 	}
 
-	@ControlP5.Invisible @Override public ControllerInterface< ? > getParent( ) {
+	@ControlP5.Invisible @Override
+	public ControllerInterface< ? extends ControllerInterface< ? > > getParent( ) {
 		return _myParent;
 	}
 
-	void setParent( final ControllerGroup< ? > theParent ) {
+	< U extends ControllerInterface< U > > T setParent( final ControllerGroup< U > theParent ) {
 		if ( _myParent != null && _myParent != this )  _myParent.remove( this );
 		if ( ( _myParent = theParent ) != this )  theParent.add( this );
 		final float x = x( position ) + x( theParent.absolutePosition );
@@ -117,6 +117,7 @@ public abstract class ControllerGroup< T > implements ControllerInterface< T > ,
 		set( absolutePosition , x , y );
 		set( positionBuffer , position );
 		if ( getWindow( ) != null )  setMouseOver( false );
+		return me;
 	}
 
 	public final T setGroup( ControllerGroup< ? > theGroup ) {
