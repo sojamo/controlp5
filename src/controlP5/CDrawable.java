@@ -1,5 +1,3 @@
-package controlP5;
-
 /**
  * controlP5 is a processing gui library.
  *
@@ -25,12 +23,14 @@ package controlP5;
  *
  */
 
+package controlP5;
+
 import processing.core.PGraphics;
 
 /**
  * The CDrawable interface is used to draw controllers, primarily for internal use.
  */
-public interface CDrawable {
+@FunctionalInterface public interface CDrawable {
 
 	public void draw( PGraphics theGraphics );
 	
