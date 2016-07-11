@@ -1,5 +1,3 @@
-package controlP5;
-
 /**
  * controlP5 is a processing gui library.
  * 
@@ -25,6 +23,8 @@ package controlP5;
  * 
  */
 
+package controlP5;
+
 import processing.core.PApplet;
 import processing.core.PFont;
 import processing.core.PGraphics;
@@ -35,7 +35,7 @@ import processing.event.KeyEvent;
  * The ControllerInterface is inherited by all ControllerGroup and Controller classes.
  * 
  */
-public interface ControllerInterface< T > {
+public interface ControllerInterface< T extends ControllerInterface< T > > {
 
 	@ControlP5.Invisible public void init( );
 

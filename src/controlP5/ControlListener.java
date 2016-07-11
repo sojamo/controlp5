@@ -34,7 +34,7 @@ package controlP5;
  * 
  * @example use/ControlP5listenerForSingleController
  */
-public interface ControlListener {
+@FunctionalInterface public interface ControlListener {
 
 	/**
 	 * controlEvent is called by controlP5's ControlBroadcaster to inform available listeners about

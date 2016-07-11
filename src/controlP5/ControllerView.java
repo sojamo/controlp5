@@ -1,5 +1,3 @@
-package controlP5;
-
 /**
  * controlP5 is a processing gui library.
  * 
@@ -25,6 +23,8 @@ package controlP5;
  * 
  */
 
+package controlP5;
+
 import processing.core.PGraphics;
 
 /**
@@ -35,7 +35,7 @@ import processing.core.PGraphics;
  * 
  * @example use/ControlP5customDisplay
  */
-public interface ControllerView< T > {
+@FunctionalInterface public interface ControllerView< T extends ControllerView< T > > {
 
 	/**
 	 * draws your custom controllers. display() will be called by a controller's draw() function and

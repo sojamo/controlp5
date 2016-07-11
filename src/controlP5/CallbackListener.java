@@ -34,7 +34,7 @@ package controlP5;
  * @example use/ControlP5callback
  * @see controlP5.ControlP5#addCallback(CallbackListener)
  */
-public interface CallbackListener {
+@FunctionalInterface public interface CallbackListener {
 
 	public void controlEvent( CallbackEvent theEvent );
 
