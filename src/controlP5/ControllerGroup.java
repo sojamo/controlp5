@@ -37,7 +37,7 @@ import processing.event.KeyEvent;
  * ControllerGroup is an abstract class and is extended by class ControlGroup, Tab, or the ListBox.
  * 
  */
-public abstract class ControllerGroup< T extends ControllerInterface< T > >
+public abstract class ControllerGroup< T extends ControllerGroup< T > >
 		implements ControllerInterface< T > , ControlListener , ControlP5Constants {
 	protected final float[] position = new float[ 2 ];
 	protected final float[] positionBuffer = new float[ 2 ];
@@ -45,7 +45,7 @@ public abstract class ControllerGroup< T extends ControllerInterface< T > >
 	protected final ControllerList controllers = new ControllerList( );
 	protected final List< ControlListener > _myControlListener = new ArrayList< >( );
 	protected ControlP5 cp5;
-	protected ControllerGroup< ? extends ControllerInterface< ? > > _myParent;
+	protected ControllerGroup< ? extends ControllerGroup< ? > > _myParent;
 	protected String _myName;
 	protected int _myId = -1;
 	protected final CColor color = new CColor( );
@@ -83,11 +83,11 @@ public abstract class ControllerGroup< T extends ControllerInterface< T > >
 	 */
 	public ControllerGroup( ControlP5 theControlP5 , String theName ) {
 		this( theControlP5 , theControlP5.getDefaultTab( ) , theName , 0f , 0f );
-		theControlP5.register( theControlP5.papplet , theName , this );
+		cp5.register( theControlP5.papplet , theName , this );
 	}
 
-	public ControllerGroup( ControlP5 theControlP5 , ControllerGroup< ? > theParent , 
-				String theName , float theX , float theY ) {
+	public ControllerGroup( ControlP5 theControlP5 , ControllerGroup< ? extends ControllerGroup< ? > > 
+				theParent , String theName , int theX , int theY ) {
 		set( position , theX , theY );
 		cp5 = theControlP5;
 		color.set( theParent == null ? cp5.color : theParent.color );
@@ -105,11 +105,11 @@ public abstract class ControllerGroup< T extends ControllerInterface< T > >
 	}
 
 	@ControlP5.Invisible @Override
-	public ControllerInterface< ? extends ControllerInterface< ? > > getParent( ) {
+	public ControllerGroup< ? extends ControllerGroup< ? > > getParent( ) {
 		return _myParent;
 	}
 
-	< U extends ControllerInterface< U > > T setParent( final ControllerGroup< U > theParent ) {
+	public T setParent( final ControllerGroup< ? extends ControllerGroup< ? > > theParent ) {
 		if ( _myParent != null && _myParent != this )  _myParent.remove( this );
 		if ( ( _myParent = theParent ) != this )  theParent.add( this );
 		final float x = x( position ) + x( theParent.absolutePosition );
@@ -120,7 +120,7 @@ public abstract class ControllerGroup< T extends ControllerInterface< T > >
 		return me;
 	}
 
-	public final T setGroup( ControllerGroup< ? > theGroup ) {
+	public final T setGroup( ControllerGroup< ? extends ControllerGroup< ? > > theGroup ) {
 		setParent( theGroup );
 		return me;
 	}
@@ -130,14 +130,14 @@ public abstract class ControllerGroup< T extends ControllerInterface< T > >
 		return me;
 	}
 
-	@Override public T moveTo( ControllerGroup< ? > theGroup , Tab theTab , 
-				   ControlWindow theControlWindow ) {
+	@Override public T moveTo( ControllerGroup< ? extends ControllerGroup< ? > > theGroup , 
+				   Tab theTab , ControlWindow theControlWindow ) {
 		if ( theGroup != null )  return setGroup( theGroup );
 		if ( theControlWindow == null )  theControlWindow = getWindow( );
 		return setTab( theControlWindow , theTab.getName( ) );
 	}
 
-	@Override public T moveTo( ControllerGroup< ? > theGroup ) {
+	@Override public T moveTo( ControllerGroup< ? extends ControllerGroup< ? > > theGroup ) {
 		return moveTo( theGroup , null , null );
 	}
 
