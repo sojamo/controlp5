@@ -25,7 +25,8 @@ package controlP5;
  * 
  */
 
-public interface ControlKey {
+@FunctionalInterface public interface ControlKey {
 
 	public void keyEvent();
+
 }
