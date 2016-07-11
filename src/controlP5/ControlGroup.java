@@ -1,5 +1,3 @@
-package controlP5;
-
 /**
  * controlP5 is a processing gui library.
  * 
@@ -25,6 +23,8 @@ package controlP5;
  * 
  */
 
+package controlP5;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,45 +46,36 @@ import processing.core.PGraphics;
  * @see controlP5.Group
  * @example controllers/ControlP5group
  */
-public class ControlGroup< T > extends ControllerGroup< T > implements ControlListener {
-
+public class ControlGroup< T extends ControlGroup< T > > extends ControllerGroup< T > {
 	protected int _myBackgroundHeight = 0;
-
-	protected int _myBackgroundColor = 0x00ffffff;
-
-	protected boolean isEventActive = false;
-
-	protected List< ControlListener > _myControlListener;
+	protected int _myBackgroundColor  = 0x00ffffff;
+	protected boolean isEventActive;
 
 	/**
 	 * Convenience constructor to extend ControlGroup.
 	 */
 	public ControlGroup( ControlP5 theControlP5 , String theName ) {
 		this( theControlP5 , theControlP5.getDefaultTab( ) , theName , 0 , 0 , 100 , 9 );
-		theControlP5.register( theControlP5.papplet , theName , this );
+		cp5.register( theControlP5.papplet , theName , this );
 	}
 
-	public ControlGroup( ControlP5 theControlP5 , ControllerGroup< ? > theParent , String theName , int theX , int theY , int theW , int theH ) {
+	public ControlGroup( ControlP5 theControlP5 , ControllerGroup< ? extends ControllerGroup< ? > > theParent , 
+				String theName , int theX , int theY , int theW , int theH ) {
 		super( theControlP5 , theParent , theName , theX , theY );
-		_myControlListener = new ArrayList< ControlListener >( );
 		_myValueLabel = new Label( cp5 , "" );
-		_myWidth = theW;
+		_myWidth  = theW;
 		_myHeight = theH;
 	}
 
-	@ControlP5.Invisible
+	@ControlP5.Invisible @Override
 	public void mousePressed( ) {
-		if ( isBarVisible && isCollapse ) {
-			if ( !cp5.isAltDown( ) ) {
-				isOpen = !isOpen;
-				if ( isEventActive ) {
-					final ControlEvent myEvent = new ControlEvent( this );
-					cp5.getControlBroadcaster( ).broadcast( myEvent , ControlP5Constants.METHOD );
-					for ( ControlListener cl : _myControlListener ) {
-						cl.controlEvent( myEvent );
-					}
-				}
-			}
+		if ( !( isBarVisible && isCollapse && !cp5.isAltDown( ) ) )  return;
+		isOpen = !isOpen;
+		if ( !isEventActive )  return;
+		final ControlEvent myEvent = new ControlEvent( this );
+		cp5.getControlBroadcaster( ).broadcast( myEvent , METHOD );
+		if ( !_myControlListener.isEmpty( ) )  synchronized ( _myControlListener ) {
+			for ( final ControlListener cl : _myControlListener )  cl.controlEvent( myEvent );
 		}
 	}
 
@@ -97,10 +88,10 @@ public class ControlGroup< T > extends ControllerGroup< T > implements ControlLi
 		return me;
 	}
 
+	@Override
 	public T setSize( int theWidth , int theHeight ) {
 		super.setSize( theWidth , theHeight );
-		setBackgroundHeight( theHeight );
-		return me;
+		return setBackgroundHeight( theHeight );
 	}
 
 	public int getBackgroundHeight( ) {
@@ -128,12 +119,11 @@ public class ControlGroup< T > extends ControllerGroup< T > implements ControlLi
 
 	@Override
 	public T updateInternalEvents( PApplet theApplet ) {
-		if ( isInside && isBarVisible ) {
-			cp5.getWindow( ).setMouseOverController( this );
-		}
+		if ( isInside && isBarVisible )  getWindow( ).setMouseOverController( this );
 		return me;
 	}
 
+	@Override
 	protected void preDraw( PGraphics theGraphics ) {
 		if ( isOpen ) {
 			theGraphics.fill( _myBackgroundColor );
@@ -141,30 +131,22 @@ public class ControlGroup< T > extends ControllerGroup< T > implements ControlLi
 		}
 	}
 
+	@Override
 	protected void postDraw( PGraphics theGraphics ) {
-		if ( isBarVisible ) {
-			theGraphics.fill( isInside ? color.getForeground( ) : color.getBackground( ) );
-			theGraphics.rect( 0 , -1 , _myWidth , -_myHeight );
-			_myLabel.draw( theGraphics , 0 , -_myHeight - 1 , this );
-			if ( isCollapse && isArrowVisible ) {
-				theGraphics.fill( _myLabel.getColor( ) );
-				theGraphics.pushMatrix( );
-				theGraphics.translate( 2 , 0 );
-				if ( isOpen ) {
-					theGraphics.triangle( _myWidth - 10 , -_myHeight / 2 - 3 , _myWidth - 4 , -_myHeight / 2 - 3 , _myWidth - 7 , -_myHeight / 2 );
-				} else {
-					theGraphics.triangle( _myWidth - 10 , -_myHeight / 2 , _myWidth - 4 , -_myHeight / 2 , _myWidth - 7 , -_myHeight / 2 - 3 );
-				}
-				theGraphics.popMatrix( );
-			}
-		}
+		if ( !isBarVisible )  return;
+		theGraphics.fill( isInside ? color.getForeground( ) : color.getBackground( ) );
+		theGraphics.rect( 0 , -1 , _myWidth , -_myHeight );
+		_myLabel.draw( theGraphics , 0 , -_myHeight - 1 , this );
+		if ( !isCollapse || !isArrowVisible )  return;
+		theGraphics.fill( _myLabel.getColor( ) );
+		final int w = _myWidth + 2 , h = -( _myHeight >> 1 );
+		final int h1 = isOpen ? h - 3 : h , h2 = isOpen ? h : h - 3;
+		theGraphics.triangle( w - 10 , h1 , w - 4 , h1 , w - 7 , h2 );
 	}
 
-	@ControlP5.Invisible
+	@ControlP5.Invisible @Override
 	public void controlEvent( ControlEvent theEvent ) {
-		if ( theEvent.getController( ).getName( ).equals( getName( ) + "close" ) ) {
-			hide( );
-		}
+		if ( theEvent.getController( ).getName( ).equals( getName( ) + "close" ) )  hide( );
 	}
 
 	@ControlP5.Invisible
@@ -173,27 +155,7 @@ public class ControlGroup< T > extends ControllerGroup< T > implements ControlLi
 	}
 
 	@Override
-	public String toString( ) {
-		return super.toString( );
-	}
-
-	@Override
 	public String getInfo( ) {
 		return "type:\tControlGroup\n" + super.getInfo( );
 	}
-
-	public T addListener( final ControlListener theListener ) {
-		_myControlListener.add( theListener );
-		return me;
-	}
-
-	public T removeListener( final ControlListener theListener ) {
-		_myControlListener.remove( theListener );
-		return me;
-	}
-
-	public int listenerSize( ) {
-		return _myControlListener.size( );
-	}
-
 }
