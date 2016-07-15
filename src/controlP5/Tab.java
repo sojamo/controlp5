@@ -54,7 +54,7 @@ public class Tab extends ControllerGroup< Tab > {
 	public Tab( ControlP5 theControlP5 , ControlWindow theControlWindow , String theName ) {
 		super( theControlP5 , null , theName , 0 , 0 );
 		isMoveable = false;
-		isEventActive = theControlP5.isTabEventsActive;
+		isEventActive = cp5.isTabEventsActive;
 		_myHeight = 16;
 		_myWidth = _myLabel.getWidth( ) + padding * 2;
 		_myLabel.align( LEFT , CENTER ).setPadding( 0 , 0 );
