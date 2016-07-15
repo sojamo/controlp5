@@ -1,5 +1,3 @@
-package controlP5;
-
 /**
  * controlP5 is a processing gui library.
  * 
@@ -25,6 +23,8 @@ package controlP5;
  * 
  */
 
+package controlP5;
+
 import processing.core.PGraphics;
 
 /**
@@ -42,8 +42,6 @@ public class Tab extends ControllerGroup< Tab > {
 	protected boolean isActive = false;
 	private boolean isAlwaysActive = false;
 	protected boolean isEventActive = false;
-	protected float _myValue = 0;
-	protected String _myStringValue = "";
 	public static int padding = 4;
 	public boolean autoWidth = true;
 
@@ -55,8 +53,6 @@ public class Tab extends ControllerGroup< Tab > {
 	 */
 	public Tab( ControlP5 theControlP5 , ControlWindow theControlWindow , String theName ) {
 		super( theControlP5 , null , theName , 0 , 0 );
-		position = new float[ 2 ];
-		absolutePosition = new float[ 2 ];
 		isMoveable = false;
 		isEventActive = theControlP5.isTabEventsActive;
 		_myHeight = 16;
@@ -69,26 +65,22 @@ public class Tab extends ControllerGroup< Tab > {
 		_myOffsetY = theValueY;
 	}
 
-	protected int height( ) {
-		return _myHeight;
+	@Deprecated protected int height( ) {
+		return getHeight( );
 	}
 
 	protected boolean updateLabel( ) {
 		isInside = inside( );
-		return cp5.getWindow( ).getTabs( ).size( ) > 2;
+		return getWindow( ).getTabs( ).size( ) > 2;
 	}
 
-	protected void drawLabel( PGraphics theGraphics ) {
-		if ( autoWidth ) {
-			_myWidth = _myLabel.getWidth( ) + padding * 2;
-		}
+	protected void drawLabel( final PGraphics theGraphics ) {
+		if ( autoWidth )  _myWidth = _myLabel.getWidth( ) + 2*padding;
 		theGraphics.pushMatrix( );
 		theGraphics.pushStyle( );
 		theGraphics.noStroke( );
 		theGraphics.fill( isInside ? color.getForeground( ) : color.getBackground( ) );
-		if ( isActive ) {
-			theGraphics.fill( color.getActive( ) );
-		}
+		if ( isActive )  theGraphics.fill( color.getActive( ) );
 		theGraphics.translate( _myOffsetX , _myOffsetY );
 		theGraphics.rect( 0 , 0 , _myWidth - 1 , _myHeight );
 		_myLabel.draw( theGraphics , padding , 0 , this );
@@ -103,42 +95,42 @@ public class Tab extends ControllerGroup< Tab > {
 	 * @param theLabel String
 	 * @return Tab
 	 */
-	public Tab setLabel( String theLabel ) {
-		_myLabel.set( theLabel );
-		return this;
-	}
+	// public Tab setLabel( String theLabel ) {
+	// 	_myLabel.set( theLabel );
+	// 	return this;
+	// }
 
-	protected int width( ) {
-		return _myWidth;
+	@Deprecated protected int width( ) {
+		return getWidth( );
 	}
 
 	/**
 	 * @param theWidth
 	 * @return
 	 */
-	public Tab setWidth( int theWidth ) {
+	@Override public T setWidth( int theWidth ) {
 		_myWidth = theWidth + padding;
 		autoWidth = false;
-		return this;
+		return me;
 	}
 
-	public Tab setHeight( int theHeight ) {
-		_myHeight = theHeight;
-		return this;
-	}
+	// public Tab setHeight( int theHeight ) {
+	// 	_myHeight = theHeight;
+	// 	return this;
+	// }
 
-	protected boolean inside( ) {
-		return ( cp5.getWindow( ).mouseX > _myOffsetX && cp5.getWindow( ).mouseX < _myOffsetX + _myWidth && cp5.getWindow( ).mouseY > _myOffsetY && cp5.getWindow( ).mouseY < _myOffsetY + _myHeight );
+	@Override protected boolean inside( ) {
+		final int mx = getWindow( ).mouseX, my = getWindow( ).mouseY;
+		return	mx > _myOffsetX && mx < _myOffsetX + _myWidth && 
+			my > _myOffsetY && my < _myOffsetY + _myHeight;
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	@ControlP5.Invisible public void mousePressed( ) {
-		cp5.getWindow( ).activateTab( this );
-		if ( isEventActive ) {
-			cp5.getControlBroadcaster( ).broadcast( new ControlEvent( this ) , ControlP5Constants.METHOD );
-		}
+	@ControlP5.Invisible @Override public void mousePressed( ) {
+		getWindow( ).activateTab( this );
+		if ( isEventActive )  cp5.getControlBroadcaster( ).broadcast( new ControlEvent( this ) , METHOD );
 	}
 
 	/**
@@ -169,18 +161,17 @@ public class Tab extends ControllerGroup< Tab > {
 		return isAlwaysActive;
 	}
 
-	@Override public Tab bringToFront( ) {
-		cp5.getWindow( ).activateTab( this );
-		return this;
+	@Override public T bringToFront( ) {
+		getWindow( ).activateTab( this );
+		return me;
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	@Override public Tab moveTo( ControlWindow theWindow ) {
-		cp5.getWindow( ).removeTab( this );
-		setTab( theWindow , getName( ) );
-		return this;
+	@Override public T moveTo( ControlWindow theControlWindow ) {
+		getWindow( ).removeTab( this );
+		return setTab( theControlWindow , getName( ) );
 	}
 
 	/**
@@ -195,34 +186,13 @@ public class Tab extends ControllerGroup< Tab > {
 		return this;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override public String getStringValue( ) {
-		return _myStringValue;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override public float getValue( ) {
-		return _myValue;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override public Tab setValue( float theValue ) {
-		_myValue = theValue;
-		return this;
-	}
 
 	@Deprecated public float value( ) {
-		return _myValue;
+		return getValue( );
 	}
 
 	@Deprecated public String stringValue( ) {
-		return _myStringValue;
+		return getStringValue( );
 	}
 
 }
