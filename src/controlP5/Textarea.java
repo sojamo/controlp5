@@ -1,5 +1,3 @@
-package controlP5;
-
 /**
  * controlP5 is a processing gui library.
  * 
@@ -25,6 +23,8 @@ package controlP5;
  * 
  */
 
+package controlP5;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -39,7 +39,7 @@ import processing.core.PGraphics;
  * 
  * @example controllers/ControlP5textarea
  */
-public class Textarea extends ControllerGroup< Textarea > implements ControlListener {
+public class Textarea extends ControllerGroup< Textarea > {
 
 	protected String _myText;
 	protected Slider _myScrollbar;
@@ -59,7 +59,7 @@ public class Textarea extends ControllerGroup< Textarea > implements ControlList
 	 */
 	public Textarea( ControlP5 theControlP5 , String theName ) {
 		this( theControlP5 , theControlP5.getDefaultTab( ) , theName , "" , 0 , 0 , 199 , 99 );
-		theControlP5.register( theControlP5.papplet , theName , this );
+		cp5.register( cp5.papplet , theName , this );
 	}
 
 	/**
@@ -81,7 +81,8 @@ public class Textarea extends ControllerGroup< Textarea > implements ControlList
 	 * @param theH
 	 *            int
 	 */
-	protected Textarea( ControlP5 theControlP5 , ControllerGroup< ? > theGroup , String theName , String theText , int theX , int theY , int theW , int theH ) {
+	protected Textarea( ControlP5 theControlP5 , ControllerGroup< ? extends ControllerGroup< ? > > theGroup , 
+			    String theName , String theText , int theX , int theY , int theW , int theH ) {
 		super( theControlP5 , theGroup , theName , theX , theY );
 		_myWidth = theW;
 		_myHeight = theH;
@@ -109,8 +110,8 @@ public class Textarea extends ControllerGroup< Textarea > implements ControlList
 
 		_myValueLabel.setFont( cp5.controlFont == cp5.defaultFont ? cp5.defaultFontForText : cp5.controlFont );
 
-		_myValueLabel.setWidth( ( int ) _myWidth );
-		_myValueLabel.setHeight( ( int ) _myHeight );
+		_myValueLabel.setWidth( _myWidth );
+		_myValueLabel.setHeight( _myHeight );
 		_myValueLabel.setMultiline( true );
 		_myValueLabel.toUpperCase( false );
 		_myValueLabel.setColor( color.getValueLabel( ) );
@@ -136,8 +137,8 @@ public class Textarea extends ControllerGroup< Textarea > implements ControlList
 	 * @param theEvent
 	 *            ControlEvent
 	 */
-	public void controlEvent( ControlEvent theEvent ) {
-		_myScrollValue = - ( 1 - theEvent.getValue( ) );
+	@Override public void controlEvent( ControlEvent theEvent ) {
+		_myScrollValue = theEvent.getValue( ) - 1;
 		scroll( );
 	}
 
@@ -149,10 +150,8 @@ public class Textarea extends ControllerGroup< Textarea > implements ControlList
 
 	public Textarea showScrollbar( ) {
 		isScrollbarVisible = true;
-		boolean isScrollbar = _myHeight < ( _myValueLabel.getTextHeight( ) + _myValueLabel.getLineHeight( ) );
-		if ( isScrollbar ) {
-			_myScrollbar.show( );
-		}
+		boolean isScrollbar = _myHeight < _myValueLabel.getTextHeight( ) + _myValueLabel.getLineHeight( );
+		if ( isScrollbar )  _myScrollbar.show( );
 		return this;
 	}
 
@@ -160,19 +159,18 @@ public class Textarea extends ControllerGroup< Textarea > implements ControlList
 		return _myScrollbar.isVisible( );
 	}
 
-	@Override public Textarea setColorBackground( int theColor ) {
+	@Override public T setColorBackground( int theColor ) {
 		_myColorBackground = theColor;
+		return enableColorBackground( );
+	}
+
+	public Textarea enableColorBackground( ) {
 		isColorBackground = true;
 		return this;
 	}
 
 	public Textarea disableColorBackground( ) {
 		isColorBackground = false;
-		return this;
-	}
-
-	public Textarea enableColorBackground( ) {
-		isColorBackground = true;
 		return this;
 	}
 
@@ -189,25 +187,20 @@ public class Textarea extends ControllerGroup< Textarea > implements ControlList
 	/**
 	 * private update method for the scrollbar.
 	 */
-	private void scroll( ) {
-		_myScrollValue = PApplet.min( PApplet.max( -1 , _myScrollValue ) , 0 );
-
+	private Textarea scroll( ) {
+		_myScrollValue = PApplet.constrain( _myScrollValue , -1 , 0 );
 		float myLen = _myValueLabel.getTextHeight( ) + _myValueLabel.getLineHeight( );
-		float myOffset = 0;
 		boolean isScrollbar = _myHeight < myLen;
-		if ( isScrollbar ) {
-			myOffset = _myScrollValue * ( myLen - _myHeight + _myBottomOffset );
-		}
-		isScrollbar = ( isScrollbarVisible ) ? isScrollbar : false;
-		_myScrollbar.setVisible( isScrollbar );
+		//float myOffset = isScrollbar ? _myScrollValue * ( myLen - _myHeight + _myBottomOffset ) : 0;
+		_myScrollbar.setVisible( isScrollbarVisible ? isScrollbar : false );
 		_myValueLabel.setOffsetYratio( _myScrollValue );
+		return this;
 	}
 
 	@ControlP5.Invisible public void scrolled( int theStep ) {
 		if ( _myScrollbar.isVisible( ) ) {
-			int lines = ( _myValueLabel.getTextHeight( ) / _myValueLabel.getLineHeight( ) );
-			float step = 1.0f / lines;
-			scroll( ( 1 - getScrollPosition( ) ) + ( theStep * step ) );
+			float lines = _myValueLabel.getTextHeight( ) / _myValueLabel.getLineHeight( );
+			scroll( theStep/lines - getScrollPosition( ) + 1f );
 		}
 	}
 
@@ -218,34 +211,32 @@ public class Textarea extends ControllerGroup< Textarea > implements ControlList
 	/**
 	 * set the width of the textarea.
 	 * 
-	 * @param theValue
+	 * @param theWidth
 	 *            int
 	 */
-	@Override public Textarea setWidth( int theValue ) {
-		theValue = ( theValue < 10 ) ? 10 : theValue;
-		_myWidth = theValue;
+	@Override public T setWidth( int theWidth ) {
+		_myWidth = Math.max( 10 , theWidth );
 		_myValueLabel.setWidth( _myWidth - _myScrollbarWidth - 10 );
-		return this;
+		return me;
 	}
 
 	/**
 	 * set the height of the textarea.
 	 * 
-	 * @param theValue
+	 * @param theHeight
 	 *            int
 	 */
-	@Override public Textarea setHeight( int theValue ) {
-		theValue = ( theValue < 10 ) ? 10 : theValue;
-		_myHeight = theValue;
+	@Override public T setHeight( int theHeight ) {
+		_myHeight = Math.max( 10 , theHeight );
 		_myValueLabel.setHeight( _myHeight - 2 );
-		_myScrollbar.setHeight( theValue );
-		return this;
+		_myScrollbar.setHeight( theHeight );
+		return me;
 	}
 
-	public Textarea setSize( int theWidth , int theHeight ) {
+	@Override public T setSize( int theWidth , int theHeight ) {
 		setWidth( theWidth );
 		setHeight( theHeight );
-		return this;
+		return me;
 	}
 
 	/**
@@ -256,8 +247,7 @@ public class Textarea extends ControllerGroup< Textarea > implements ControlList
 	 */
 	public Textarea setLineHeight( int theLineHeight ) {
 		_myValueLabel.setLineHeight( theLineHeight );
-		scroll( );
-		return this;
+		return scroll( );
 	}
 
 	/**
@@ -272,15 +262,6 @@ public class Textarea extends ControllerGroup< Textarea > implements ControlList
 	}
 
 	/**
-	 * returns the instance of the textarea's label.
-	 * 
-	 * @return
-	 */
-	public Label getValueLabel( ) {
-		return _myValueLabel;
-	}
-
-	/**
 	 * set the text of the textarea.
 	 * 
 	 * @param theText
@@ -288,8 +269,9 @@ public class Textarea extends ControllerGroup< Textarea > implements ControlList
 	 */
 	public Textarea setText( String theText ) {
 		_myValueLabel.set( theText );
-		_myScrollValue = ( float ) ( _myHeight ) / ( float ) ( _myValueLabel.getTextHeight( ) );
-		_myScrollbar.setHeight( _myHeight + _myValueLabel.getStyle( ).paddingTop + _myValueLabel.getStyle( ).paddingBottom );
+		_myScrollValue = ( float ) _myHeight / _myValueLabel.getTextHeight( );
+		final ControllerStyle style = _myValueLabel.getStyle( );
+		_myScrollbar.setHeight( _myHeight + style.paddingTop + style.paddingBottom );
 		return this;
 	}
 
@@ -303,13 +285,10 @@ public class Textarea extends ControllerGroup< Textarea > implements ControlList
 
 	public Textarea append( String theText , int max ) {
 		String str = getText( ) + theText;
-
-		if ( max == -1 ) {
-			return setText( str );
-		}
-
+		if ( max == -1 )  return setText( str );
 		List< String > strs = Arrays.asList( str.split( "\n" ) );
-		return setText( CP.join( strs.subList( Math.max( 0 , strs.size( ) - max ) , strs.size( ) ) , "\n" ) );
+		int len = strs.size( );
+		return setText( CP.join( strs.subList( Math.max( 0 , len - max ) , len ) , "\n" ) );
 	}
 
 	/**
@@ -321,45 +300,42 @@ public class Textarea extends ControllerGroup< Textarea > implements ControlList
 		return getStringValue( );
 	}
 
-	@Override protected void preDraw( PGraphics theGraphics ) {
-		if ( isScrollbarVisible ) {
-			_myScrollbar.setVisible( _myValueLabel.getOverflow( ) > 1 );
-		}
-		if ( _myScrollbar.isVisible( ) || isColorBackground ) {
-			float x = _myWidth - _myScrollbarWidth + _myValueLabel.getStyle( ).paddingLeft + _myValueLabel.getStyle( ).paddingRight;
-			float y = y( _myScrollbar.getPosition( ) );
-			set( _myScrollbar.getPosition( ) , x , y );
-			if ( !isColorBackground ) {
-				theGraphics.noFill( );
-			} else {
-				int a = _myColorBackground >> 24 & 0xff;
-				theGraphics.fill( _myColorBackground , a > 0 ? a : 255 );
-			}
-			int ww = _myWidth + _myValueLabel.getStyle( ).paddingLeft + _myValueLabel.getStyle( ).paddingRight;
-			int hh = _myHeight + _myValueLabel.getStyle( ).paddingTop + _myValueLabel.getStyle( ).paddingBottom;
-			theGraphics.rect( 0 , 0 , ww , hh );
-		}
+	@Override protected void preDraw( final PGraphics theGraphics ) {
+		if ( isScrollbarVisible )  _myScrollbar.setVisible( _myValueLabel.getOverflow( ) > 1 );
+		if ( !isColorBackground && !_myScrollbar.isVisible( ) )  return;
+		final ControllerStyle style = _myValueLabel.getStyle( );
+		float x = _myWidth - _myScrollbarWidth + style.paddingLeft + style.paddingRight;
+		set( _myScrollbar.getPosition( ) , x , y( _myScrollbar.getPosition( ) ) );
+		if ( isColorBackground ) {
+			int a = _myColorBackground >> 24 & 0xff;
+			theGraphics.fill( _myColorBackground , a > 0 ? a : 0xff );
+		} else theGraphics.noFill( );
+		int ww = _myWidth  + style.paddingLeft + style.paddingRight;
+		int hh = _myHeight + style.paddingTop  + style.paddingBottom;
+		theGraphics.rect( 0 , 0 , ww , hh );
 	}
 
 	// !!! add padding to the box.
-	// padding and margin doesnt work nicely with textarea yet!
-	protected boolean inside( ) {
-		return ( cp5.getWindow( ).mouseX > x( position ) + x( _myParent.absolutePosition ) && cp5.getWindow( ).mouseX < x( position ) + x( _myParent.absolutePosition ) + _myWidth
-		    && cp5.getWindow( ).mouseY > y( position ) + y( _myParent.absolutePosition ) && cp5.getWindow( ).mouseY < y( position ) + y( _myParent.absolutePosition ) + _myHeight );
+	// padding and margin doesn't work nicely with Textarea yet!
+	@Override protected boolean inside( ) {
+		final int mx = getWindow( ).mouseX, my = getWindow( ).mouseY;
+		final int x = Math.round( x( position ) + x( _myParent.absolutePosition ) );
+		final int y = Math.round( y( position ) + y( _myParent.absolutePosition ) );
+		return mx > x && mx < x + _myWidth && my > y && my < y + _myHeight;
 	}
 
-	public String getStringValue( ) {
+	@Override public String getStringValue( ) {
 		return _myValueLabel.getText( );
 	}
 
-	public Textarea setFont( ControlFont theFont ) {
+	@Override public T setFont( ControlFont theFont ) {
 		getValueLabel( ).setFont( theFont );
-		return this;
+		return me;
 	}
 
-	public Textarea setFont( PFont thePFont ) {
+	@Override public T setFont( PFont thePFont ) {
 		getValueLabel( ).setFont( thePFont );
-		return this;
+		return me;
 	}
 
 	public Textarea setFont( int theFontIndex ) {
