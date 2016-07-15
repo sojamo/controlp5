@@ -59,7 +59,7 @@ public class Textarea extends ControllerGroup< Textarea > {
 	 */
 	public Textarea( ControlP5 theControlP5 , String theName ) {
 		this( theControlP5 , theControlP5.getDefaultTab( ) , theName , "" , 0 , 0 , 199 , 99 );
-		theControlP5.register( theControlP5.papplet , theName , this );
+		cp5.register( cp5.papplet , theName , this );
 	}
 
 	/**
