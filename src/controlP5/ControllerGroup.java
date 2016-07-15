@@ -83,7 +83,7 @@ public abstract class ControllerGroup< T extends ControllerGroup< T > >
 	 */
 	public ControllerGroup( ControlP5 theControlP5 , String theName ) {
 		this( theControlP5 , theControlP5.getDefaultTab( ) , theName , 0 , 0 );
-		cp5.register( theControlP5.papplet , theName , this );
+		cp5.register( cp5.papplet , theName , this );
 	}
 
 	public ControllerGroup( ControlP5 theControlP5 , ControllerGroup< ? extends ControllerGroup< ? > > 
