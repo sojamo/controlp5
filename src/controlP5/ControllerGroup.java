@@ -46,7 +46,7 @@ public abstract class ControllerGroup< T extends ControllerGroup< T > >
 	protected final List< ControlListener > _myControlListener = new ArrayList< >( );
 	protected ControlP5 cp5;
 	protected ControllerGroup< ? extends ControllerGroup< ? > > _myParent;
-	protected String _myName;
+	protected String _myName = "";
 	protected int _myId = -1;
 	protected final CColor color = new CColor( );
 	protected boolean isMousePressed = false;
@@ -67,7 +67,7 @@ public abstract class ControllerGroup< T extends ControllerGroup< T > >
 	protected boolean isUpdate;
 	protected final List< Canvas > _myCanvas = new ArrayList< >( );
 	protected float _myValue;
-	protected String _myStringValue;
+	protected String _myStringValue = "";
 	protected float[] _myArrayValue;
 	protected boolean isCollapse = true;
 	protected int _myPickingColor = 0x6600ffff;
