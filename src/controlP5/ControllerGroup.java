@@ -74,15 +74,15 @@ public abstract class ControllerGroup< T extends ControllerGroup< T > >
 	protected final float[] autoPosition = new float[] { 10f , 30f };
 	protected float tempAutoPositionHeight = 0f;
 	protected float autoPositionOffsetX = 10f;
-	private String _myAddress = "";
-	private boolean mouseover;
+	protected String _myAddress = "";
+	protected boolean mouseover;
 	protected final T me = ( T ) this;
 
 	/**
 	 * Convenience constructor to extend ControllerGroup.
 	 */
 	public ControllerGroup( ControlP5 theControlP5 , String theName ) {
-		this( theControlP5 , theControlP5.getDefaultTab( ) , theName , 0f , 0f );
+		this( theControlP5 , theControlP5.getDefaultTab( ) , theName , 0 , 0 );
 		cp5.register( theControlP5.papplet , theName , this );
 	}
 
