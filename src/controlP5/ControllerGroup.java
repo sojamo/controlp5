@@ -209,8 +209,8 @@ public abstract class ControllerGroup< T extends ControllerGroup< T > >
 		return absolutePosition.clone();
 	}
 
-	@ControlP5.Invisible @Override public T setAbsolutePosition( float[] thePos ) {
-		set( absolutePosition , x( thePos ) , y( thePos ) );
+	@ControlP5.Invisible @Override public T setAbsolutePosition( final float... thePos ) {
+		set( absolutePosition , thePos );
 		return me;
 	}
 
@@ -225,7 +225,7 @@ public abstract class ControllerGroup< T extends ControllerGroup< T > >
 		return updateAbsolutePosition( );
 	}
 
-	@Override public T setPosition( float[] thePosition ) {
+	@Override public T setPosition( final float... thePosition ) {
 		return setPosition( x( thePosition ) , y( thePosition ) );
 	}
 
@@ -741,7 +741,7 @@ public abstract class ControllerGroup< T extends ControllerGroup< T > >
 		return me;
 	}
 
-	@Override public T setArrayValue( float[] theArray ) {
+	@Override public T setArrayValue( final float... theArray ) {
 		_myArrayValue = theArray;
 		return me;
 	}
