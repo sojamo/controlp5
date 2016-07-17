@@ -193,7 +193,7 @@ public abstract class ControllerGroup< T extends ControllerGroup< T > >
 	protected void updateFont( final ControlFont theControlFont ) {
 		_myLabel.updateFont( theControlFont );
 		if ( _myValueLabel != null )  _myValueLabel.updateFont( theControlFont );
-		if ( controllers.size( ) != 0 )  synchronized ( controllers.get( ) ) {
+		synchronized ( controllers.get( ) ) {
 			for ( final ControllerInterface< ? > ci : controllers.get( ) ) {
 				if ( ci instanceof Controller< ? > ) {
 					( ( Controller< ? > ) ci ).updateFont( theControlFont );
@@ -233,7 +233,7 @@ public abstract class ControllerGroup< T extends ControllerGroup< T > >
 		final float x = x( position ) + x( _myParent.getAbsolutePosition( ) );
 		final float y = y( position ) + y( _myParent.getAbsolutePosition( ) );
 		set( absolutePosition , x , y );
-		if ( controllers.size( ) != 0 )  synchronized ( controllers.get( ) ) {
+		synchronized ( controllers.get( ) ) {
 			for ( final ControllerInterface< ? > ci : controllers.get( ) )
 				ci.updateAbsolutePosition( );
 		}
@@ -242,7 +242,7 @@ public abstract class ControllerGroup< T extends ControllerGroup< T > >
 
 	@ControlP5.Invisible @Override public void continuousUpdateEvents( ) {
 		final List< ControllerInterface< ? > > controls = controllers.get( );
-		if ( !controls.isEmpty( ) )  synchronized ( controls ) {
+		synchronized ( controls ) {
 			int i = controls.size( );
 			while (  i-- != 0 )  controls.get( i ).continuousUpdateEvents( );
 		}
@@ -250,7 +250,7 @@ public abstract class ControllerGroup< T extends ControllerGroup< T > >
 
 	@Override public T update( ) {
 		final List< ControllerInterface< ? > > controls = controllers.get( );
-		if ( !controls.isEmpty( ) )  synchronized ( controls ) {
+		synchronized ( controls ) {
 			for ( int i = controls.size( ) ; i-- != 0 ; ) {
 				final ControllerInterface< ? > ci = controls.get( i );
 				if ( ci.isUpdate( ) )  ci.update( );
@@ -264,10 +264,9 @@ public abstract class ControllerGroup< T extends ControllerGroup< T > >
 	 */
 	@Override public T setUpdate( final boolean theFlag ) {
 		isUpdate = theFlag;
-		if ( controllers.size( ) != 0 )  synchronized ( controllers.get( ) ) {
-			for ( final ControllerInterface< ? > ci : controllers.get( ) ) {
+		synchronized ( controllers.get( ) ) {
+			for ( final ControllerInterface< ? > ci : controllers.get( ) )
 				ci.setUpdate( theFlag );
-			}
 		}
 		return me;
 	}
@@ -282,7 +281,7 @@ public abstract class ControllerGroup< T extends ControllerGroup< T > >
 	@ControlP5.Invisible @Override public T updateEvents( ) {
 		if ( isOpen ) {
 			final List< ControllerInterface< ? > > controls = controllers.get( );
-			if ( !controls.isEmpty( ) )  synchronized ( controls ) {
+			synchronized ( controls ) {
 				int i = controls.size( );
 				while (  i-- != 0 )  controls.get( i ).updateEvents( );
 			}
@@ -333,7 +332,7 @@ public abstract class ControllerGroup< T extends ControllerGroup< T > >
 			isInsideGroup = isInside = false;
 			getWindow( ).removeMouseOverFor( this );
 			final List< ControllerInterface< ? > > controls = controllers.get( );
-			if ( !controls.isEmpty( ) )  synchronized ( controls ) {
+			synchronized ( controls ) {
 				int i = controls.size( );
 				while (  i-- != 0 )  controls.get( i ).setMouseOver( false );
 			}
@@ -359,10 +358,9 @@ public abstract class ControllerGroup< T extends ControllerGroup< T > >
 				if ( cc.mode( ) == Canvas.PRE )  cc.draw( theGraphics );
 		}
 		if ( controllers.size( ) != 0 )  synchronized ( controllers.get( ) ) {
-			for ( final ControllerInterface< ? > ci : controllers.get( ) ) {
+			for ( final ControllerInterface< ? > ci : controllers.get( ) )
 				if ( ci.isVisible( ) )
 					ci.updateInternalEvents( theApplet ).draw( theGraphics );
-			}
 		}
 		if ( controllers.sizeDrawable( ) != 0 )  synchronized ( controllers.getDrawables( ) ) {
 			for ( final CDrawable cd : controllers.getDrawables( ) )  cd.draw( theGraphics );
@@ -414,14 +412,10 @@ public abstract class ControllerGroup< T extends ControllerGroup< T > >
 	}
 
 	@Override public T bringToFront( final ControllerInterface< ? > theController ) {
-		if ( _myParent instanceof Tab ) {
-			moveTo( ( Tab ) _myParent );
-		} else {
-			_myParent.bringToFront( theController );
-		}
-		if ( theController != this && controllers.get( ).contains( theController ) ) {
-			controllers.remove( theController );
-			controllers.add( theController );
+		if ( _myParent instanceof Tab )  moveTo( ( Tab ) _myParent );
+		else				_myParent.bringToFront( theController );
+		if ( theController != this && controllers.size( ) != 0 )  synchronized ( controllers.get( ) ) {
+			if ( controllers.remove( theController ) )  controllers.add( theController );
 		}
 		return me;
 	}
@@ -481,7 +475,7 @@ public abstract class ControllerGroup< T extends ControllerGroup< T > >
 	}
 
 	@ControlP5.Invisible @Override public void keyEvent( final KeyEvent theEvent ) {
-		if ( controllers.size( ) != 0 )  synchronized ( controllers.get( ) ) {
+		synchronized ( controllers.get( ) ) {
 			for ( final ControllerInterface< ? > ci : controllers.get( ) )
 				ci.keyEvent( theEvent );
 		}
@@ -490,7 +484,7 @@ public abstract class ControllerGroup< T extends ControllerGroup< T > >
 	@Override public boolean setMousePressed( final boolean theStatus ) {
 		if ( !isVisible )  return false;
 		final List< ControllerInterface< ? > > controls = controllers.get( );
-		if ( !controls.isEmpty( ) )  synchronized ( controls ) {
+		synchronized ( controls ) {
 			for ( int i = controls.size( ) ; i-- != 0 ; )
 				if ( controls.get( i ).setMousePressed( theStatus ) )  return true;
 		}
@@ -530,7 +524,7 @@ public abstract class ControllerGroup< T extends ControllerGroup< T > >
 	}
 
 	@Override public T setColor( final CColor theColor ) {
-		if ( controllers.size( ) != 0 )  synchronized ( controllers.get( ) ) {
+		synchronized ( controllers.get( ) ) {
 			for ( final ControllerInterface< ? > ci : controllers.get( ) )
 				ci.setColor( theColor );
 		}
@@ -539,7 +533,7 @@ public abstract class ControllerGroup< T extends ControllerGroup< T > >
 
 	@Override public T setColorActive( final int theColor ) {
 		color.setActive( theColor );
-		if ( controllers.size( ) != 0 )  synchronized ( controllers.get( ) ) {
+		synchronized ( controllers.get( ) ) {
 			for ( final ControllerInterface< ? > ci : controllers.get( ) )
 				ci.setColorActive( theColor );
 		}
@@ -548,7 +542,7 @@ public abstract class ControllerGroup< T extends ControllerGroup< T > >
 
 	@Override public T setColorForeground( final int theColor ) {
 		color.setForeground( theColor );
-		if ( controllers.size( ) != 0 )  synchronized ( controllers.get( ) ) {
+		synchronized ( controllers.get( ) ) {
 			for ( final ControllerInterface< ? > ci : controllers.get( ) )
 				ci.setColorForeground( theColor );
 		}
@@ -557,7 +551,7 @@ public abstract class ControllerGroup< T extends ControllerGroup< T > >
 
 	@Override public T setColorBackground( final int theColor ) {
 		color.setBackground( theColor );
-		if ( controllers.size( ) != 0 )  synchronized ( controllers.get( ) ) {
+		synchronized ( controllers.get( ) ) {
 			for ( final ControllerInterface< ? > ci : controllers.get( ) )
 				ci.setColorBackground( theColor );
 		}
@@ -567,7 +561,7 @@ public abstract class ControllerGroup< T extends ControllerGroup< T > >
 	@Override public T setColorLabel( final int theColor ) {
 		color.setCaptionLabel( theColor );
 		if ( _myLabel != null )  _myLabel.setColor( color.getCaptionLabel( ) );
-		if ( controllers.size( ) != 0 )  synchronized ( controllers.get( ) ) {
+		synchronized ( controllers.get( ) ) {
 			for ( final ControllerInterface< ? > ci : controllers.get( ) )
 				ci.setColorLabel( theColor );
 		}
@@ -577,7 +571,7 @@ public abstract class ControllerGroup< T extends ControllerGroup< T > >
 	@Override public T setColorValue( final int theColor ) {
 		color.setValueLabel( theColor );
 		if ( _myValueLabel != null )  _myValueLabel.setColor( color.getValueLabel( ) );
-		if ( controllers.size( ) != 0 )  synchronized ( controllers.get( ) ) {
+		synchronized ( controllers.get( ) ) {
 			for ( final ControllerInterface< ? > ci : controllers.get( ) )
 				ci.setColorValue( theColor );
 		}
