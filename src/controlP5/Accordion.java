@@ -101,7 +101,7 @@ public class Accordion extends ControlGroup< Accordion > {
 	 */
 	public Accordion updateItems( ) {
 		setWidth( _myWidth );
-		if ( controllers.size( ) != 0 )  synchronized ( controllers.get( ) ) {
+		synchronized ( controllers.get( ) ) {
 			int n = 0;
 			for ( final ControllerInterface< ? > ci : controllers.get( ) )
 				if ( ci instanceof ControlGroup< ? > ) {
@@ -121,7 +121,7 @@ public class Accordion extends ControlGroup< Accordion > {
 	 */
 	public Accordion setMinItemHeight( int theHeight ) {
 		minHeight = theHeight;
-		if ( controllers.size( ) != 0 )  synchronized ( controllers.get( ) ) {
+		synchronized ( controllers.get( ) ) {
 			for ( final ControllerInterface< ? > ci : controllers.get( ) )
 				if ( ci instanceof ControlGroup< ? > ) {
 					final ControlGroup< ? > cg = ( ControlGroup< ? > ) ci;
@@ -138,7 +138,7 @@ public class Accordion extends ControlGroup< Accordion > {
 
 	public Accordion setItemHeight( int theHeight ) {
 		itemHeight = theHeight;
-		if ( controllers.size( ) != 0 )  synchronized ( controllers.get( ) ) {
+		synchronized ( controllers.get( ) ) {
 			for ( final ControllerInterface< ? > ci : controllers.get( ) )
 				if ( cg instanceof ControlGroup< ? > )
 					( ( ControlGroup< ? > ) ci ).setBackgroundHeight( itemHeight );
@@ -151,7 +151,7 @@ public class Accordion extends ControlGroup< Accordion > {
 	}
 
 	@Override public T setWidth( final int theWidth ) {
-		if ( controllers.size( ) != 0 )  synchronized ( controllers.get( ) ) {
+		synchronized ( controllers.get( ) ) {
 		for ( ControllerInterface< ? > ci : controllers.get( ) )
 			if ( cg instanceof ControlGroup< ? > )
 				( ( ControlGroup< ? > ) ci ).setWidth( theWidth );
@@ -193,7 +193,7 @@ public class Accordion extends ControlGroup< Accordion > {
 
 	@SafeVarargs public final T open( final int... theIds ) {
 		if ( theIds == null || theIds[ 0 ] == -1 )  return open( );
-		if ( controllers.size( ) != 0 )  synchronized ( controllers.get( ) ) {
+		synchronized ( controllers.get( ) ) {
 			int n = 0 , i = 0;
 			for ( final ControllerInterface< ? > ci : controllers.get( ) )
 				if ( ci instanceof ControlGroup< ? > ) {
@@ -213,7 +213,7 @@ public class Accordion extends ControlGroup< Accordion > {
 
 	@SafeVarargs public final T close( final int... theIds ) {
 		if ( theIds == null || theIds[ 0 ] == -1 )  return close( );
-		if ( controllers.size( ) != 0 )  synchronized ( controllers.get( ) ) {
+		synchronized ( controllers.get( ) ) {
 			int n = 0 , i = 0;
 			for ( final ControllerInterface< ? > ci : controllers.get( ) )
 				if ( ci instanceof ControlGroup< ? > ) {
