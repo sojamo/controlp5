@@ -346,6 +346,20 @@ public class CheckBox extends ControlGroup< CheckBox > {
 		return _myRadioToggles.get( theIndex );
 	}
 
+	/**
+	 * Gets a radio button item by name. Null if not found!
+	 * 
+	 * @param theName
+	 * @return Toggle
+	 */
+	public Toggle getItem( final String theName ) {
+		if ( theName != null && !_myRadioToggles.isEmpty( ) )  synchronized ( _myRadioToggles ) {
+			for ( final Toggle tog : _myRadioToggles )
+				if ( theName.equals( tog.getName( ) ) )  return tog;
+		}
+		return null;
+	}
+
 	public List< Toggle > getItems( ) {
 		return _myRadioToggles;
 	}
