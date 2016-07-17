@@ -57,10 +57,12 @@ public class CheckBox extends ControlGroup< CheckBox > {
 	protected int itemWidth  = 9;
 
 	protected boolean noneSelectedAllowed = true;
-	protected boolean isMultipleChoice;
+	protected boolean isMultipleChoice = true;
 
 	protected Object _myPlug;
-	protected String _myPlugName;
+	protected String _myPlugName = "";
+
+	static protected final Class<?>[] CFA = { float[].class };
 
 	/**
 	 * Convenience constructor to extend CheckBox.
@@ -88,10 +90,8 @@ public class CheckBox extends ControlGroup< CheckBox > {
 				String theName , int theX , int theY ) {
 		super( theControlP5 , theParent , theName , theX , theY , 99 , 9 );
 		isCollapse = isBarVisible = false;
-		isMultipleChoice = true;
 		setItemsPerRow( 1 );
-		if ( ControllerPlug.checkPlug( cp5.papplet , _myPlugName = getName( ) , 
-						new Class[] { float[].class } ) )  _myPlug = cp5.papplet;
+		if ( ControllerPlug.checkPlug( cp5.papplet , _myPlugName = getName( ) , CFA )  _myPlug = cp5.papplet;
 	}
 
 	public CheckBox activateAll( ) {
@@ -315,7 +315,7 @@ public class CheckBox extends ControlGroup< CheckBox > {
 	 */
 	public CheckBox setItemHeight( final int theItemHeight ) {
 		itemHeight = theItemHeight;
-		if ( !_myRadioToggles.isEmpty( ) )  synchronized ( _myRadioToggles ) {
+		synchronized ( _myRadioToggles ) {
 			for ( final Toggle tog : _myRadioToggles )  tog.setHeight( theItemHeight );
 		}
 		return updateLayout( );
@@ -330,7 +330,7 @@ public class CheckBox extends ControlGroup< CheckBox > {
 	 */
 	public CheckBox setItemWidth( final int theItemWidth ) {
 		itemWidth = theItemWidth;
-		if ( !_myRadioToggles.isEmpty( ) )  synchronized ( _myRadioToggles ) {
+		synchronized ( _myRadioToggles ) {
 			for ( final Toggle tog : _myRadioToggles )  tog.setWidth( theItemWidth );
 		}
 		return updateLayout( );
@@ -379,7 +379,7 @@ public class CheckBox extends ControlGroup< CheckBox > {
 	 * @exclude
 	 */
 	public CheckBox updateLayout( ) {
-		if ( !_myRadioToggles.isEmpty( ) )  synchronized ( _myRadioToggles ) {
+		synchronized ( _myRadioToggles ) {
 			int nn = 0 , xx = 0 , yy = 0;
 			for ( final Toggle tog : _myRadioToggles ) {
 				set( tog.position , xx , yy );
@@ -465,8 +465,7 @@ public class CheckBox extends ControlGroup< CheckBox > {
 	}
 
 	public CheckBox plugTo( final Object theObject ) {
-		_myPlug = ControllerPlug.checkPlug( theObject , _myPlugName , new Class[] { float[].class } )
-				? theObject : null;
+		_myPlug = ControllerPlug.checkPlug( theObject , _myPlugName , CFA ) ? theObject : null;
 		return this;
 	}
 
@@ -487,28 +486,28 @@ public class CheckBox extends ControlGroup< CheckBox > {
 	}
 
 	public CheckBox setColorLabels( final int theColor ) {
-		if ( !_myRadioToggles.isEmpty( ) )  synchronized ( _myRadioToggles ) {
+		synchronized ( _myRadioToggles ) {
 			for ( final Toggle tog : _myRadioToggles )  tog.getCaptionLabel( ).setColor( theColor );
 		}
 		return this;
 	}
 
 	public CheckBox hideLabels( ) {
-		if ( !_myRadioToggles.isEmpty( ) )  synchronized ( _myRadioToggles ) {
+		synchronized ( _myRadioToggles ) {
 			for ( final Toggle tog : _myRadioToggles )  tog.getCaptionLabel( ).setVisible( false );
 		}
 		return this;
 	}
 
 	public CheckBox showLabels( ) {
-		if ( !_myRadioToggles.isEmpty( ) )  synchronized ( _myRadioToggles ) {
+		synchronized ( _myRadioToggles ) {
 			for ( final Toggle tog : _myRadioToggles )  tog.getCaptionLabel( ).setVisible( true );
 		}
 		return this;
 	}
 
 	public CheckBox toUpperCase( boolean theValue ) {
-		if ( !_myRadioToggles.isEmpty( ) )  synchronized ( _myRadioToggles ) {
+		synchronized ( _myRadioToggles ) {
 			for ( final Toggle tog : _myRadioToggles )  tog.getCaptionLabel( ).toUpperCase( theValue );
 		}
 		return this;
