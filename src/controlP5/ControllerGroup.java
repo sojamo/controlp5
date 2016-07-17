@@ -1,5 +1,3 @@
-package controlP5;
-
 /**
  * controlP5 is a processing gui library.
  * 
@@ -25,6 +23,8 @@ package controlP5;
  * 
  */
 
+package controlP5;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,19 +37,18 @@ import processing.event.KeyEvent;
  * ControllerGroup is an abstract class and is extended by class ControlGroup, Tab, or the ListBox.
  * 
  */
-public abstract class ControllerGroup< T > implements ControllerInterface< T > , ControlP5Constants , ControlListener {
-
-	protected float[] position = new float[ 2 ];
-	protected float[] positionBuffer = new float[ 2 ];
-	protected float[] absolutePosition = new float[ 2 ];
-	protected ControllerList controllers;
-	protected List< ControlListener > _myControlListener;
-	// protected ControlWindow _myControlWindow;
+public abstract class ControllerGroup< T extends ControllerGroup< T > >
+		implements ControllerInterface< T > , ControlListener , ControlP5Constants {
+	protected final float[] position = new float[ 2 ];
+	protected final float[] positionBuffer = new float[ 2 ];
+	protected final float[] absolutePosition = new float[ 2 ];
+	protected final ControllerList controllers = new ControllerList( );
+	protected final List< ControlListener > _myControlListener = new ArrayList< >( );
 	protected ControlP5 cp5;
-	protected ControllerGroup< ? > _myParent;
-	protected String _myName;
+	protected ControllerGroup< ? extends ControllerGroup< ? > > _myParent;
+	protected String _myName = "";
 	protected int _myId = -1;
-	protected CColor color = new CColor( );
+	protected final CColor color = new CColor( );
 	protected boolean isMousePressed = false;
 	// only applies to the area of the title bar of a group
 	protected boolean isInside = false;
@@ -66,79 +65,62 @@ public abstract class ControllerGroup< T > implements ControllerInterface< T > ,
 	protected int _myWidth = 99;
 	protected int _myHeight = 9;
 	protected boolean isUpdate;
-	protected List< Canvas > _myCanvas;
+	protected final List< Canvas > _myCanvas = new ArrayList< >( );
 	protected float _myValue;
-	protected String _myStringValue;
+	protected String _myStringValue = "";
 	protected float[] _myArrayValue;
 	protected boolean isCollapse = true;
 	protected int _myPickingColor = 0x6600ffff;
-	protected float[] autoPosition = new float[] { 10 , 30 };
-	protected float tempAutoPositionHeight = 0;
-	protected float autoPositionOffsetX = 10;
-	private String _myAddress = "";
-	private boolean mouseover;
-	protected final T me;
+	protected final float[] autoPosition = new float[] { 10f , 30f };
+	protected float tempAutoPositionHeight = 0f;
+	protected float autoPositionOffsetX = 10f;
+	protected String _myAddress = "";
+	protected boolean mouseover;
+	protected final T me = ( T ) this;
 
 	/**
 	 * Convenience constructor to extend ControllerGroup.
 	 */
 	public ControllerGroup( ControlP5 theControlP5 , String theName ) {
 		this( theControlP5 , theControlP5.getDefaultTab( ) , theName , 0 , 0 );
-		theControlP5.register( theControlP5.papplet , theName , this );
+		cp5.register( cp5.papplet , theName , this );
 	}
 
-	public ControllerGroup( ControlP5 theControlP5 , ControllerGroup< ? > theParent , String theName , float theX , float theY ) {
-		position = new float[] { theX , theY };
+	public ControllerGroup( ControlP5 theControlP5 , ControllerGroup< ? extends ControllerGroup< ? > > 
+				theParent , String theName , int theX , int theY ) {
+		set( position , theX , theY );
 		cp5 = theControlP5;
-		me = ( T ) this;
-		color.set( ( theParent == null ) ? cp5.color : theParent.color );
+		color.set( theParent == null ? cp5.color : theParent.color );
 		_myName = theName;
-		controllers = new ControllerList( );
-		_myCanvas = new ArrayList< Canvas >( );
-		_myControlListener = new ArrayList< ControlListener >( );
 		_myLabel = new Label( cp5 , _myName );
-		_myLabel.setText( _myName );
-		_myLabel.setColor( color.getCaptionLabel( ) );
-		_myLabel.align( LEFT , TOP );
-		setParent( ( theParent == null ) ? this : theParent );
+		_myLabel.setText( _myName ).setColor( color.getCaptionLabel( ) ).align( LEFT , TOP );
+		setParent( theParent == null ? this : theParent );
 	}
 
 	protected ControllerGroup( int theX , int theY ) {
-		position = new float[] { theX , theY };
-		me = ( T ) this;
-		controllers = new ControllerList( );
-		_myCanvas = new ArrayList< Canvas >( );
+		set( position , theX , theY );
 	}
 
-	@ControlP5.Invisible public void init( ) {
+	@ControlP5.Invisible @Override public void init( ) {
 	}
 
-	@ControlP5.Invisible @Override public ControllerInterface< ? > getParent( ) {
+	@ControlP5.Invisible @Override
+	public ControllerGroup< ? extends ControllerGroup< ? > > getParent( ) {
 		return _myParent;
 	}
 
-	void setParent( ControllerGroup< ? > theParent ) {
-
-		if ( _myParent != null && _myParent != this ) {
-			_myParent.remove( this );
-		}
-
-		_myParent = theParent;
-
-		if ( _myParent != this ) {
-			_myParent.add( this );
-		}
-
-		set( absolutePosition , x( position ) , y( position ) );
-		set( absolutePosition , x( absolutePosition ) + x( _myParent.absolutePosition ) , y( absolutePosition ) + y( _myParent.absolutePosition ) );
-		set( positionBuffer , x( position ) , y( position ) );
-
-		if ( cp5.getWindow( ) != null ) {
-			setMouseOver( false );
-		}
+	public T setParent( final ControllerGroup< ? extends ControllerGroup< ? > > theParent ) {
+		if ( _myParent != null && _myParent != this )  _myParent.remove( this );
+		if ( ( _myParent = theParent ) != this )  theParent.add( this );
+		final float x = x( position ) + x( theParent.absolutePosition );
+		final float y = y( position ) + y( theParent.absolutePosition );
+		set( absolutePosition , x , y );
+		set( positionBuffer , position );
+		if ( getWindow( ) != null )  setMouseOver( false );
+		return me;
 	}
 
-	public final T setGroup( ControllerGroup< ? > theGroup ) {
+	public final T setGroup( ControllerGroup< ? extends ControllerGroup< ? > > theGroup ) {
 		setParent( theGroup );
 		return me;
 	}
@@ -148,58 +130,43 @@ public abstract class ControllerGroup< T > implements ControllerInterface< T > ,
 		return me;
 	}
 
-	public final T moveTo( ControllerGroup< ? > theGroup , Tab theTab , ControlWindow theControlWindow ) {
-		if ( theGroup != null ) {
-			setGroup( theGroup );
-			return me;
-		}
-
-		if ( theControlWindow == null ) {
-			theControlWindow = cp5.controlWindow;
-		}
-
-		setTab( theControlWindow , theTab.getName( ) );
-		return me;
+	@Override public T moveTo( ControllerGroup< ? extends ControllerGroup< ? > > theGroup , 
+				   Tab theTab , ControlWindow theControlWindow ) {
+		if ( theGroup != null )  return setGroup( theGroup );
+		if ( theControlWindow == null )  theControlWindow = getWindow( );
+		return setTab( theControlWindow , theTab.getName( ) );
 	}
 
-	public final T moveTo( ControllerGroup< ? > theGroup ) {
-		moveTo( theGroup , null , null );
-		return me;
+	@Override public T moveTo( ControllerGroup< ? extends ControllerGroup< ? > > theGroup ) {
+		return moveTo( theGroup , null , null );
 	}
 
 	public final T moveTo( Tab theTab ) {
-		moveTo( null , theTab , theTab.getWindow( ) );
-		return me;
+		return moveTo( null , theTab , theTab.getWindow( ) );
 	}
 
 	public T moveTo( PApplet thePApplet ) {
-		moveTo( cp5.controlWindow );
-		return me;
+		return moveTo( cp5.controlWindow );
 	}
 
 	public T moveTo( ControlWindow theControlWindow ) {
-		moveTo( null , theControlWindow.getTab( "default" ) , theControlWindow );
-		return me;
+		return moveTo( null , theControlWindow.getTab( "default" ) , theControlWindow );
 	}
 
 	public final T moveTo( String theTabName ) {
-		moveTo( null , cp5.controlWindow.getTab( theTabName ) , cp5.controlWindow );
-		return me;
+		return moveTo( null , cp5.controlWindow.getTab( theTabName ) , cp5.controlWindow );
 	}
 
 	public final T moveTo( String theTabName , ControlWindow theControlWindow ) {
-		moveTo( null , theControlWindow.getTab( theTabName ) , theControlWindow );
-		return me;
+		return moveTo( null , theControlWindow.getTab( theTabName ) , theControlWindow );
 	}
 
 	public final T moveTo( ControlWindow theControlWindow , String theTabName ) {
-		moveTo( null , theControlWindow.getTab( theTabName ) , theControlWindow );
-		return me;
+		return moveTo( null , theControlWindow.getTab( theTabName ) , theControlWindow );
 	}
 
 	public final T moveTo( Tab theTab , ControlWindow theControlWindow ) {
-		moveTo( null , theTab , theControlWindow );
-		return me;
+		return moveTo( null , theTab , theControlWindow );
 	}
 
 	public final T setTab( String theName ) {
@@ -217,80 +184,76 @@ public abstract class ControllerGroup< T > implements ControllerInterface< T > ,
 		return me;
 	}
 
-	public Tab getTab( ) {
-		if ( this instanceof Tab ) {
-			return ( Tab ) this;
-		}
-		if ( _myParent instanceof Tab ) {
-			return ( Tab ) _myParent;
-		}
+	@Override public Tab getTab( ) {
+		if ( this instanceof Tab )  return ( Tab ) this;
+		if ( _myParent instanceof Tab )  return ( Tab ) _myParent;
 		return _myParent.getTab( );
 	}
 
-	protected void updateFont( ControlFont theControlFont ) {
+	protected void updateFont( final ControlFont theControlFont ) {
 		_myLabel.updateFont( theControlFont );
-		if ( _myValueLabel != null ) {
-			_myValueLabel.updateFont( theControlFont );
-		}
-		for ( int i = 0 ; i < controllers.size( ) ; i++ ) {
-			if ( controllers.get( i ) instanceof Controller< ? > ) {
-				( ( Controller< ? > ) controllers.get( i ) ).updateFont( theControlFont );
-			} else {
-				( ( ControllerGroup< ? > ) controllers.get( i ) ).updateFont( theControlFont );
+		if ( _myValueLabel != null )  _myValueLabel.updateFont( theControlFont );
+		synchronized ( controllers.get( ) ) {
+			for ( final ControllerInterface< ? > ci : controllers.get( ) ) {
+				if ( ci instanceof Controller< ? > ) {
+					( ( Controller< ? > ) ci ).updateFont( theControlFont );
+				} else {
+					( ( ControllerGroup< ? > ) ci ).updateFont( theControlFont );
+				}
 			}
 		}
 	}
 
-	@ControlP5.Invisible public float[] getAbsolutePosition( ) {
-		return new float[] { x( absolutePosition ) , y( absolutePosition ) };
+	@ControlP5.Invisible @Override public float[] getAbsolutePosition( ) {
+		//return new float[] { x( absolutePosition ) , y( absolutePosition ) };
+		return absolutePosition.clone();
 	}
 
-	@ControlP5.Invisible public T setAbsolutePosition( float[] thePos ) {
-		set( absolutePosition , x( thePos ) , y( thePos ) );
+	@ControlP5.Invisible @Override public T setAbsolutePosition( final float... thePos ) {
+		set( absolutePosition , thePos );
 		return me;
 	}
 
-	public float[] getPosition( ) {
-		return new float[] { x( position ) , y( position ) };
+	@Override public float[] getPosition( ) {
+		//return new float[] { x( position ) , y( position ) };
+		return position.clone();
 	}
 
-	public T setPosition( float theX , float theY ) {
-		set( position , ( int ) theX , ( int ) theY );
-		set( positionBuffer , x( position ) , y( position ) );
-		updateAbsolutePosition( );
-		return me;
+	@Override public T setPosition( float theX , float theY ) {
+		set( position , Math.round( theX ) , Math.round( theY ) );
+		set( positionBuffer , position );
+		return updateAbsolutePosition( );
 	}
 
-	public T setPosition( float[] thePosition ) {
-		setPosition( x( thePosition ) , y( thePosition ) );
-		return me;
+	@Override public T setPosition( final float... thePosition ) {
+		return setPosition( x( thePosition ) , y( thePosition ) );
 	}
 
-	public T updateAbsolutePosition( ) {
-		set( absolutePosition , x( position ) , y( position ) );
-		set( absolutePosition , x( absolutePosition ) + x( _myParent.getAbsolutePosition( ) ) , y( absolutePosition ) + y( _myParent.getAbsolutePosition( ) ) );
-		for ( int i = 0 ; i < controllers.size( ) ; i++ ) {
-			controllers.get( i ).updateAbsolutePosition( );
+	@Override public T updateAbsolutePosition( ) {
+		final float x = x( position ) + x( _myParent.getAbsolutePosition( ) );
+		final float y = y( position ) + y( _myParent.getAbsolutePosition( ) );
+		set( absolutePosition , x , y );
+		synchronized ( controllers.get( ) ) {
+			for ( final ControllerInterface< ? > ci : controllers.get( ) )
+				ci.updateAbsolutePosition( );
 		}
 		return me;
 	}
 
-	@ControlP5.Invisible public void continuousUpdateEvents( ) {
-		if ( controllers.size( ) <= 0 ) {
-			return;
-		}
-		for ( int i = controllers.size( ) - 1 ; i >= 0 ; i-- ) {
-			( ( ControllerInterface< ? > ) controllers.get( i ) ).continuousUpdateEvents( );
+	@ControlP5.Invisible @Override public void continuousUpdateEvents( ) {
+		final List< ControllerInterface< ? > > controls = controllers.get( );
+		synchronized ( controls ) {
+			int i = controls.size( );
+			while (  i-- != 0 )  controls.get( i ).continuousUpdateEvents( );
 		}
 	}
 
-	public T update( ) {
-		if ( controllers.size( ) <= 0 ) {
-			return me;
-		}
-		for ( int i = controllers.size( ) - 1 ; i >= 0 ; i-- ) {
-			if ( ( ( ControllerInterface< ? > ) controllers.get( i ) ).isUpdate( ) ) {
-				( ( ControllerInterface< ? > ) controllers.get( i ) ).update( );
+	@Override public T update( ) {
+		final List< ControllerInterface< ? > > controls = controllers.get( );
+		synchronized ( controls ) {
+			for ( int i = controls.size( ) ; i-- != 0 ; ) {
+				final ControllerInterface< ? > ci = controls.get( i );
+				if ( ci.isUpdate( ) )  ci.update( );
 			}
 		}
 		return me;
@@ -299,10 +262,11 @@ public abstract class ControllerGroup< T > implements ControllerInterface< T > ,
 	/**
 	 * enables or disables the update function of a controller.
 	 */
-	@Override public T setUpdate( boolean theFlag ) {
+	@Override public T setUpdate( final boolean theFlag ) {
 		isUpdate = theFlag;
-		for ( int i = 0 ; i < controllers.size( ) ; i++ ) {
-			( ( ControllerInterface< ? > ) controllers.get( i ) ).setUpdate( theFlag );
+		synchronized ( controllers.get( ) ) {
+			for ( final ControllerInterface< ? > ci : controllers.get( ) )
+				ci.setUpdate( theFlag );
 		}
 		return me;
 	}
@@ -310,117 +274,100 @@ public abstract class ControllerGroup< T > implements ControllerInterface< T > ,
 	/**
 	 * checks the update status of a controller.
 	 */
-	public boolean isUpdate( ) {
+	@Override public boolean isUpdate( ) {
 		return isUpdate;
 	}
 
-	@ControlP5.Invisible public T updateEvents( ) {
+	@ControlP5.Invisible @Override public T updateEvents( ) {
 		if ( isOpen ) {
-			for ( int i = controllers.size( ) - 1 ; i >= 0 ; i-- ) {
-				( ( ControllerInterface< ? > ) controllers.get( i ) ).updateEvents( );
+			final List< ControllerInterface< ? > > controls = controllers.get( );
+			synchronized ( controls ) {
+				int i = controls.size( );
+				while (  i-- != 0 )  controls.get( i ).updateEvents( );
 			}
 		}
-		if ( isVisible ) {
-			if ( ( isMousePressed == cp5.getWindow( ).mouselock ) ) {
-				if ( isMousePressed && cp5.isAltDown( ) && isMoveable ) {
-					if ( !cp5.isMoveable ) {
-						set( positionBuffer , x( positionBuffer ) + cp5.getWindow( ).mouseX - cp5.getWindow( ).pmouseX , y( positionBuffer ) + cp5.getWindow( ).mouseY - cp5.getWindow( ).pmouseY );
-						if ( cp5.isShiftDown( ) ) {
-							set( position , ( ( ( int ) ( x( positionBuffer ) ) / 10 ) * 10 ) , ( ( ( int ) ( y( positionBuffer ) ) / 10 ) * 10 ) );
-						} else {
-							set( position , x( positionBuffer ) , y( positionBuffer ) );
-						}
-						updateAbsolutePosition( );
-					}
+		final ControlWindow win = getWindow( );
+		if ( isVisible && isMousePressed == win.mouselock ) {
+			if ( isMousePressed && isMoveable && !cp5.isMoveable && cp5.isAltDown( ) ) {
+				final float x = x( positionBuffer ), y = y( positionBuffer );
+				set( positionBuffer , x + win.mouseX - win.pmouseX , 
+						      y + win.mouseY - win.pmouseY );
+				if ( cp5.isShiftDown( ) ) {
+					final int xi = ( int ) x( positionBuffer );
+					final int yi = ( int ) y( positionBuffer );
+					set( position , xi / 10 * 10 , yi / 10 * 10 );
 				} else {
-					if ( isInside ) {
-						setMouseOver( true );
-					}
-					if ( inside( ) ) {
-						if ( !isInside ) {
-							isInside = true;
-							onEnter( );
-							setMouseOver( true );
-						}
-					} else {
-						if ( isInside && !isMousePressed ) {
-							onLeave( );
-							isInside = false;
-							setMouseOver( false );
-						}
-					}
+					set( position , positionBuffer );
+				}
+				updateAbsolutePosition( );
+			} else {
+				if ( isInside )  setMouseOver( true );
+				if ( !isInside && inside( ) ) {
+					isInside = true;
+					onEnter( );
+					setMouseOver( true );
+				} else if ( isInside && !isMousePressed ) {
+					onLeave( );
+					setMouseOver( isInside = false );
 				}
 			}
 		}
 		return me;
 	}
 
-	@ControlP5.Invisible public T updateInternalEvents( PApplet theApplet ) {
+	@ControlP5.Invisible @Override public T updateInternalEvents( PApplet theApplet ) {
 		return me;
 	}
 
-	public boolean isMouseOver( ) {
-		mouseover = isInside || isInsideGroup || !isBarVisible;
-		return mouseover;
+	@Override public boolean isMouseOver( ) {
+		return mouseover = isInside || isInsideGroup || !isBarVisible;
 	}
 
-	public T setMouseOver( boolean theFlag ) {
-
-		mouseover = ( !isBarVisible ) ? false : theFlag;
-
-		if ( !mouseover ) {
-			isInside = false;
-			isInsideGroup = false;
-			cp5.getWindow( ).removeMouseOverFor( this );
-			for ( int i = controllers.size( ) - 1 ; i >= 0 ; i-- ) {
-				controllers.get( i ).setMouseOver( false );
-			}
+	@Override public T setMouseOver( final boolean theFlag ) {
+		if ( mouseover = isBarVisible ? theFlag : false ) {
+			// TODO since inside can be either isInside or isInsideGroup.
+			// There are 2 options here, which I am not sure how to handle them yet.
+			getWindow( ).setMouseOverController( this );
 		} else {
-			// TODO since inside can be either isInside or isInsideGroup, there are 2 options here,
-			// which i am not sure how to handle them yet.
-			cp5.getWindow( ).setMouseOverController( this );
+			isInsideGroup = isInside = false;
+			getWindow( ).removeMouseOverFor( this );
+			final List< ControllerInterface< ? > > controls = controllers.get( );
+			synchronized ( controls ) {
+				int i = controls.size( );
+				while (  i-- != 0 )  controls.get( i ).setMouseOver( false );
+			}
 		}
 		return me;
 	}
 
-	@ControlP5.Invisible public final void draw( PGraphics theGraphics ) {
-		if ( isVisible ) {
-			theGraphics.pushMatrix( );
-			theGraphics.translate( x( position ) , y( position ) );
-			preDraw( theGraphics );
-			drawControllers( cp5.papplet , theGraphics );
-			postDraw( theGraphics );
-			if ( _myValueLabel != null ) {
-				_myValueLabel.draw( theGraphics , 2 , 2 , this );
-			}
-			theGraphics.popMatrix( );
-		}
+	@ControlP5.Invisible @Override public final void draw( final PGraphics theGraphics ) {
+		if ( !isVisible )  return;
+		theGraphics.pushMatrix( );
+		theGraphics.translate( x( position ) , y( position ) );
+		preDraw( theGraphics );
+		drawControllers( cp5.papplet , theGraphics );
+		postDraw( theGraphics );
+		if ( _myValueLabel != null )  _myValueLabel.draw( theGraphics , 2 , 2 , this );
+		theGraphics.popMatrix( );
 	}
 
-	protected void drawControllers( PApplet theApplet , PGraphics theGraphics ) {
-		if ( isOpen ) {
-
-			for ( Canvas cc : _myCanvas ) {
-				if ( cc.mode( ) == Canvas.PRE ) {
-					cc.draw( theGraphics );
-				}
-			}
-			for ( ControllerInterface< ? > ci : controllers.get( ) ) {
-				if ( ci.isVisible( ) ) {
-					ci.updateInternalEvents( theApplet );
-					ci.draw( theGraphics );
-				}
-			}
-
-			for ( CDrawable cd : controllers.getDrawables( ) ) {
-				cd.draw( theGraphics );
-			}
-
-			for ( Canvas cc : _myCanvas ) {
-				if ( cc.mode( ) == Canvas.POST ) {
-					cc.draw( theGraphics );
-				}
-			}
+	protected void drawControllers( final PApplet theApplet , final PGraphics theGraphics ) {
+		if ( !isOpen )  return;
+		if ( !_myCanvas.isEmpty( ) )  synchronized ( _myCanvas ) {
+			for ( final Canvas cc : _myCanvas )
+				if ( cc.mode( ) == Canvas.PRE )  cc.draw( theGraphics );
+		}
+		if ( controllers.size( ) != 0 )  synchronized ( controllers.get( ) ) {
+			for ( final ControllerInterface< ? > ci : controllers.get( ) )
+				if ( ci.isVisible( ) )
+					ci.updateInternalEvents( theApplet ).draw( theGraphics );
+		}
+		if ( controllers.sizeDrawable( ) != 0 )  synchronized ( controllers.getDrawables( ) ) {
+			for ( final CDrawable cd : controllers.getDrawables( ) )  cd.draw( theGraphics );
+		}
+		if ( !_myCanvas.isEmpty( ) )  synchronized ( _myCanvas ) {
+			for ( final Canvas cc : _myCanvas )
+				if ( cc.mode( ) == Canvas.POST )  cc.draw( theGraphics );
 		}
 	}
 
@@ -431,11 +378,13 @@ public abstract class ControllerGroup< T > implements ControllerInterface< T > ,
 	}
 
 	/**
-	 * Adds a canvas to a controllerGroup such as a tab or group. Use processing's draw methods to
-	 * add visual content.
+	 * Adds a canvas to a controllerGroup such as a tab or group.
+	 * Use processing's draw methods to add visual content.
 	 */
-	public Canvas addCanvas( Canvas theCanvas ) {
-		_myCanvas.add( theCanvas );
+	public Canvas addCanvas( final Canvas theCanvas ) {
+		synchronized (_myCanvas) {
+			_myCanvas.add( theCanvas );
+		}
 		// TODO theCanvas.setup( cp5.papplet );
 		return theCanvas;
 	}
@@ -443,15 +392,17 @@ public abstract class ControllerGroup< T > implements ControllerInterface< T > ,
 	/**
 	 * Removes a canvas from a controller group.
 	 */
-	public T removeCanvas( Canvas theCanvas ) {
-		_myCanvas.remove( theCanvas );
+	public T removeCanvas( final Canvas theCanvas ) {
+		if ( !_myCanvas.isEmpty( ) )  synchronized (_myCanvas) {
+			_myCanvas.remove( theCanvas );
+		}
 		return me;
 	}
 
 	/**
 	 * Adds a controller to the group, but use Controller.setGroup() instead.
 	 */
-	public T add( ControllerInterface< ? > theElement ) {
+	@Override public T add( ControllerInterface< ? > theElement ) {
 		controllers.add( theElement );
 		return me;
 	}
@@ -460,17 +411,11 @@ public abstract class ControllerGroup< T > implements ControllerInterface< T > ,
 		return bringToFront( this );
 	}
 
-	@Override public T bringToFront( ControllerInterface< ? > theController ) {
-		if ( _myParent instanceof Tab ) {
-			moveTo( ( Tab ) _myParent );
-		} else {
-			_myParent.bringToFront( theController );
-		}
-		if ( theController != this ) {
-			if ( controllers.get( ).contains( theController ) ) {
-				controllers.remove( theController );
-				controllers.add( theController );
-			}
+	@Override public T bringToFront( final ControllerInterface< ? > theController ) {
+		if ( _myParent instanceof Tab )  moveTo( ( Tab ) _myParent );
+		else				_myParent.bringToFront( theController );
+		if ( theController != this && controllers.size( ) != 0 )  synchronized ( controllers.get( ) ) {
+			if ( controllers.remove( theController ) )  controllers.add( theController );
 		}
 		return me;
 	}
@@ -478,11 +423,8 @@ public abstract class ControllerGroup< T > implements ControllerInterface< T > ,
 	/**
 	 * Removes a controller from the group, but use Controller.setGroup() instead.
 	 */
-
-	public T remove( ControllerInterface< ? > theElement ) {
-		if ( theElement != null ) {
-			theElement.setMouseOver( false );
-		}
+	@Override public T remove( final ControllerInterface< ? > theElement ) {
+		if ( theElement != null )  theElement.setMouseOver( false );
 		controllers.remove( theElement );
 		return me;
 	}
@@ -500,71 +442,59 @@ public abstract class ControllerGroup< T > implements ControllerInterface< T > ,
 	/**
 	 * removes the group from controlP5.
 	 */
-	public void remove( ) {
-		cp5.getWindow( ).removeMouseOverFor( this );
-		if ( _myParent != null ) {
-			_myParent.remove( this );
-		}
-		if ( cp5 != null ) {
+	@Override public void remove( ) {
+		if ( cp5 != null )  {
+			getWindow( ).removeMouseOverFor( this );
+			if ( this instanceof Tab )  getWindow( ).removeTab( ( Tab ) this );
 			cp5.remove( this );
 		}
-
-		for ( int i = controllers.size( ) - 1 ; i >= 0 ; i-- ) {
-			controllers.get( i ).remove( );
+		if ( _myParent != null )  _myParent.remove( this );
+		final List< ControllerInterface< ? > > controls = controllers.get( );
+		if ( !controls.isEmpty( ) )  synchronized ( controls ) {
+			for ( int i = controls.size( ) ; i-- != 0 ; )  controls.get( i ).remove( );
+			controls.clear( );
 		}
-		controllers.clear( );
 		controllers.clearDrawable( );
-		controllers = new ControllerList( );
-		if ( this instanceof Tab ) {
-			cp5.getWindow( ).removeTab( ( Tab ) this );
-		}
 	}
 
-	public String getName( ) {
+	@Override public String getName( ) {
 		return _myName;
 	}
 
-	public String getAddress( ) {
+	@Override public String getAddress( ) {
 		return _myAddress;
 	}
 
 	@Override public T setAddress( String theAddress ) {
-		if ( _myAddress.length( ) == 0 ) {
-			_myAddress = theAddress;
-		}
+		if ( _myAddress.length( ) == 0 )  _myAddress = theAddress;
 		return me;
 	}
 
-	public ControlWindow getWindow( ) {
+	@Override public ControlWindow getWindow( ) {
 		return cp5.getWindow( );
 	}
 
-	@ControlP5.Invisible public void keyEvent( KeyEvent theEvent ) {
-		for ( int i = 0 ; i < controllers.size( ) ; i++ ) {
-			( ( ControllerInterface< ? > ) controllers.get( i ) ).keyEvent( theEvent );
+	@ControlP5.Invisible @Override public void keyEvent( final KeyEvent theEvent ) {
+		synchronized ( controllers.get( ) ) {
+			for ( final ControllerInterface< ? > ci : controllers.get( ) )
+				ci.keyEvent( theEvent );
 		}
 	}
 
-	public boolean setMousePressed( boolean theStatus ) {
-		if ( !isVisible ) {
-			return false;
+	@Override public boolean setMousePressed( final boolean theStatus ) {
+		if ( !isVisible )  return false;
+		final List< ControllerInterface< ? > > controls = controllers.get( );
+		synchronized ( controls ) {
+			for ( int i = controls.size( ) ; i-- != 0 ; )
+				if ( controls.get( i ).setMousePressed( theStatus ) )  return true;
 		}
-		for ( int i = controllers.size( ) - 1 ; i >= 0 ; i-- ) {
-			if ( ( ( ControllerInterface< ? > ) controllers.get( i ) ).setMousePressed( theStatus ) ) {
-				return true;
-			}
-		}
-		if ( theStatus == true ) {
-			if ( isInside ) {
-				isMousePressed = true;
-				mousePressed( );
-				return true;
-			}
-		} else {
-			if ( isMousePressed == true ) {
-				isMousePressed = false;
-				mouseReleased( );
-			}
+		if ( theStatus && isInside ) {
+			isMousePressed = true;
+			mousePressed( );
+			return true;
+		} else if ( isMousePressed ) {
+			isMousePressed = false;
+			mouseReleased( );
 		}
 		return false;
 	}
@@ -584,80 +514,77 @@ public abstract class ControllerGroup< T > implements ControllerInterface< T > ,
 	protected void onScroll( int theAmount ) {
 	}
 
-	public T setId( int theId ) {
+	@Override public T setId( int theId ) {
 		_myId = theId;
 		return me;
 	}
 
-	public int getId( ) {
+	@Override public int getId( ) {
 		return _myId;
 	}
 
-	public T setColor( CColor theColor ) {
-		for ( ControllerInterface< ? > ci : controllers.get( ) ) {
-			ci.setColor( theColor );
+	@Override public T setColor( final CColor theColor ) {
+		synchronized ( controllers.get( ) ) {
+			for ( final ControllerInterface< ? > ci : controllers.get( ) )
+				ci.setColor( theColor );
 		}
 		return me;
 	}
 
-	public T setColorActive( int theColor ) {
+	@Override public T setColorActive( final int theColor ) {
 		color.setActive( theColor );
-		for ( ControllerInterface< ? > ci : controllers.get( ) ) {
-			ci.setColorActive( theColor );
+		synchronized ( controllers.get( ) ) {
+			for ( final ControllerInterface< ? > ci : controllers.get( ) )
+				ci.setColorActive( theColor );
 		}
 		return me;
 	}
 
-	public T setColorForeground( int theColor ) {
+	@Override public T setColorForeground( final int theColor ) {
 		color.setForeground( theColor );
-		for ( ControllerInterface< ? > ci : controllers.get( ) ) {
-			ci.setColorForeground( theColor );
+		synchronized ( controllers.get( ) ) {
+			for ( final ControllerInterface< ? > ci : controllers.get( ) )
+				ci.setColorForeground( theColor );
 		}
 		return me;
 	}
 
-	public T setColorBackground( int theColor ) {
+	@Override public T setColorBackground( final int theColor ) {
 		color.setBackground( theColor );
-		for ( ControllerInterface< ? > ci : controllers.get( ) ) {
-			ci.setColorBackground( theColor );
+		synchronized ( controllers.get( ) ) {
+			for ( final ControllerInterface< ? > ci : controllers.get( ) )
+				ci.setColorBackground( theColor );
 		}
 		return me;
 	}
 
-	public T setColorLabel( int theColor ) {
+	@Override public T setColorLabel( final int theColor ) {
 		color.setCaptionLabel( theColor );
-		if ( _myLabel != null ) {
-			_myLabel.setColor( color.getCaptionLabel( ) );
-		}
-		for ( ControllerInterface< ? > ci : controllers.get( ) ) {
-			ci.setColorLabel( theColor );
+		if ( _myLabel != null )  _myLabel.setColor( color.getCaptionLabel( ) );
+		synchronized ( controllers.get( ) ) {
+			for ( final ControllerInterface< ? > ci : controllers.get( ) )
+				ci.setColorLabel( theColor );
 		}
 		return me;
 	}
 
-	public T setColorValue( int theColor ) {
+	@Override public T setColorValue( final int theColor ) {
 		color.setValueLabel( theColor );
-		if ( _myValueLabel != null ) {
-			_myValueLabel.setColor( color.getValueLabel( ) );
-		}
-		for ( ControllerInterface< ? > ci : controllers.get( ) ) {
-			ci.setColorValue( theColor );
+		if ( _myValueLabel != null )  _myValueLabel.setColor( color.getValueLabel( ) );
+		synchronized ( controllers.get( ) ) {
+			for ( final ControllerInterface< ? > ci : controllers.get( ) )
+				ci.setColorValue( theColor );
 		}
 		return me;
 	}
 
-	public T setLabel( String theLabel ) {
+	@Override public T setLabel( String theLabel ) {
 		_myLabel.set( theLabel );
 		return me;
 	}
 
-	public boolean isVisible( ) {
-		if ( _myParent != null && _myParent != this ) {
-			if ( getParent( ).isVisible( ) == false ) {
-				return false;
-			}
-		}
-		return isVisible;
+	@Override public boolean isVisible( ) {
+		return _myParent != null && _myParent != this && !getParent( ).isVisible( )? false : isVisible;
 	}
 
 	public T setVisible( boolean theFlag ) {
@@ -665,12 +592,12 @@ public abstract class ControllerGroup< T > implements ControllerInterface< T > ,
 		return me;
 	}
 
-	public T hide( ) {
+	@Override public T hide( ) {
 		isVisible = false;
 		return me;
 	}
 
-	public T show( ) {
+	@Override public T show( ) {
 		isVisible = true;
 		return me;
 	}
@@ -697,22 +624,18 @@ public abstract class ControllerGroup< T > implements ControllerInterface< T > ,
 	}
 
 	public T open( ) {
-		setOpen( true );
-		return me;
+		return setOpen( true );
 	}
 
 	public T close( ) {
-		setOpen( false );
-		return me;
+		return setOpen( false );
 	}
 
 	/**
 	 * TODO redesign or deprecate remove the close button.
 	 */
 	@ControlP5.Invisible public T removeCloseButton( ) {
-		if ( _myCloseButton == null ) {
-			_myCloseButton.remove( );
-		}
+		if ( _myCloseButton != null )  _myCloseButton.remove( );
 		_myCloseButton = null;
 		return me;
 	}
@@ -746,49 +669,58 @@ public abstract class ControllerGroup< T > implements ControllerInterface< T > ,
 		return me;
 	}
 
+	public boolean isArrowVisible( ) {
+		return isArrowVisible;
+	}
+
 	/**
 	 * TODO redesign or deprecate add a close button to the controlbar of this controlGroup.
 	 */
 	@ControlP5.Invisible public T addCloseButton( ) {
 		if ( _myCloseButton == null ) {
-			_myCloseButton = new Button( cp5 , this , getName( ) + "close" , 1 , _myWidth + 1 , -10 , 12 , 9 );
-			_myCloseButton.setCaptionLabel( "X" );
-			_myCloseButton.addListener( this );
+			_myCloseButton = new Button( cp5 , this , getName( ) + "close" , 
+						     1 , _myWidth + 1 , -10 , 12 , 9 );
+			_myCloseButton.setCaptionLabel( "X" ).addListener( this );
 		}
 		return me;
 	}
 
-	@ControlP5.Invisible public int getPickingColor( ) {
+	@ControlP5.Invisible @Override public int getPickingColor( ) {
 		return _myPickingColor;
 	}
 
-	public CColor getColor( ) {
+	@ControlP5.Invisible public T setPickingColor( final int c ) {
+		_myPickingColor = c;
+		return me;
+	}
+
+	@Override public CColor getColor( ) {
 		return color;
 	}
 
-	public T setValue( float theValue ) {
+	@Override public T setValue( float theValue ) {
 		_myValue = theValue;
 		return me;
 	}
 
-	public float getValue( ) {
+	@Override public float getValue( ) {
 		return _myValue;
 	}
 
-	public String getStringValue( ) {
+	@Override public String getStringValue( ) {
 		return _myStringValue;
 	}
 
-	public T setStringValue( String theValue ) {
+	@Override public T setStringValue( String theValue ) {
 		_myStringValue = theValue;
 		return me;
 	}
 
-	public float[] getArrayValue( ) {
+	@Override public float[] getArrayValue( ) {
 		return _myArrayValue;
 	}
 
-	public float getArrayValue( int theIndex ) {
+	@Override public float getArrayValue( final int theIndex ) {
 		if ( theIndex >= 0 && theIndex < _myArrayValue.length ) {
 			return _myArrayValue[ theIndex ];
 		} else {
@@ -796,14 +728,14 @@ public abstract class ControllerGroup< T > implements ControllerInterface< T > ,
 		}
 	}
 
-	public T setArrayValue( int theIndex , float theValue ) {
+	@Override public T setArrayValue( final int theIndex , final float theValue ) {
 		if ( theIndex >= 0 && theIndex < _myArrayValue.length ) {
 			_myArrayValue[ theIndex ] = theValue;
 		}
 		return me;
 	}
 
-	public T setArrayValue( float[] theArray ) {
+	@Override public T setArrayValue( final float... theArray ) {
 		_myArrayValue = theArray;
 		return me;
 	}
@@ -812,7 +744,7 @@ public abstract class ControllerGroup< T > implements ControllerInterface< T > ,
 		return cp5.getController( theController );
 	}
 
-	public T setCaptionLabel( String theValue ) {
+	@Override public T setCaptionLabel( String theValue ) {
 		getCaptionLabel( ).set( theValue );
 		return me;
 	}
@@ -839,11 +771,11 @@ public abstract class ControllerGroup< T > implements ControllerInterface< T > ,
 		return isCollapse;
 	}
 
-	public int getWidth( ) {
+	@Override public int getWidth( ) {
 		return _myWidth;
 	}
 
-	public int getHeight( ) {
+	@Override public int getHeight( ) {
 		return _myHeight;
 	}
 
@@ -864,48 +796,54 @@ public abstract class ControllerGroup< T > implements ControllerInterface< T > ,
 	}
 
 	protected boolean inside( ) {
-		return ( cp5.getWindow( ).mouseX > x( position ) + x( _myParent.absolutePosition ) && cp5.getWindow( ).mouseX < x( position ) + x( _myParent.absolutePosition ) + _myWidth
-		    && cp5.getWindow( ).mouseY > y( position ) + y( _myParent.absolutePosition ) - _myHeight && cp5.getWindow( ).mouseY < y( position ) + y( _myParent.absolutePosition ) );
+		final int mx = getWindow( ).mouseX, my = getWindow( ).mouseY;
+		final int x = Math.round( x( position ) + x( _myParent.absolutePosition ) );
+		final int y = Math.round( y( position ) + y( _myParent.absolutePosition ) );
+		return mx > x && mx < x + _myWidth && my > y - _myHeight && my < y;
 	}
 
-	public ControllerProperty getProperty( String thePropertyName ) {
+	@Override public ControllerProperty getProperty( String thePropertyName ) {
 		return cp5.getProperties( ).getProperty( this , thePropertyName );
 	}
 
-	public ControllerProperty getProperty( String theSetter , String theGetter ) {
+	@Override public ControllerProperty getProperty( String theSetter , String theGetter ) {
 		return cp5.getProperties( ).getProperty( this , theSetter , theGetter );
 	}
 
-	public T registerProperty( String thePropertyName ) {
+	@Override public T registerProperty( String thePropertyName ) {
 		cp5.getProperties( ).register( this , thePropertyName );
 		return me;
 	}
 
-	public T registerProperty( String theSetter , String theGetter ) {
+	@Override public T registerProperty( String theSetter , String theGetter ) {
 		cp5.getProperties( ).register( this , theSetter , theGetter );
 		return me;
 	}
 
-	public T removeProperty( String thePropertyName ) {
+	@Override public T removeProperty( String thePropertyName ) {
 		cp5.getProperties( ).remove( this , thePropertyName );
 		return me;
 	}
 
-	public T removeProperty( String theSetter , String theGetter ) {
+	@Override public T removeProperty( String theSetter , String theGetter ) {
 		cp5.getProperties( ).remove( this , theSetter , theGetter );
 		return me;
 	}
 
-	public void controlEvent( ControlEvent theEvent ) {
+	@Override public void controlEvent( ControlEvent theEvent ) {
 	}
 
-	public T addListener( final ControlListener theListener ) {
-		_myControlListener.add( theListener );
+	@Override public T addListener( final ControlListener theListener ) {
+		synchronized ( _myControlListener ) {
+			_myControlListener.add( theListener );
+		}
 		return me;
 	}
 
 	public T removeListener( final ControlListener theListener ) {
-		_myControlListener.remove( theListener );
+		if ( !_myControlListener.isEmpty( ) )  synchronized ( _myControlListener ) {
+			_myControlListener.remove( theListener );
+		}
 		return me;
 	}
 
@@ -918,15 +856,19 @@ public abstract class ControllerGroup< T > implements ControllerInterface< T > ,
 	}
 
 	public String getInfo( ) {
-		return "type:\tControllerGroup" + "\nname:\t" + _myName + "\n" + "label:\t" + _myLabel.getText( ) + "\n" + "id:\t" + _myId + "\n" + "value:\t" + _myValue + "\n" + "arrayvalue:\t" + CP.arrayToString( _myArrayValue ) + "\n" + "position:\t"
-		    + position + "\n" + "absolute:\t" + absolutePosition + "\n" + "width:\t" + getWidth( ) + "\n" + "height:\t" + getHeight( ) + "\n" + "color:\t" + getColor( ) + "\n" + "visible:\t" + isVisible + "\n" + "moveable:\t" + isMoveable + "\n";
+		return "type:\tControllerGroup" + "\nname:\t" + _myName + "\nlabel:\t" + _myLabel.getText( ) 
+			+ "\nid:\t" + _myId + "\nvalue:\t" + _myValue + "\narrayvalue:\t" + CP.arrayToString( 
+			_myArrayValue ) + "\nposition:\t" + position + "\nabsolute:\t" + absolutePosition 
+			+ "\nwidth:\t" + getWidth( ) + "\nheight:\t" + getHeight( ) + "\ncolor:\t" 
+			+ getColor( ) + "\nvisible:\t" + isVisible + "\nmoveable:\t" + isMoveable + "\n";
 	}
 
 	/**
-	 * convenience method to fill a float array in favor of theArray[0] = 1.2; etc.
-	 * takes a float array and fills it (starting from index 0) with arguments starting from index 1.  
+	 * Convenience method to fill a float array in favor of theArray[0] = 1.2; etc.
+	 * Takes a float array and fills it (starting from index 0) with arguments starting from index 1.  
 	 */
-	static public float[] set( float[] theArray , float ... theValues ) {
+	@SafeVarargs static public final float[] set( final float[] theArray , final float... theValues ) {
+		if ( theArray == null || theValues == null )  return theArray;
 		if ( theValues.length > theArray.length ) {
 			System.arraycopy( theValues , 0 , theArray , 0 , theArray.length );
 		} else {
@@ -938,21 +880,15 @@ public abstract class ControllerGroup< T > implements ControllerInterface< T > ,
 	/**
 	 * returns the first element of the float array.
 	 */
-	static public float x( float[] theArray ) {
-		if ( theArray.length > 0 ) {
-			return theArray[ 0 ];
-		}
-		return 0;
+	static public final float x( final float[] theArray ) {
+		return theArray != null && theArray.length > 0 ? theArray[ 0 ] : 0f;
 	}
 
 	/**
 	 * returns the second element of the float array.
 	 */
-	static public float y( float[] theArray ) {
-		if ( theArray.length > 1 ) {
-			return theArray[ 1 ];
-		}
-		return 0;
+	static public final float y( final float[] theArray ) {
+		return theArray != null && theArray.length > 1 ? theArray[ 1 ] : 0f;
 	}
 
 	@Override public T setFont( PFont thePFont ) {
@@ -967,4 +903,7 @@ public abstract class ControllerGroup< T > implements ControllerInterface< T > ,
 		return me;
 	}
 
+	@ControlP5.Invisible public ControllerList getControllerList() {
+		return controllers;
+	}
 }
