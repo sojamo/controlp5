@@ -33,17 +33,16 @@ package controlP5;
  * @see controlP5.ControlGroup
  * @example controllers/ControlP5accordion
  */
-@SuppressWarnings( "rawtypes" ) public class Accordion extends ControlGroup< Accordion > {
+public class Accordion extends ControlGroup< Accordion > {
 
-	
 	protected int spacing = 1;
 	protected int minHeight = 100;
-	protected int itemheight;
+	protected int itemHeight;
 	protected int _myMode = SINGLE;
 
 	public Accordion( ControlP5 theControlP5 , String theName ) {
 		this( theControlP5 , theControlP5.getDefaultTab( ) , theName , 0 , 0 , 200 );
-		theControlP5.register( theControlP5.papplet , theName , this );
+		cp5.register( cp5.papplet , theName , this );
 	}
 
 	Accordion( ControlP5 theControlP5 , Tab theTab , String theName , int theX , int theY , int theW ) {
@@ -58,75 +57,58 @@ package controlP5;
 	 * @param theGroup
 	 * @return Accordion
 	 */
-	public Accordion addItem( ControlGroup< ? > theGroup ) {
-		theGroup.close( );
-		theGroup.moveTo( this );
-		theGroup.activateEvent( true );
-		theGroup.addListener( this );
-		theGroup.setMoveable( false );
-		if ( theGroup.getBackgroundHeight( ) < minHeight ) {
-			theGroup.setBackgroundHeight( minHeight );
-		}
+	public Accordion addItem( final ControlGroup< ? extends ControlGroup< ? > > theGroup ) {
+		theGroup.close( ).moveTo( this ).activateEvent( true ).addListener( this ).setMoveable( false );
+		if ( theGroup.getBackgroundHeight( ) < minHeight )  theGroup.setBackgroundHeight( minHeight );
 		controllers.add( theGroup );
-		updateItems( );
-		return this;
+		return updateItems( );
 	}
 
 	/**
-	 * Removes a ControlGroup from the accordion AND from controlP5 remove(ControllerInterface
-	 * theGroup) overwrites it's super method. if you want to remove a ControlGroup only from the
-	 * accordion, use removeItem(ControlGroup).
-	 * 
+	 * Removes a ControlGroup from the accordion AND from controlP5. 
+	 * remove(ControllerInterface theGroup) overwrites its super method.
+	 * If you want to remove a ControlGroup only from the Accordion, use removeItem(ControlGroup).
+	 *
 	 * @see controlP5.Accordion#removeItem(ControlGroup)
 	 * @return ControllerInterface
 	 */
-	@Override public Accordion remove( ControllerInterface< ? > theGroup ) {
-		if ( theGroup instanceof ControlGroup< ? > ) {
-			controllers.remove( theGroup );
-			( ( ControlGroup< ? > ) theGroup ).removeListener( this );
-			updateItems( );
-		}
-		super.remove( theGroup );
-		return this;
+	@Override public Accordion remove( final ControllerInterface< ? extends ControlGroup< ? > > theGroup ) {
+		theGroup.removeListener( this );
+		updateItems( );
+		return super.remove( theGroup );
 	}
 
 	/**
 	 * Removes a ControlGroup from the accordion and puts it back into the default tab of controlP5.
-	 * if you dont have access to a ControlGroup via a variable, use
-	 * controlP5.group("theNameOfTheGroup") which will return a
+	 * If you don't have access to a ControlGroup via a variable, 
+	 * use controlP5.group("theNameOfTheGroup") which will return a
 	 * 
 	 * @return Accordion
 	 */
-	public Accordion removeItem( ControlGroup< ? > theGroup ) {
-		if ( theGroup == null ) {
-			return this;
-		}
+	public Accordion removeItem( final ControlGroup< ? extends ControlGroup< ? > > theGroup ) {
+		if ( theGroup == null )  return this;
 		controllers.remove( theGroup );
-		theGroup.removeListener( this );
-		theGroup.moveTo( cp5.controlWindow );
-		updateItems( );
-		return this;
+		theGroup.removeListener( this ).moveTo( cp5.controlWindow );
+		return updateItems( );
 	}
 
 	/**
-	 * UpdateItems is called when changes such as remove, change of height is performed on an
-	 * accordion. updateItems() is called automatically for such cases, but by calling updateItems
+	 * updateItems() is called when changes such as remove, change of height are performed on an Accordion.
+	 * updateItems() is called automatically for such cases, but by calling updateItems()
 	 * manually an update will be forced.
 	 * 
 	 * @return Accordion
 	 */
 	public Accordion updateItems( ) {
-		int n = 0;
 		setWidth( _myWidth );
-
-		for ( ControllerInterface< ? > cg : controllers.get( ) ) {
-			if ( cg instanceof ControlGroup ) {
-				n += ( ( ControlGroup ) cg ).getBarHeight( ) + spacing;
-				cg.setPosition( 0 , n );
-				if ( ( ( ControlGroup ) cg ).isOpen( ) ) {
-					n += ( ( ControlGroup ) cg ).getBackgroundHeight( );
+		synchronized ( controllers.get( ) ) {
+			int n = 0;
+			for ( final ControllerInterface< ? > ci : controllers.get( ) )
+				if ( ci instanceof ControlGroup< ? > ) {
+					final ControlGroup< ? > cg = ( ControlGroup< ? > ) ci;
+					cg.setPosition( 0 , n += cg.getBarHeight( ) + spacing );
+					if ( cg.isOpen( ) ) n += cg.getBackgroundHeight( );
 				}
-			}
 		}
 		return this;
 	}
@@ -139,15 +121,15 @@ package controlP5;
 	 */
 	public Accordion setMinItemHeight( int theHeight ) {
 		minHeight = theHeight;
-		for ( ControllerInterface< ? > cg : controllers.get( ) ) {
-			if ( cg instanceof ControlGroup ) {
-				if ( ( ( ControlGroup ) cg ).getBackgroundHeight( ) < minHeight ) {
-					( ( ControlGroup ) cg ).setBackgroundHeight( minHeight );
+		synchronized ( controllers.get( ) ) {
+			for ( final ControllerInterface< ? > ci : controllers.get( ) )
+				if ( ci instanceof ControlGroup< ? > ) {
+					final ControlGroup< ? > cg = ( ControlGroup< ? > ) ci;
+					if ( cg.getBackgroundHeight( ) < minHeight )
+						cg.setBackgroundHeight( minHeight );
 				}
-			}
 		}
-		updateItems( );
-		return this;
+		return updateItems( );
 	}
 
 	public int getMinItemHeight( ) {
@@ -155,131 +137,103 @@ package controlP5;
 	}
 
 	public Accordion setItemHeight( int theHeight ) {
-		itemheight = theHeight;
-		for ( ControllerInterface< ? > cg : controllers.get( ) ) {
-			if ( cg instanceof ControlGroup ) {
-				( ( ControlGroup ) cg ).setBackgroundHeight( itemheight );
-			}
+		itemHeight = theHeight;
+		synchronized ( controllers.get( ) ) {
+			for ( final ControllerInterface< ? > ci : controllers.get( ) )
+				if ( cg instanceof ControlGroup< ? > )
+					( ( ControlGroup< ? > ) ci ).setBackgroundHeight( itemHeight );
 		}
-		updateItems( );
-		return this;
+		return updateItems( );
 	}
 
 	public int getItemHeight( ) {
-		return itemheight;
+		return itemHeight;
 	}
 
-	@Override public Accordion setWidth( int theWidth ) {
-		super.setWidth( theWidth );
-		for ( ControllerInterface< ? > cg : controllers.get( ) ) {
-			if ( cg instanceof ControlGroup ) {
-				( ( ControlGroup ) cg ).setWidth( theWidth );
-			}
+	@Override public T setWidth( final int theWidth ) {
+		synchronized ( controllers.get( ) ) {
+		for ( ControllerInterface< ? > ci : controllers.get( ) )
+			if ( cg instanceof ControlGroup< ? > )
+				( ( ControlGroup< ? > ) ci ).setWidth( theWidth );
 		}
-		return this;
+		return super.setWidth( theWidth );
 	}
 
 	/**
 	 * @exclude {@inheritDoc}
 	 */
-	@Override @ControlP5.Invisible public void controlEvent( ControlEvent theEvent ) {
-		if ( theEvent.isGroup( ) ) {
+	@ControlP5.Invisible @Override public void controlEvent( final ControlEvent theEvent ) {
+		if ( theEvent.isGroup( ) && controllers.size( ) != 0 )  synchronized ( controllers.get( ) ) {
 			int n = 0;
-			for ( ControllerInterface< ? > cg : controllers.get( ) ) {
-				if ( cg instanceof ControlGroup ) {
-					n += ( ( ControlGroup ) cg ).getBarHeight( ) + spacing;
-					cg.setPosition( 0 , n );
-					if ( _myMode == SINGLE ) {
-						if ( cg == theEvent.getGroup( ) && ( ( ControlGroup ) cg ).isOpen( ) ) {
-							n += ( ( ControlGroup ) cg ).getBackgroundHeight( );
-						} else {
-							( ( ControlGroup ) cg ).close( );
-						}
-					} else {
-						if ( ( ( ControlGroup ) cg ).isOpen( ) ) {
-							n += ( ( ControlGroup ) cg ).getBackgroundHeight( );
-						}
-					}
+			for ( final ControllerInterface< ? > ci : controllers.get( ) ) {
+				if ( ci instanceof ControlGroup< ? > ) {
+					final ControlGroup< ? > cg = ( ControlGroup< ? > ) ci;
+					cg.setPosition( 0 , n += cg.getBarHeight( ) + spacing );
+					if ( _myMode != SINGLE ) {
+						if ( cg.isOpen( ) )  n += cg.getBackgroundHeight( );
+					} else	if ( cg.isOpen( ) && cg == theEvent.getGroup( ) ) {
+						n += cg.getBackgroundHeight( );
+					} else	cg.close( );
 				}
 			}
 		}
 	}
 
-	public Accordion open( ) {
-		int[] n = new int[ controllers.size( ) ];
-		for ( int i = 0 ; i < controllers.size( ) ; i++ ) {
-			n[ i ] = i;
-		}
+	@Override public T open( ) {
+		final int len = controllers.size( ) , n[] = new int[ len ];
+		for ( int i = 0 ; i < len ; n[ i ] = i++ );
 		return open( n );
 	}
 
-	public Accordion close( ) {
-		int[] n = new int[ controllers.size( ) ];
-		for ( int i = 0 ; i < controllers.size( ) ; i++ ) {
-			n[ i ] = i;
-		}
+	@Override public T close( ) {
+		final int len = controllers.size( ) , n[] = new int[ len ];
+		for ( int i = 0 ; i < len ; n[ i ] = i++ );
 		return close( n );
 	}
 
-	public Accordion open( int ... theId ) {
-		if ( theId[ 0 ] == -1 ) {
-			return open( );
-		}
-		int n = 0 , i = 0;
-		for ( ControllerInterface< ? > cg : controllers.get( ) ) {
-			if ( cg instanceof ControlGroup ) {
-				boolean a = false;
-				for ( int j = 0 ; j < theId.length ; j++ ) {
-					if ( theId[ j ] == i ) {
-						a = true;
+	@SafeVarargs public final T open( final int... theIds ) {
+		if ( theIds == null || theIds[ 0 ] == -1 )  return open( );
+		synchronized ( controllers.get( ) ) {
+			int n = 0 , i = 0;
+			for ( final ControllerInterface< ? > ci : controllers.get( ) )
+				if ( ci instanceof ControlGroup< ? > ) {
+					final ControlGroup< ? > cg = ( ControlGroup< ? > ) ci;
+					boolean idCheck = false;
+					for ( final int id : theIds )  if ( id == i ) {
+						idCheck = true;
+						break;
 					}
+					++i;
+					cg.setPosition( 0 , n += cg.getBarHeight( ) + spacing );
+					if ( idCheck || cg.isOpen( ) )  n += cg.open( ).getBackgroundHeight( );
 				}
-				boolean b = ( ( ControlGroup ) cg ).isOpen( ) || a ? true : false;
-				i++;
-				n += ( ( ControlGroup ) cg ).getBarHeight( ) + spacing;
-				cg.setPosition( 0 , n );
-				if ( b ) {
-					n += ( ( ControlGroup ) cg ).getBackgroundHeight( );
-					( ( ControlGroup ) cg ).open( );
-				}
-			}
 		}
-		return this;
+		return me;
 	}
 
-	public Accordion close( int ... theId ) {
-		if ( theId[ 0 ] == -1 ) {
-			return close( );
-		}
-		int n = 0 , i = 0;
-		for ( ControllerInterface< ? > cg : controllers.get( ) ) {
-			if ( cg instanceof ControlGroup ) {
-				boolean a = false;
-				for ( int j = 0 ; j < theId.length ; j++ ) {
-					if ( theId[ j ] == i ) {
-						a = true;
+	@SafeVarargs public final T close( final int... theIds ) {
+		if ( theIds == null || theIds[ 0 ] == -1 )  return close( );
+		synchronized ( controllers.get( ) ) {
+			int n = 0 , i = 0;
+			for ( final ControllerInterface< ? > ci : controllers.get( ) )
+				if ( ci instanceof ControlGroup< ? > ) {
+					final ControlGroup< ? > cg = ( ControlGroup< ? > ) ci;
+					boolean idCheck = false;
+					for ( final int id : theIds )  if ( id == i ) {
+						idCheck = true;
+						break;
 					}
+					++i;
+					cg.setPosition( 0 , n += cg.getBarHeight( ) + spacing );
+					if ( idCheck || !cg.isOpen( ) )	cg.close( );
+					else				n += cg.getBackgroundHeight( );
 				}
-				boolean b = ! ( ( ControlGroup ) cg ).isOpen( ) || a ? true : false;
-				i++;
-				n += ( ( ControlGroup ) cg ).getBarHeight( ) + spacing;
-				( ( ControlGroup ) cg ).setPosition( 0 , n );
-				if ( b ) {
-					( ( ControlGroup ) cg ).close( );
-				} else {
-					n += ( ( ControlGroup ) cg ).getBackgroundHeight( );
-				}
-			}
 		}
-		return this;
+		return me;
 	}
 
-	public Accordion setCollapseMode( int theMode ) {
-		if ( theMode == 0 ) {
-			_myMode = SINGLE;
-		} else {
-			_myMode = MULTI;
-		}
+	public Accordion setCollapseMode( final int theMode ) {
+		_myMode = theMode == 0 ? SINGLE : MULTI;
 		return this;
 	}
 }
