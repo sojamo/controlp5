@@ -74,7 +74,7 @@ public class ControlGroup< T extends ControlGroup< T > > extends ControllerGroup
 		if ( !isEventActive )  return;
 		final ControlEvent myEvent = new ControlEvent( this );
 		cp5.getControlBroadcaster( ).broadcast( myEvent , METHOD );
-		if ( !_myControlListener.isEmpty( ) )  synchronized ( _myControlListener ) {
+		synchronized ( _myControlListener ) {
 			for ( final ControlListener cl : _myControlListener )  cl.controlEvent( myEvent );
 		}
 	}
