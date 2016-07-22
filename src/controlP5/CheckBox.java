@@ -194,8 +194,8 @@ public class CheckBox extends ControlGroup< CheckBox > {
 	}
 
 	/**
-	 * Sets the value for all CheckBox items according to the values of the array passed on. 0 will
-	 * turn off an item, any other value will turn it on.
+	 * Sets the value for all CheckBox items according to the values of the array passed on.
+	 * 0 will turn off an item, any other value will turn it on.
 	 */
 	@Override @SafeVarargs public final T setArrayValue( final float... theArray ) {
 		if ( theArray != null && !_myRadioToggles.isEmpty( ) )  synchronized ( _myRadioToggles ) {
@@ -520,7 +520,7 @@ public class CheckBox extends ControlGroup< CheckBox > {
 		return this;
 	}
 
-	public CheckBox toUpperCase( boolean theValue ) {
+	public CheckBox toUpperCase( final boolean theValue ) {
 		synchronized ( _myRadioToggles ) {
 			for ( final Toggle tog : _myRadioToggles )  tog.getCaptionLabel( ).toUpperCase( theValue );
 		}
