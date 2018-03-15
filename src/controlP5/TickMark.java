@@ -20,8 +20,8 @@ package controlP5;
  * Boston, MA 02111-1307 USA
  * 
  * @author Andreas Schlegel (http://www.sojamo.de)
- * @modified ##date##
- * @version ##version##
+ * @modified 03/15/2018
+ * @version 2.2.6
  * 
  */
 import processing.core.PApplet;
@@ -35,6 +35,7 @@ public class TickMark implements CDrawable {
 	protected Controller< ? > _myParent;
 
 	protected int _myLen = 4;
+	protected int _myDistance = _myLen;
 
 	protected Label _myLabel;
 
@@ -52,14 +53,14 @@ public class TickMark implements CDrawable {
 		theGraphics.pushMatrix( );
 		switch ( theDirection ) {
 		case ( ControlP5Constants.HORIZONTAL ):
-			theGraphics.translate( 0 , _myLen );
+			theGraphics.translate( 0 , _myDistance );
 			theGraphics.rect( 0 , 0 , 1 , _myLen );
 			if ( isLabel ) {
 				_myLabel.draw( theGraphics , 0 , _myLen + 4 , _myParent );
 			}
 			break;
 		case ( ControlP5Constants.VERTICAL ):
-			theGraphics.translate( -_myLen , 0 );
+			theGraphics.translate( -_myDistance - _myLen , 0 );
 			theGraphics.rect( 0 , 0 , _myLen , 1 );
 			if ( isLabel ) {
 				_myLabel.draw( theGraphics , -_myLabel.getWidth( ) , 0 , _myParent );
@@ -72,6 +73,10 @@ public class TickMark implements CDrawable {
 
 	public void setLength( int theLength ) {
 		_myLen = theLength;
+	}
+
+	public void setDistance( int theDistance) {
+		_myDistance = theDistance;
 	}
 
 	public Label setLabel( String theLabeltext ) {
