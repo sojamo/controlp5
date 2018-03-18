@@ -236,7 +236,6 @@ public class ControlFont {
 		theGraphics.textFont( pfont , size );
 		theGraphics.textAlign( theLabel.textAlign );
 		theGraphics.fill( theLabel.getColor( ) );
-		
 		if ( theLabel.isMultiline( ) ) {
 			theGraphics.fill( theLabel.getColor( ) );
 			theGraphics.textLeading( theLabel.getLineHeight( ) );

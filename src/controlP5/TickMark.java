@@ -63,6 +63,7 @@ public class TickMark implements CDrawable {
 			theGraphics.translate( -_myDistance - _myLen , 0 );
 			theGraphics.rect( 0 , 0 , _myLen , 1 );
 			if ( isLabel ) {
+				
 				_myLabel.draw( theGraphics , -_myLabel.getWidth( ) , 0 , _myParent );
 			}
 			break;
@@ -80,6 +81,7 @@ public class TickMark implements CDrawable {
 	}
 
 	public Label setLabel( String theLabeltext ) {
+
 		if ( _myLabel == null ) {
 			_myLabel = new Label( _myParent.cp5 , theLabeltext );
 			isLabel = true;
