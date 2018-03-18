@@ -523,6 +523,7 @@ public class Slider extends Controller< Slider > {
 		}
 
 		public void display( PGraphics theGraphics , Slider theController ) {
+			//theGraphics.clear();
 			theGraphics.fill( getColor( ).getBackground( ) );
 			theGraphics.noStroke( );
 			if ( ( getColor( ).getBackground( ) >> 24 & 0xff ) > 0 ) {
@@ -552,11 +553,26 @@ public class Slider extends Controller< Slider > {
 				theGraphics.pushStyle( );
 				theGraphics.translate( -4 , ( getSliderMode( ) == FIX ) ? 0 : getHandleSize( ) / 2 );
 				theGraphics.fill( _myColorTickMark );
-				float x = ( getHeight( ) - ( ( getSliderMode( ) == FIX ) ? 0 : getHandleSize( ) ) ) / ( getTickMarks( ).size( ) - 1 );
+				float x = ( (float)getHeight( ) - ( ( getSliderMode( ) == FIX ) ? 0 : getHandleSize( ) ) ) / ( getTickMarks( ).size( ) - 1 );
+				int tickMarksCount = 0; 
+				int totalTickMarks = _myTickMarks.size();
+				int xOffset;
 				for ( TickMark tm : getTickMarks( ) ) {
+					theGraphics.pushMatrix();
+					xOffset = PApplet.round(x*tickMarksCount);
+					
+					if(tickMarksCount < totalTickMarks -1){
+						theGraphics.translate( 0, xOffset );
+					}else{
+						theGraphics.translate( 0, xOffset-1 );
+					}
+						
 					tm.draw( theGraphics , getDirection( ) );
-					theGraphics.translate( 0 , x );
+					theGraphics.popMatrix();
+					//PApplet.println(tickMarksCount + " > xOffset: " + xOffset);
+					tickMarksCount++;
 				}
+
 				theGraphics.popStyle( );
 				theGraphics.popMatrix( );
 			}
@@ -614,18 +630,38 @@ public class Slider extends Controller< Slider > {
 			}
 
 			if ( isShowTickMarks ) {
+				
 				theGraphics.pushMatrix( );
 				//				theGraphics.pushStyle( );
 				theGraphics.translate( ( getSliderMode( ) == FIX ) ? 0 : getHandleSize( ) / 2 , getHeight( ) );
 				theGraphics.fill( _myColorTickMark );
 				theGraphics.noStroke( );
-				float x = ( getWidth( ) - ( ( getSliderMode( ) == FIX ) ? 0 : getHandleSize( ) ) ) / ( getTickMarks( ).size( ) - 1 );
+				
+				float x = ( (float)getWidth() -	( ( getSliderMode() == FIX ) ? 0 : getHandleSize() ) ) / ( getTickMarks().size() - 1 );
+
+				int tickMarksCount = 0; 
+				int totalTickMarks = _myTickMarks.size();
+				int xOffset;
+				
+				
 				for ( TickMark tm : getTickMarks( ) ) {
+					theGraphics.pushMatrix();
+					xOffset = PApplet.round(x*tickMarksCount);
+					
+					if(tickMarksCount < totalTickMarks -1){
+						theGraphics.translate( xOffset , 0 );
+					}else{
+						theGraphics.translate( xOffset-1 , 0 );
+					}
+						
 					tm.draw( theGraphics , getDirection( ) );
-					theGraphics.translate( x , 0 );
+					theGraphics.popMatrix();
+					//PApplet.println(tickMarksCount + " > xOffset: " + xOffset);
+					tickMarksCount++;
 				}
 				//				theGraphics.popStyle( );
 				theGraphics.popMatrix( );
+				
 			}
 		}
 	}
