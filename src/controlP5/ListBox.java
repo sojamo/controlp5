@@ -128,9 +128,14 @@ public class ListBox extends Controller< ListBox > implements ControlListener {
 			} else if ( isOpen ) {
 
 				double n = Math.floor( ( getPointer( ).y( ) - barHeight ) / itemHeight );
-
+                
 				// n += itemRange; /* UP */
 				int index = ( int ) n + itemIndexOffset;
+                
+                if ( index < 0 || index >= items.size() ) {
+                    // no need to go further, there is something wrong in the position process                    
+                    return;                
+                }
 
 				Map m = items.get( index );
 
