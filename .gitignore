@@ -4,6 +4,7 @@
 /test/
 /lib/
 /src-js/
+/target/
 .svn/
 /.externalToolBuilders/
 /.settings/
