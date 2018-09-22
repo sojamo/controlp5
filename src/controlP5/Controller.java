@@ -1311,6 +1311,8 @@ public abstract class Controller< T > implements ControllerInterface< T > , CDra
 		}
 		cp5.getControlBroadcaster( ).plug( theObject , this , theName );
 		cp5.getControlBroadcaster( ).plug( theObject , this , cp5.getControlBroadcaster( ).getEventMethod( ) );
+		initControllerValue();
+		setValue( _myDefaultValue );
 		return me;
 	}
 
