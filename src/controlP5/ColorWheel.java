@@ -52,6 +52,7 @@ public class ColorWheel extends Controller< ColorWheel > {
 	private final static int ALPHA = 2;
 	int _sideHandleHeight = 8;
 	private double[] hsl = new double[] { 1.0 , 1.0 , 1.0 };
+	private boolean isUpdateColor = false;
 
 	// argb = int ( 0-255 , 0-255 , 0-255 , 0-255 )
 	// hue = double ( 0.0-1.0 ) 0-360
@@ -75,6 +76,8 @@ public class ColorWheel extends Controller< ColorWheel > {
 		_myInfoLabel = new Label( cp5 , theName + "-info" );
 		_myInfoLabel.setPaddingX( 4 ).getStyle( ).marginTop = 4;
 		yoff = ( int ) ( getWidth( ) * 0.05 );
+
+		getColor().setBackground(cp5.papplet.color(0,100));
 
 		setColorResources( );
 	}
@@ -224,21 +227,28 @@ public class ColorWheel extends Controller< ColorWheel > {
 	}
 
 	public void setHue( double theH ) {
+
 		hsl[ 0 ] = Math.max( 0 , Math.min( 1 , theH ) );
+		isUpdateColor = true;
 	}
 
 	public void setSaturation( double theS ) {
+
 		hsl[ 1 ] = Math.max( 0 , Math.min( 1 , theS ) );
+		isUpdateColor = true;
 	}
 
 	public void setLightness( double theL ) {
+
 		hsl[ 2 ] = Math.max( 0 , Math.min( 1 , theL ) );
+		isUpdateColor = true;
 	}
 
 	public ColorWheel setHSL( double theH , double theS , double theL ) {
 		setHue( theH );
 		setSaturation( theS );
 		setLightness( theL );
+		isUpdateColor = true;
 		return this;
 	}
 
@@ -260,8 +270,7 @@ public class ColorWheel extends Controller< ColorWheel > {
 		set( _myCursor , x , y );
 		setSaturation( t[ 1 ] );
 		// TODO resolve rounding error issue as reported here https://github.com/sojamo/controlp5/issues/21
-		_myColorValue = HSLtoRGB( hsl );
-		setValue( _myColorValue );
+		isUpdateColor = true;
 		return this;
 	}
 
@@ -275,6 +284,16 @@ public class ColorWheel extends Controller< ColorWheel > {
 	 */
 	@Override @ControlP5.Invisible public ColorWheel updateDisplayMode( int theMode ) {
 		return updateViewMode( theMode );
+	}
+
+
+	private void updateColor() {
+		if(isUpdateColor) {
+			System.out.println("colorwheel update");
+			_myColorValue = HSLtoRGB(hsl);
+			setValue(_myColorValue);
+			isUpdateColor = false;
+		}
 	}
 
 	/**
@@ -315,9 +334,11 @@ public class ColorWheel extends Controller< ColorWheel > {
 
 		public void display( PGraphics theGraphics , ColorWheel theController ) {
 
+			updateColor();
+
 			PGraphics buffer = _myColorResources.get( "default" );
 
-			theGraphics.fill( 0 , 100 );
+			theGraphics.fill( getColor().getBackground());
 			theGraphics.rect( 0 , 0 , getWidth( ) , getHeight( ) );
 			theGraphics.ellipseMode( PApplet.CENTER );
 			theGraphics.pushMatrix( );
