@@ -458,6 +458,11 @@ public final class ControlWindow {
 
 	public void keyEvent( KeyEvent theKeyEvent ) {
 
+		if (theKeyEvent.getKeyCode() > numKeys) {
+			// Something is wrong, a key was typed which is not mapped!
+			return;
+		}
+
 		if ( theKeyEvent.getAction( ) == KeyEvent.PRESS ) {
 			keys[ theKeyEvent.getKeyCode( ) ] = true;
 			numOfActiveKeys++;
