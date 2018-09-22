@@ -23,7 +23,7 @@
 
 
 <!-- #### (4) set the java version that should be used to compile your library. #### -->
-	<property name="javaVersion" value="1.5"/>
+	<property name="javaVersion" value="1.7"/>
 
 
 
@@ -35,13 +35,13 @@
 	<property name="author" value="Andreas Schlegel"/>
 
 <!-- #### (6) which copyright?  edit value.  #### -->
-	<property name="copyright" value="(c) 2010"/>
+	<property name="copyright" value="(c) 2018"/>
 
 <!-- #### (7) give your library a name. edit value.  #### -->
 	<property name="libraryName"  value="controlP5"/>
 
 <!-- #### (8) give your library a name. edit value.   #### -->
-	<property name="versionNumber"  value="2.1.5"/>
+	<property name="versionNumber"  value="2.2.7"/>
 
 <!-- #### (9) your contact url. edit value. #### -->
 	<property name="yourLink"  value="http://www.sojamo.de" />
@@ -59,9 +59,9 @@
 	<property name="tested:dependencies"  value="none" />
 
 <!-- #### (14) where can the source code be found? edit value. #### -->
-	<property name="source:host"  value="google code" />
+	<property name="source:host"  value="github" />
 	<property name="source:url"  value="controlp5" />
-	<property name="source:repository"  value="http://code.google.com/p/controlp5/source/browse/" />
+	<property name="source:repository"  value="https://github.com/sojamo/controlp5" />
 
 
 
@@ -143,7 +143,10 @@
   		<fileset dir="src"/>
   	</copy>
   -->
+
+	<!-- 
   	<copy file="src-js/controlP5.js" tofile="${dist}/library/controlP5.js" overwrite="true" />
+	-->
 
   	  	<!-- copy the jar file to processing's libraries -->
   	  	<mkdir dir="${processing}/${libraryName}" />

@@ -11,15 +11,15 @@
 			<include name="core.jar"/>
 		</fileset>
 	</path>
-	<property name="javaVersion"                value="1.6"/>
+	<property name="javaVersion"                value="1.7"/>
 	<property name="author"                     value="Andreas Schlegel"/>
-	<property name="copyright"                  value="(c) 2006-2016"/>
+	<property name="copyright"                  value="(c) 2006-2018"/>
 	<property name="libraryName"                value="controlP5"/>
-	<property name="versionNumber"              value="2.2.6"/>
+	<property name="versionNumber"              value="2.2.7"/>
 	<property name="yourLink"                   value="http://www.sojamo.de" />
 	<property name="keywords"                   value="gui, ui, controller, interface, user interface" />
 	<property name="tested:platform"            value="osx, windows, linux" />
-	<property name="tested:processingVersion"  	value="3.0.2" />
+	<property name="tested:processingVersion"  	value="3.3.6" />
 	<property name="tested:dependencies"        value="none" />
 	<property name="source:host"                value="github" />
 	<property name="source:url"                 value="https://github.com/sojamo/controlp5" />

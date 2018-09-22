@@ -2,9 +2,9 @@ package controlP5;
 
 /**
  * controlP5 is a processing gui library.
- * 
+ *
  * 2006-2015 by Andreas Schlegel
- * 
+ *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public License
  * as published by the Free Software Foundation; either version 2.1
@@ -13,16 +13,16 @@ package controlP5;
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General
  * Public License along with this library; if not, write to the
  * Free Software Foundation, Inc., 59 Temple Place, Suite 330,
  * Boston, MA 02111-1307 USA
- * 
+ *
  * @author Andreas Schlegel (http://www.sojamo.de)
  * @modified ##date##
  * @version ##version##
- * 
+ *
  */
 
 import java.io.File;
@@ -62,7 +62,7 @@ import controlP5.ControlWindow.Pointer;
  * All addController-Methods are located inside the
  * ControlP5Base class.
  * </p>
- * 
+ *
  * @see controlP5.ControlP5Base
  * @example use/ControlP5basics
  */
@@ -96,7 +96,7 @@ public class ControlP5 extends ControlP5Base {
 	/**
 	 * @exclude
 	 */
-	@ControlP5.Invisible public static final String VERSION = "2.2.6";// "##version##";
+	@ControlP5.Invisible public static final String VERSION = "2.2.7";// "##version##";
 
 	/**
 	 * @exclude
@@ -136,7 +136,7 @@ public class ControlP5 extends ControlP5Base {
 	 * from version 0.7.2 onwards shortcuts are disabled by
 	 * default. shortcuts can be enabled using
 	 * controlP5.enableShortcuts();
-	 * 
+	 *
 	 * @see #enableShortcuts()
 	 */
 	protected boolean isShortcuts = false;
@@ -148,7 +148,7 @@ public class ControlP5 extends ControlP5Base {
 
 	/**
 	 * Create a new instance of controlP5.
-	 * 
+	 *
 	 * @param theParent PApplet
 	 */
 	public ControlP5( final PApplet theParent ) {
@@ -270,7 +270,7 @@ public class ControlP5 extends ControlP5Base {
 	 * By default event originating from tabs are disabled,
 	 * use setTabEventsActive(true) to receive controlEvents
 	 * when tabs are clicked.
-	 * 
+	 *
 	 * @param theFlag
 	 */
 	public void setTabEventsActive( boolean theFlag ) {
@@ -285,7 +285,7 @@ public class ControlP5 extends ControlP5Base {
 	 * of auto intialization, call
 	 * setAutoInitialization(false) right after initializing
 	 * controlP5 and before creating any controller.
-	 * 
+	 *
 	 * @param theFlag boolean
 	 */
 	public void setAutoInitialization( boolean theFlag ) {
@@ -301,7 +301,7 @@ public class ControlP5 extends ControlP5Base {
 	 * controlP5.setAutoDraw(false). now you can call
 	 * controlP5.draw() any time whenever controllers should
 	 * be drawn into the sketch.
-	 * 
+	 *
 	 * @param theFlag boolean
 	 */
 	public void setAutoDraw( boolean theFlag ) {
@@ -317,7 +317,7 @@ public class ControlP5 extends ControlP5Base {
 	/**
 	 * check if the autoDraw function for the main window is
 	 * enabled(true) or disabled(false).
-	 * 
+	 *
 	 * @return boolean
 	 */
 	public boolean isAutoDraw( ) {
@@ -325,7 +325,7 @@ public class ControlP5 extends ControlP5Base {
 	}
 
 	/**
-	 * 
+	 *
 	 * @see controlP5.ControlBroadcaster
 	 */
 	public ControlBroadcaster getControlBroadcaster( ) {
@@ -419,7 +419,7 @@ public class ControlP5 extends ControlP5Base {
 
 	/**
 	 * TODO
-	 * 
+	 *
 	 * @exclude
 	 */
 	public void addControlsFor( Object theObject ) {
@@ -452,7 +452,7 @@ public class ControlP5 extends ControlP5Base {
 	 * accessing Controllers by name is not guaranteed. the
 	 * rule here is last come last serve, existing
 	 * Controllers with the same name will be overridden.
-	 * 
+	 *
 	 * @param theController ControllerInterface
 	 * @return ControlP5
 	 */
@@ -520,7 +520,7 @@ public class ControlP5 extends ControlP5Base {
 	/**
 	 * Returns a List of all controllers currently
 	 * registered.
-	 * 
+	 *
 	 * @return List<ControllerInterface<?>>
 	 */
 	public List< ControllerInterface< ? >> getAll( ) {
@@ -539,7 +539,7 @@ public class ControlP5 extends ControlP5Base {
 	 * }
 	 * </pre></code> Here the foreground color of all Bangs
 	 * is changed to yellow.
-	 * 
+	 *
 	 * @param <T>
 	 * @param theClass A class that extends
 	 *            ControllerInterface, which applies to all
@@ -590,11 +590,11 @@ public class ControlP5 extends ControlP5Base {
 
 	/**
 	 * removes a controller by instance.
-	 * 
+	 *
 	 * TODO Fix this. this only removes the reference to a
 	 * controller from the controller map but not its
 	 * children, fatal for controller groups!
-	 * 
+	 *
 	 * @param theController ControllerInterface
 	 */
 	protected void remove( ControllerInterface< ? > theController ) {
@@ -604,7 +604,7 @@ public class ControlP5 extends ControlP5Base {
 	/**
 	 * removes a controlP5 element such as a controller,
 	 * group, or tab by name.
-	 * 
+	 *
 	 * @param theString String
 	 */
 	public void remove( String theName ) {
@@ -726,7 +726,7 @@ public class ControlP5 extends ControlP5Base {
 	/**
 	 * call draw() from your program when autoDraw is
 	 * disabled.
-	 * 
+	 *
 	 * @exclude
 	 */
 	@ControlP5.Invisible public void draw( ) {
@@ -805,7 +805,7 @@ public class ControlP5 extends ControlP5Base {
 
 	/**
 	 * adds a Canvas to the default sketch window.
-	 * 
+	 *
 	 * @see controlP5.Canvas
 	 */
 	public ControlP5 addCanvas( Canvas theCanvas ) {
@@ -900,7 +900,7 @@ public class ControlP5 extends ControlP5Base {
 
 	/**
 	 * Checks if controllers are generally moveable
-	 * 
+	 *
 	 */
 	public boolean isMoveable( ) {
 		return isMoveable;
@@ -909,7 +909,7 @@ public class ControlP5 extends ControlP5Base {
 	/**
 	 * Saves the current values of controllers into a
 	 * default properties file
-	 * 
+	 *
 	 * @see controlP5.ControllerProperties
 	 */
 	public boolean saveProperties( ) {
@@ -919,7 +919,7 @@ public class ControlP5 extends ControlP5Base {
 	/**
 	 * Saves the current values of controllers into a file,
 	 * the filepath is given by parameter theFilePath.
-	 * 
+	 *
 	 * @see controlP5.ControllerProperties
 	 */
 	public boolean saveProperties( String theFilePath ) {
@@ -933,7 +933,7 @@ public class ControlP5 extends ControlP5Base {
 	/**
 	 * Loads properties from a default properties file and
 	 * changes values of controllers accordingly.
-	 * 
+	 *
 	 * @see controlP5.ControllerProperties
 	 * @return
 	 */
@@ -945,7 +945,7 @@ public class ControlP5 extends ControlP5Base {
 	 * Loads properties from a properties file and changes
 	 * the values of controllers accordingly, the filepath
 	 * is given by parameter theFilePath.
-	 * 
+	 *
 	 * @param theFilePath
 	 * @return
 	 */
@@ -953,7 +953,7 @@ public class ControlP5 extends ControlP5Base {
 		String path = theFilePath.endsWith( _myProperties.format.getExtension( ) ) ? theFilePath : theFilePath + "." + _myProperties.format.getExtension( );
 		path = checkPropertiesPath( path );
 		File f = new File( path);
-		
+
 		if ( f.exists( ) ) {
 			return _myProperties.load( path );
 		}
@@ -992,7 +992,7 @@ public class ControlP5 extends ControlP5Base {
 
 	/**
 	 * Returns the current version of controlP5
-	 * 
+	 *
 	 * @return String
 	 */
 	public String version( ) {
@@ -1001,7 +1001,7 @@ public class ControlP5 extends ControlP5Base {
 
 	/**
 	 * shows all controllers and tabs in your sketch.
-	 * 
+	 *
 	 * @see controlP5.ControlP5#isVisible()
 	 * @see controlP5.ControlP5#hide()
 	 */
@@ -1018,7 +1018,7 @@ public class ControlP5 extends ControlP5Base {
 	/**
 	 * returns true or false according to the current
 	 * visibility flag.
-	 * 
+	 *
 	 * @see controlP5.ControlP5#show()
 	 * @see controlP5.ControlP5#hide()
 	 */
@@ -1038,7 +1038,7 @@ public class ControlP5 extends ControlP5Base {
 	/**
 	 * hide all controllers and tabs inside your sketch
 	 * window.
-	 * 
+	 *
 	 * @see controlP5.ControlP5#show()
 	 * @see controlP5.ControlP5#isVisible()
 	 */
@@ -1048,7 +1048,7 @@ public class ControlP5 extends ControlP5Base {
 
 	/**
 	 * forces all controllers to update.
-	 * 
+	 *
 	 * @see controlP5.ControlP5#isUpdate()
 	 * @see controlP5.ControlP5#setUpdate()
 	 */
@@ -1059,7 +1059,7 @@ public class ControlP5 extends ControlP5Base {
 	/**
 	 * checks if automatic updates are enabled. By default
 	 * this is true.
-	 * 
+	 *
 	 * @see controlP5.ControlP5#update()
 	 * @see controlP5.ControlP5#setUpdate(boolean)
 	 * @return
@@ -1071,7 +1071,7 @@ public class ControlP5 extends ControlP5Base {
 	/**
 	 * changes the update behavior according to parameter
 	 * theFlag
-	 * 
+	 *
 	 * @see controlP5.ControlP5#update()
 	 * @see controlP5.ControlP5#isUpdate()
 	 * @param theFlag
@@ -1113,7 +1113,7 @@ public class ControlP5 extends ControlP5Base {
 	/**
 	 * disables shortcuts such as alt-h for hiding/showing
 	 * controllers
-	 * 
+	 *
 	 */
 	public void disableShortcuts( ) {
 		isShortcuts = false;
@@ -1213,7 +1213,7 @@ public class ControlP5 extends ControlP5Base {
 	 * therefore dispose() is disabled when running ing
 	 * applet mode. TODO implement better dispose handling
 	 * for applets.
-	 * 
+	 *
 	 * @exclude
 	 */
 	public void dispose( ) {
