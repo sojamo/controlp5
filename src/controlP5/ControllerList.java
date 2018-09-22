@@ -26,7 +26,7 @@ package controlP5;
  */
 
 import java.util.List;
-import java.util.Vector;
+import java.util.ArrayList;
 
 /**
  * Stores objects of type ControllerInterface and CDrawable, mainly for internal use.
@@ -38,8 +38,8 @@ public class ControllerList {
 	protected List< CDrawable > drawables;
 
 	public ControllerList( ) {
-		controllers = new Vector< ControllerInterface< ? >>( );
-		drawables = new Vector< CDrawable >( );
+		controllers = new ArrayList< ControllerInterface< ? >>( );
+		drawables = new ArrayList< CDrawable >( );
 	}
 
 	public void add( ControllerInterface< ? > theController ) {
