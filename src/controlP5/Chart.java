@@ -49,8 +49,6 @@ public class Chart extends Controller< Chart > {
 	protected final LinkedHashMap< String , ChartDataSet > _myDataSet;
 	protected float resolution = 1;
 	protected float strokeWeight = 1;
-	protected float _myMin = 0;
-	protected float _myMax = 1;
 
 	/**
 	 * Convenience constructor to extend Chart.
