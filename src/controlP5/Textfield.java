@@ -134,8 +134,8 @@ public class Textfield extends Controller< Textfield > {
 		keyMapping = new HashMap< Integer , TextfieldCommand >( );
 		keyMapping.put( ENTER , new Enter( ) );
 		keyMapping.put( DEFAULT , new InsertCharacter( ) );
-		keyMapping.put( DELETE , new DeleteCharacter( ) );
-		keyMapping.put( BACKSPACE , new DeleteCharacter( ) );
+		keyMapping.put( DELETE , new DeleteCharacterRight( ) );
+		keyMapping.put( BACKSPACE , new DeleteCharacterLeft( ) );
 		keyMapping.put( LEFT , new MoveLeft( ) );
 		keyMapping.put( RIGHT , new MoveRight( ) );
 		keyMapping.put( UP , new MoveUp( ) );
@@ -261,11 +261,27 @@ public class Textfield extends Controller< Textfield > {
 	@Override protected void mousePressed( ) {
 		if ( isActive ) {
 			// TODO System.out.println("adjust cursor");
+			// Multiline not supported
 		}
-		int x = ( int ) ( getControlWindow( ).mouseX - x( getAbsolutePosition( ) ) );
-		int y = ( int ) ( getControlWindow( ).mouseY - y( getAbsolutePosition( ) ) );
+		int x = ( int ) ( getControlWindow( ).mouseX - x( getPosition( ) ) );
+		int y = ( int ) ( getControlWindow( ).mouseY - y( getPosition( ) ) );
 
-		// TODO System.out.println(x + ":" + y);
+		int i = 0;
+		int textWidth;
+		for(i = 0 ; i <= _myTextBuffer.length() ; i++) {
+			textWidth = ControlFont.getWidthFor( _myTextBuffer.substring( 0 , i ) , _myValueLabel , buffer );
+			if(textWidth > x) {
+				if(i != 0 && textWidth-x > ControlFont.getWidthFor( _myTextBuffer.substring( i-1 , i ) , _myValueLabel , buffer )/2) {
+					i--;
+				}
+				break;
+			}
+		}
+		if(i > _myTextBuffer.length())
+			i = _myTextBuffer.length();
+		
+		setIndex(i);
+		
 		setFocus( true );
 	}
 
@@ -424,12 +440,22 @@ public class Textfield extends Controller< Textfield > {
 		}
 	}
 
-	class DeleteCharacter implements TextfieldCommand {
+	class DeleteCharacterLeft implements TextfieldCommand {
 
 		public void execute( ) {
 			if ( _myTextBuffer.length( ) > 0 && _myTextBufferIndex > 0 ) {
 				_myTextBuffer.deleteCharAt( _myTextBufferIndex - 1 );
 				setIndex( _myTextBufferIndex - 1 );
+			}
+		}
+	}
+
+	class DeleteCharacterRight implements TextfieldCommand {
+
+		public void execute( ) {
+			if ( _myTextBuffer.length( ) > 0 && _myTextBufferIndex < _myTextBuffer.length( ) ) {
+				_myTextBuffer.deleteCharAt( _myTextBufferIndex );
+				setIndex( _myTextBufferIndex );
 			}
 		}
 	}
