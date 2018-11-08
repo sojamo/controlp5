@@ -71,6 +71,9 @@ public class Textfield extends Controller< Textfield > {
 	protected boolean isPasswordMode;
 	protected boolean autoclear = true;
 	protected int _myColorCursor = 0x88ffffff;
+	protected int startDragIndex = 0;
+	protected int currentDragIndex = 0;
+	protected boolean isDragging = false;
 	private PGraphics buffer;
 
 	public enum InputFilter {
@@ -266,6 +269,9 @@ public class Textfield extends Controller< Textfield > {
 		int x = ( int ) ( getControlWindow( ).mouseX - x( getPosition( ) ) );
 		int y = ( int ) ( getControlWindow( ).mouseY - y( getPosition( ) ) );
 
+		_myValueLabel.setSelectedStart(0);
+		_myValueLabel.setSelectedStop(0);
+		
 		int i = 0;
 		int textWidth;
 		for(i = 0 ; i <= _myTextBuffer.length() ; i++) {
@@ -286,11 +292,82 @@ public class Textfield extends Controller< Textfield > {
 	}
 
 	@Override protected void mouseReleasedOutside( ) {
-		if ( isKeepFocus == false ) {
+		if ( isKeepFocus == false && !isDragging ) {
 			isTexfieldActive = isActive = false;
+			startDragIndex = 0;
+			currentDragIndex = 0;
+			updateLabelSelection();
 		}
+		isDragging = false;
 	}
 
+	@Override protected void onStartDrag( ) {
+		int x = (int) (getControlWindow().mouseX - x(getPosition()));
+		int i = 0;
+		int textWidth;
+		isDragging = true;
+		for(i = 0 ; i <= _myTextBuffer.length() ; i++) {
+			textWidth = ControlFont.getWidthFor( _myTextBuffer.substring( 0 , i ) , _myValueLabel , buffer );
+			if(textWidth > x) {
+				if(i != 0 && textWidth-x > ControlFont.getWidthFor( _myTextBuffer.substring( i-1 , i ) , _myValueLabel , buffer )/2) {
+					i--;
+				}
+				break;
+			}
+		}
+		if(i > _myTextBuffer.length())
+			i = _myTextBuffer.length();
+		
+		startDragIndex = i;
+		setIndex(i);
+		
+		setFocus( true );
+	}
+
+	@Override protected void onDrag( ) {
+		int x = (int) (getControlWindow().mouseX - x(getPosition()));
+		int i = 0;
+		int textWidth;
+		for(i = 0 ; i <= _myTextBuffer.length() ; i++) {
+			textWidth = ControlFont.getWidthFor( _myTextBuffer.substring( 0 , i ) , _myValueLabel , buffer );
+			if(textWidth > x) {
+				if(i != 0 && textWidth-x > ControlFont.getWidthFor( _myTextBuffer.substring( i-1 , i ) , _myValueLabel , buffer )/2) {
+					i--;
+				}
+				break;
+			}
+		}
+		if(i > _myTextBuffer.length())
+			i = _myTextBuffer.length();
+		
+		currentDragIndex = i;
+		updateLabelSelection();
+		
+		setIndex(i);
+		setFocus( true );
+	}
+
+	@Override protected void onDoublePress( ) {
+		startDragIndex = 0;
+		currentDragIndex = _myTextBuffer.length();
+		updateLabelSelection();
+		setIndex(currentDragIndex);
+	}
+	
+	@Override protected void onEndDrag( ) {
+		isDragging = false;
+	}
+	
+	protected void updateLabelSelection() {
+		if(startDragIndex > currentDragIndex) {
+			_myValueLabel.setSelectedStart(currentDragIndex);
+			_myValueLabel.setSelectedStop(startDragIndex);
+		} else {
+			_myValueLabel.setSelectedStart(startDragIndex);
+			_myValueLabel.setSelectedStop(currentDragIndex);
+		}
+	}
+	
 	public int getIndex( ) {
 		return _myTextBufferIndex;
 	}
@@ -317,11 +394,21 @@ public class Textfield extends Controller< Textfield > {
 
 	@Override public void draw( PGraphics theGraphics ) {
 
+		final String text = passCheck( getText( ) );
+		
 		theGraphics.pushStyle( );
 		theGraphics.fill( color.getBackground( ) );
 		theGraphics.pushMatrix( );
 		theGraphics.translate( x( position ) , y( position ) );
-		theGraphics.rect( 0 , 0 , getWidth( ) , getHeight( ) );
+		theGraphics.fill(color.getBackground());
+		theGraphics.rect(0, 0, getWidth(), getHeight());
+		
+		//theGraphics.fill(color.getBackground());
+		//theGraphics.rect(0, 0, theGraphics.textWidth(text.substring(0, _myValueLabel.getSelectedStart())), getHeight());
+		theGraphics.fill(color.getSelectedBackground());
+		theGraphics.rect(ControlFont.getWidthFor(text.substring(0, _myValueLabel.getSelectedStart()), _myValueLabel, buffer), 0, ControlFont.getWidthFor(text.substring(_myValueLabel.getSelectedStart(), _myValueLabel.getSelectedStop()), _myValueLabel, buffer), getHeight());
+		theGraphics.fill(color.getBackground());
+		
 		theGraphics.noStroke( );
 
 		theGraphics.fill( _myColorCursor );
@@ -330,7 +417,6 @@ public class Textfield extends Controller< Textfield > {
 
 		buffer.beginDraw( );
 		buffer.background( 0 , 0 );
-		final String text = passCheck( getText( ) );
 		final int textWidth = ControlFont.getWidthFor( text.substring( 0 , _myTextBufferIndex ) , _myValueLabel , buffer );
 		final int dif = PApplet.max( textWidth - _myValueLabel.getWidth( ) , 0 );
 		final int _myTextBufferIndexPosition = ControlFont.getWidthFor( text.substring( 0 , _myTextBufferIndex ) , _myValueLabel , buffer );
@@ -417,6 +503,20 @@ public class Textfield extends Controller< Textfield > {
 			}
 
 			if ( _myInputFilter.apply( cp5.getKey( ) ) ) {
+				if(startDragIndex != currentDragIndex) {
+					int strt = startDragIndex;
+					int current = currentDragIndex;
+					startDragIndex = 0;
+					currentDragIndex = 0;
+					updateLabelSelection();
+					if(strt > current) {
+						_myTextBuffer.delete(current, strt);
+						setIndex(current);
+					} else {
+						_myTextBuffer.delete(strt, current);
+						setIndex(strt);
+					}
+				}
 				_myTextBuffer.insert( _myTextBufferIndex , ( char ) cp5.getKey( ) );
 				setIndex( _myTextBufferIndex + 1 );
 			}
@@ -444,8 +544,23 @@ public class Textfield extends Controller< Textfield > {
 
 		public void execute( ) {
 			if ( _myTextBuffer.length( ) > 0 && _myTextBufferIndex > 0 ) {
-				_myTextBuffer.deleteCharAt( _myTextBufferIndex - 1 );
-				setIndex( _myTextBufferIndex - 1 );
+				if(startDragIndex != currentDragIndex) {
+					int strt = startDragIndex;
+					int current = currentDragIndex;
+					startDragIndex = 0;
+					currentDragIndex = 0;
+					updateLabelSelection();
+					if(strt > current) {
+						_myTextBuffer.delete(current, strt);
+						setIndex(current);
+					} else {
+						_myTextBuffer.delete(strt, current);
+						setIndex(strt);
+					}
+				} else {
+					_myTextBuffer.deleteCharAt( _myTextBufferIndex - 1 );
+					setIndex( _myTextBufferIndex - 1 );
+				}
 			}
 		}
 	}
@@ -454,8 +569,23 @@ public class Textfield extends Controller< Textfield > {
 
 		public void execute( ) {
 			if ( _myTextBuffer.length( ) > 0 && _myTextBufferIndex < _myTextBuffer.length( ) ) {
-				_myTextBuffer.deleteCharAt( _myTextBufferIndex );
-				setIndex( _myTextBufferIndex );
+				if(startDragIndex != currentDragIndex) {
+					int strt = startDragIndex;
+					int current = currentDragIndex;
+					startDragIndex = 0;
+					currentDragIndex = 0;
+					updateLabelSelection();
+					if(strt > current) {
+						_myTextBuffer.delete(current, strt);
+						setIndex(current);
+					} else {
+						_myTextBuffer.delete(strt, current);
+						setIndex(strt);
+					}
+				} else {
+					_myTextBuffer.deleteCharAt( _myTextBufferIndex );
+					setIndex( _myTextBufferIndex );
+				}
 			}
 		}
 	}

@@ -75,6 +75,8 @@ public final class ControlWindow {
 	protected int mouseY;
 	protected int pmouseX;
 	protected int pmouseY;
+	protected int pclickMouseX;
+	protected int pclickMouseY;
 	protected boolean mousePressed;
 	protected long mousePressedTime;
 	protected long pmousePressedTime;
@@ -401,7 +403,9 @@ public final class ControlWindow {
 	 * boolean).
 	 */
 	public void mouseEvent( int theX , int theY , boolean pressed ) {
-
+		pclickMouseX = mouseX;
+		pclickMouseY = mouseY;
+		
 		mouseX = theX - cp5.pgx - cp5.ox;
 		mouseY = theY - cp5.pgy - cp5.oy;
 
@@ -440,12 +444,16 @@ public final class ControlWindow {
 	 */
 	public void mouseEvent( MouseEvent theMouseEvent ) {
 		if ( isMouse ) {
+			int oldX = mouseX;
+			int oldY = mouseY;
 			mouseX = theMouseEvent.getX( ) - cp5.pgx - cp5.ox;
 			mouseY = theMouseEvent.getY( ) - cp5.pgy - cp5.oy;
 			if ( theMouseEvent.getAction( ) == MouseEvent.PRESS ) {
 				mousePressedEvent( );
 			}
 			if ( theMouseEvent.getAction( ) == MouseEvent.RELEASE ) {
+				pclickMouseX = oldX;
+				pclickMouseY = oldY;
 				mouseReleasedEvent( );
 			}
 			if ( theMouseEvent.getAction( ) == MouseEvent.WHEEL ) {
@@ -600,7 +608,7 @@ public final class ControlWindow {
 
 				pmouseX = mouseX;
 				pmouseY = mouseY;
-
+				
 				/* draw Tooltip here. */
 
 				cp5.getTooltip( ).draw( this );
@@ -919,6 +927,14 @@ public final class ControlWindow {
 
 		public int getPreviousY( ) {
 			return pmouseY;
+		}
+
+		public int getPreviousClickX( ) {
+			return pclickMouseX;
+		}
+
+		public int getPreviousClickY( ) {
+			return pclickMouseY;
 		}
 
 		public Pointer set( int theX , int theY ) {

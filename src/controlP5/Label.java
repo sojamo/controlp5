@@ -48,6 +48,7 @@ public class Label implements CDrawable {
 	protected ControllerStyle _myControllerStyle = new ControllerStyle( );
 	protected boolean isVisible = true;
 	protected int _myColor = 0xffffffff;
+	protected int _mySelectedColor = 0xff000000;
 	protected boolean isColorBackground;
 	protected boolean isToUpperCase = isToUpperCaseDefault;
 	protected boolean changed;
@@ -67,6 +68,8 @@ public class Label implements CDrawable {
 	protected Labeltype _myLabeltype;
 	protected int _myTextHeight = 1;
 	protected float offsetYratio = 0;
+	protected int _mySelectedStart = 0;
+	protected int _mySelectedStop = 0;
 	private ControlP5 cp5;
 
 	private Label( Label theLabel ) {
@@ -366,6 +369,16 @@ public class Label implements CDrawable {
 		return _myColor;
 	}
 
+	public int getSelectedColor( ) {
+		return _mySelectedColor;
+	}
+
+	public Label setSelectedColor( int theColor ) {
+		_mySelectedColor = theColor;
+		setChanged( true );
+		return this;
+	}
+
 	public Label setColorBackground( int theColor ) {
 		enableColorBackground( );
 		_myColorBackground = theColor;
@@ -402,6 +415,22 @@ public class Label implements CDrawable {
 
 	public boolean isToUpperCase( ) {
 		return isToUpperCase;
+	}
+
+	public int getSelectedStart( ) {
+		return _mySelectedStart;
+	}
+
+	public int getSelectedStop( ) {
+		return _mySelectedStop;
+	}
+
+	public void setSelectedStart(int start) {
+		_mySelectedStart = start;
+	}
+
+	public void setSelectedStop(int stop) {
+		_mySelectedStop = stop;
 	}
 
 	protected Label copy( ) {
