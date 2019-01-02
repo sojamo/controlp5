@@ -34,6 +34,7 @@ import java.io.Serializable;
 public class CColor implements Serializable {
 
 	private int colorBackground = 0xff003652;
+	private int colorSelectedBackground = 0xffffffff;
 	private int colorForeground = 0xff00698c;
 	private int colorActive = 0xff08a2cf; // 0699C4;
 	private int colorCaptionLabel = 0xffffffff;
@@ -52,6 +53,7 @@ public class CColor implements Serializable {
 
 	protected CColor set( CColor theColor ) {
 		colorBackground = theColor.colorBackground;
+		colorSelectedBackground = theColor.colorSelectedBackground;
 		colorForeground = theColor.colorForeground;
 		colorActive = theColor.colorActive;
 		colorCaptionLabel = theColor.colorCaptionLabel;
@@ -125,6 +127,15 @@ public class CColor implements Serializable {
 		return this;
 	}
 
+	public CColor setSelectedBackground( int theColor ) {
+		if ( ( theColor & 0xff000000 ) == 0 ) {
+			colorSelectedBackground = 0xff000000;
+		} else {
+			colorSelectedBackground = theColor;
+		}
+		return this;
+	}
+
 	public CColor setActive( int theColor ) {
 		if ( ( theColor & 0xff000000 ) == 0 ) {
 			colorActive = 0xff000000;
@@ -162,6 +173,10 @@ public class CColor implements Serializable {
 
 	public int getBackground( ) {
 		return colorBackground;
+	}
+
+	public int getSelectedBackground( ) {
+		return colorSelectedBackground;
 	}
 
 	public int getActive( ) {

@@ -247,9 +247,22 @@ public class ControlFont {
 			debug( theGraphics , theLabel );
 			theGraphics.fill( theLabel.getColor( ) );
 			theGraphics.textLeading( theLabel.getLineHeight( ) );
-			theGraphics.text( theLabel.getTextFormatted( ) , 0 , 0 );
+			String myText = theLabel.getTextFormatted( );
+			
+			theGraphics.fill(theLabel.getColor());
+			theGraphics.text(myText.substring(0, theLabel.getSelectedStart()) , 0 , 0);
+			theGraphics.fill( theLabel.getSelectedColor( ) );
+			theGraphics.text(myText.substring(theLabel.getSelectedStart(), theLabel.getSelectedStop()) , theGraphics.textWidth(myText.substring(0, theLabel.getSelectedStart())) , 0);
+			theGraphics.fill( theLabel.getColor( ) );
+			theGraphics.text(myText.substring(theLabel.getSelectedStop(), myText.length()) , theGraphics.textWidth(myText.substring(0, theLabel.getSelectedStop())) , 0);
+			
 			if ( RENDER_2X ) {
-				theGraphics.text( theLabel.getTextFormatted( ) , 0 , 0 );
+				theGraphics.fill(theLabel.getColor());
+				theGraphics.text(myText.substring(0, theLabel.getSelectedStart()) , 0 , 0);
+				theGraphics.fill( theLabel.getSelectedColor( ) );
+				theGraphics.text(myText.substring(theLabel.getSelectedStart(), theLabel.getSelectedStop()) , theGraphics.textWidth(myText.substring(0, theLabel.getSelectedStart())) , 0);
+				theGraphics.fill( theLabel.getColor( ) );
+				theGraphics.text(myText.substring(theLabel.getSelectedStop(), myText.length()) , theGraphics.textWidth(myText.substring(0, theLabel.getSelectedStop())) , 0);
 			}
 
 		}

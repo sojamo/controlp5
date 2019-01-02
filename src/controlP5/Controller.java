@@ -545,11 +545,11 @@ public abstract class Controller< T > implements ControllerInterface< T > , CDra
 			}
 
 			public int px( ) {
-				return ( int ) ( _myControlWindow.pmouseX - Controller.x( _myParent.getAbsolutePosition( ) ) - Controller.x( position ) );
+				return ( int ) ( _myControlWindow.pclickMouseX - Controller.x( _myParent.getAbsolutePosition( ) ) - Controller.x( position ) );
 			}
 
 			public int py( ) {
-				return ( int ) ( _myControlWindow.pmouseY - Controller.y( _myParent.getAbsolutePosition( ) ) - Controller.y( position ) );
+				return ( int ) ( _myControlWindow.pclickMouseY - Controller.y( _myParent.getAbsolutePosition( ) ) - Controller.y( position ) );
 			}
 
 			public int dx( ) {
@@ -590,7 +590,7 @@ public abstract class Controller< T > implements ControllerInterface< T > , CDra
 					onPress( );
 					cp5.getControlBroadcaster( ).invokeAction( new CallbackEvent( this , ACTION_PRESS ) );
 					callListener( ACTION_PRESS );
-					if ( getPointer( ).dt( ) < 500 ) {
+					if ( getPointer( ).dt( ) < 500 && getPointer( ).dx() == 0 && getPointer( ).dy() == 0 ) {
 						onDoublePress( );
 						callListener( ACTION_DOUBLE_PRESS );
 					}
@@ -628,8 +628,7 @@ public abstract class Controller< T > implements ControllerInterface< T > , CDra
 					onReleaseOutside( );
 					cp5.getControlBroadcaster( ).invokeAction( new CallbackEvent( this , ACTION_RELEASE_OUTSIDE ) );
 					callListener( ACTION_RELEASE_OUTSIDE );
-				}
-				if ( this instanceof Textfield ) {
+				} else if ( this instanceof Textfield ) {
 					mouseReleasedOutside( );
 					onReleaseOutside( );
 					callListener( ACTION_RELEASE_OUTSIDE );
