@@ -463,6 +463,13 @@ public final class ControlWindow {
 			return;
 		}
 
+		if ( theKeyEvent.getAction( ) == KeyEvent.TYPE ) {
+			keys[ theKeyEvent.getKeyCode( ) ] = true;
+			numOfActiveKeys++;
+			cp5.modifiers = theKeyEvent.getModifiers( );
+			key = theKeyEvent.getKey( );
+		}
+
 		if ( theKeyEvent.getAction( ) == KeyEvent.PRESS ) {
 			keys[ theKeyEvent.getKeyCode( ) ] = true;
 			numOfActiveKeys++;
@@ -475,6 +482,7 @@ public final class ControlWindow {
 			keys[ theKeyEvent.getKeyCode( ) ] = false;
 			numOfActiveKeys--;
 			cp5.modifiers = theKeyEvent.getModifiers( );
+			keyCode = theKeyEvent.getKeyCode( );
 		}
 
 		if ( theKeyEvent.getAction( ) == KeyEvent.PRESS && cp5.isShortcuts( ) ) {
