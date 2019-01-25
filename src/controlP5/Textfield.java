@@ -357,14 +357,24 @@ public class Textfield extends Controller< Textfield > {
 	}
 
 	public void keyEvent( KeyEvent theKeyEvent ) {
-		if ( isUserInteraction && isTexfieldActive && isActive && theKeyEvent.getAction( ) == KeyEvent.PRESS ) {
-			if ( ignorelist.contains( cp5.getKeyCode( ) ) ) {
-				return;
-			}
-			if ( keyMapping.containsKey( cp5.getKeyCode( ) ) ) {
-				keyMapping.get( cp5.getKeyCode( ) ).execute( );
-			} else {
+		if ( isUserInteraction && isTexfieldActive && isActive) {
+			if(theKeyEvent.getAction( ) == KeyEvent.TYPE) {
+				if ( ignorelist.contains( cp5.getKeyCode( ) ) ) {
+					return;
+				}
+				if ( keyMapping.containsKey( cp5.getKeyCode( ) ) ) {
+					return;
+				}
 				keyMapping.get( DEFAULT ).execute( );
+			}
+
+			if( theKeyEvent.getAction( ) == KeyEvent.PRESS ) {
+				if ( ignorelist.contains( cp5.getKeyCode( ) ) ) {
+					return;
+				}
+				if ( keyMapping.containsKey( cp5.getKeyCode( ) ) ) {
+					keyMapping.get( cp5.getKeyCode( ) ).execute( );
+				}
 			}
 		}
 	}
