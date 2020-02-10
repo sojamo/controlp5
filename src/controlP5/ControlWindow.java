@@ -843,7 +843,8 @@ public final class ControlWindow {
 			_myApplet.frame.removeNotify( );
 			_myApplet.frame.setUndecorated( isUndecorated );
 			_myApplet.setSize( _myApplet.width , _myApplet.height );
-			_myApplet.setBounds( 0 , 0 , _myApplet.width , _myApplet.height );
+			// Wont compile as `PApplet.setBounds(int, int, int, int)` is not a function (Im not sure if setBounds does anything important)
+			//_myApplet.setBounds( 0 , 0 , _myApplet.width , _myApplet.height );
 			_myApplet.frame.setSize( _myApplet.width , _myApplet.height );
 			_myApplet.frame.addNotify( );
 		}
