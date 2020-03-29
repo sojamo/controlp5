@@ -21,7 +21,7 @@ The range of available controllers includes Slider, Button, Toggle, Knob, Textfi
   * [Digital Object Identifiers ](#doi)
 
   
-## <a name"install"></a>Installation
+## <a name="install"></a>Installation
 
 To install the library from inside the Processing IDE, use the Library Manager from the menu under Sketch &rarr; Import Library &rarr; Add Library and search for ControlP5.
 
@@ -93,7 +93,7 @@ _example 1, see code below_
 _example 2, a range of default ControlP5 controllers_
 
 
-## <a name"how"></a>How does ControlP5 work?
+## <a name="how"></a>How does ControlP5 work?
 
 
 ControlP5 provides a range of controllers, each controller comes with an example which is located inside the examples/controllers folder. This is a good place to get started with ControlP5.
@@ -131,7 +131,7 @@ Alternatively, ControlP5 can be instantiated from other places as well for examp
 	}
 ```
 
-### <a name="#controllers"></a>Adding Controllers
+### <a name="controllers"></a>Adding Controllers
 
 To add controllers to a ControlP5 object, use the add function followed by the name of the Controller, for example to add a Slider use cp5.addSlider("mySlider"). Here function addSlider takes one argument which is the unique name of the controller to be added. In case a controller with the same name is already registered with ControlP5, the old controller will be overridden - this is then indicated and printed as a warning message in the console. All default add functions are implemented with class ControlP5Base; have a look at its source code for further reference.
 
