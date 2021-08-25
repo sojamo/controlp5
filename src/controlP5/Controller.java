@@ -1982,7 +1982,7 @@ public abstract class Controller< T > implements ControllerInterface< T > , CDra
 
 	public T align( int theCaptionX , int theCaptionY , int theValueX , int theValueY ) {
 		getCaptionLabel( ).align( theCaptionX , theCaptionY );
-		getCaptionLabel( ).align( theValueX , theValueY );
+		getValueLabel( ).align( theValueX , theValueY );
 		return me;
 	}
 
