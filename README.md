@@ -1,3 +1,4 @@
+https://argus74.github.io/controlp5/
 # ControlP5
 
 ControlP5 is a GUI library written by [Andreas Schlegel](http://www.sojamo.de) for the programming environment [Processing](http://www.processing.org). 
@@ -309,7 +310,58 @@ To change the order of controllers, use Controller.bringToFront() which will pos
 To render controllers into separate windows please see example [ControlP5frames](examples/use/ControlP5frames/ControlP5frames.pde), this example demonstrates how to open multiple frames each running its own instance of ControlP5. With previous version of ControlP5 the ControlWindow class would allow you to add and open new windows with 1 command, this comand though has been removed when all references to java.awt.* had been removed to make ControlP5 work with Android.
 
 ## <a name="events"></a>Event Handling
+```java import controlP5.*;
 
+
+boolean on = false;
+
+ControlP5 cp5;
+Button ButtonA;
+
+void setup() {
+ size(800, 800);
+ background(140,170,209);
+ cp5 = new ControlP5(this);
+
+ //Instantiation of the button
+ ButtonA = cp5.addButton("ButtonA")
+     .setBroadcast(false)
+     .setValue(0)
+     .setPosition(10, 10)
+     .setSize(80, 10)
+     .setCaptionLabel("start")
+     .setBroadcast(true)
+     ;
+}
+
+void draw() {
+  
+}
+
+//The control event method is called everytime an event on any control object is triggered. We can obtain the name of the
+//control object that triggered the event using the getName() method. The name corresponds to the name used in the instatntiaon of the button.
+public void controlEvent(ControlEvent theEvent) {
+  
+  if ((theEvent.getController().getName()) == "ButtonA") 
+  {
+    println(theEvent.getController().getName());
+  
+  }
+}
+
+//You can also create a method with the same name as the control object instantiated earlier. This methods will get called with parameters specific to each
+//control object.
+public void ButtonA(boolean flag) {
+  if (!on)
+  {
+    on = true;
+  }
+  else
+  {
+    on = false;
+  }
+}
+```
 #### Linking a Variable or Function to a Controller
 
 #### ControlEvent
