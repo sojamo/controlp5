@@ -310,7 +310,7 @@ To change the order of controllers, use Controller.bringToFront() which will pos
 To render controllers into separate windows please see example [ControlP5frames](examples/use/ControlP5frames/ControlP5frames.pde), this example demonstrates how to open multiple frames each running its own instance of ControlP5. With previous version of ControlP5 the ControlWindow class would allow you to add and open new windows with 1 command, this comand though has been removed when all references to java.awt.* had been removed to make ControlP5 work with Android.
 
 ## <a name="events"></a>Event Handling
-` import controlP5.*;
+```java import controlP5.*;
 
 
 boolean on = false;
@@ -360,7 +360,8 @@ public void ButtonA(boolean flag) {
   {
     on = false;
   }
-}`
+}
+```
 #### Linking a Variable or Function to a Controller
 
 #### ControlEvent
