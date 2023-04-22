@@ -71,7 +71,7 @@ public class Textfield extends Controller< Textfield > {
 	protected boolean isPasswordMode;
 	protected boolean autoclear = true;
 	protected int _myColorCursor = 0x88ffffff;
-	private PGraphics buffer;
+	protected PGraphics buffer;
 
 	public enum InputFilter {
 		INTEGER(Arrays.asList( '0' , '1' , '2' , '3' , '4' , '5' , '6' , '7' , '8' , '9' )), FLOAT(Arrays.asList( '0' , '1' , '2' , '3' , '4' , '5' , '6' , '7' , '8' , '9' , '.' )), BITFONT(Arrays.asList( '\n' , '\r' , ' ' , '!' , '"' , '#' , '$' , '%' ,
