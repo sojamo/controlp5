@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/resources/addons/addons.iml" filepath="$PROJECT_DIR$/resources/addons/addons.iml" />
-      <module fileurl="file://$PROJECT_DIR$/controlp5.iml" filepath="$PROJECT_DIR$/controlp5.iml" />
       <module fileurl="file://$PROJECT_DIR$/examples/examples.iml" filepath="$PROJECT_DIR$/examples/examples.iml" />
       <module fileurl="file://$PROJECT_DIR$/resources/resources.iml" filepath="$PROJECT_DIR$/resources/resources.iml" />
     </modules>

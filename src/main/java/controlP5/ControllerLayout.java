@@ -87,6 +87,7 @@ class ControllerLayout {
 			oos.flush( );
 			oos.close( );
 			fos.close( );
+
 		} catch ( Exception e ) {
 			logger.warning( "Exception during serialization: " + e );
 		}
