@@ -9,3 +9,5 @@
 .buildpath
 .classpath
 .project
+./out/
+./target/

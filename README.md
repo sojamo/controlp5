@@ -1,3 +1,8 @@
+## this is a fork of the original controlP5 library by Andreas Schlegel
+## it provides a pom.xml for maven and can be used as a dependency in maven projects
+
+
+
 # ControlP5
 
 ControlP5 is a GUI library written by [Andreas Schlegel](http://www.sojamo.de) for the programming environment [Processing](http://www.processing.org). 
@@ -23,7 +28,7 @@ The range of available controllers includes Slider, Button, Toggle, Knob, Textfi
   
 ## <a name"install"></a>Installation
 
-To install the library from inside the Processing IDE, use the Library Manager from the menu under Sketch &rarr; Import Library &rarr; Add Library and search for ControlP5.
+To install the library from inside the Processing IDE, use the Library Manager from the menu under sketch.Sketch &rarr; Import Library &rarr; Add Library and search for ControlP5.
 
 If you want to install ControlP5 manually, download (the latest) version from the [releases](https://github.com/sojamo/controlp5/releases) directory. Inside the downloaded .zip file you will find [install_instructions](resources/install_instructions.txt) that guide you through the installation details and tell you where the controlP5 folder needs to be put. In case you are looking for an earlier release, please check the [archive on google code](https://code.google.com/p/controlp5/downloads/list?can=1&q=&colspec=Filename+Summary+Uploaded+ReleaseDate+Size+DownloadCount).
 
