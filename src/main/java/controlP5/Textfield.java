@@ -384,7 +384,7 @@ public class Textfield extends Controller< Textfield > {
 		return s;
 	}
 
-	private Textfield setIndex( int theIndex ) {
+	protected Textfield setIndex( int theIndex ) {
 		_myTextBufferIndex = theIndex;
 		return this;
 	}

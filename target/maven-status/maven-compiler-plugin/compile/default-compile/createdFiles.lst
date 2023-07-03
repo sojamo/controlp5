@@ -19,6 +19,7 @@ controlP5/ControllerProperties$XMLFormat.class
 controlP5/ControlP5Base.class
 controlP5/TextfieldMultiline$InsertCharacter.class
 controlP5/Knob.class
+controlP5/Slider$1.class
 controlP5/ControllerProperties$JSONFormat.class
 controlP5/ControlKey.class
 controlP5/Group.class
@@ -112,12 +113,15 @@ controlP5/ControlP5$Layout.class
 controlP5/TextfieldMultiline$MoveRight.class
 controlP5/FrameRate.class
 controlP5/Textfield.class
+controlP5/ColorWheel$1.class
 controlP5/FieldChangedListener$1.class
 controlP5/Slider2D$Slider2DView.class
 controlP5/TextfieldMultiline$MoveLeft.class
+controlP5/layout/LayoutBuilder.class
 controlP5/ControlBroadcaster$EmptyController.class
 controlP5/Chart$ChartViewLine.class
 controlP5/Icon$IconImageView.class
+controlP5/ColorPicker$1.class
 controlP5/FieldChangedListener.class
 controlP5/FieldChangedListener$2.class
 controlP5/Textfield$MoveLeft.class
@@ -142,9 +146,12 @@ controlP5/Textfield$MoveDown.class
 controlP5/ControlP5$4.class
 controlP5/Button$ButtonView.class
 controlP5/ControllerProperties.class
+controlP5/Button$1.class
 controlP5/ControllerInterface.class
+controlP5/Spacer$1.class
 controlP5/Range.class
 controlP5/FieldChangedListener$3.class
+controlP5/Icon$1.class
 controlP5/ListBox.class
 controlP5/Toggle$ToggleView.class
 controlP5/Pad.class
@@ -153,6 +160,7 @@ controlP5/Canvas.class
 controlP5/CallbackListener.class
 controlP5/ControlBehavior.class
 controlP5/MultiListInterface.class
+controlP5/Bang$1.class
 controlP5/Textfield$MoveRight.class
 controlP5/ColorPicker$ColorField.class
 controlP5/ControlFont.class
