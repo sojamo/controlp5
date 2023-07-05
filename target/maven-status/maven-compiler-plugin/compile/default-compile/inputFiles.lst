@@ -18,6 +18,7 @@
 /Users/gabrielsalvador/Code/controlp5/src/main/java/controlP5/ControllerProperty.java
 /Users/gabrielsalvador/Code/controlp5/src/main/java/controlP5/ColorPicker.java
 /Users/gabrielsalvador/Code/controlp5/src/main/java/controlP5/Tooltip.java
+/Users/gabrielsalvador/Code/controlp5/src/main/java/controlP5/events/ReleasedOutsideListener.java
 /Users/gabrielsalvador/Code/controlp5/src/main/java/controlP5/Group.java
 /Users/gabrielsalvador/Code/controlp5/src/main/java/controlP5/CP.java
 /Users/gabrielsalvador/Code/controlp5/src/main/java/controlP5/Tab.java
@@ -37,7 +38,6 @@
 /Users/gabrielsalvador/Code/controlp5/src/main/java/controlP5/ControlKey.java
 /Users/gabrielsalvador/Code/controlp5/src/main/java/controlP5/ControlP5Base.java
 /Users/gabrielsalvador/Code/controlp5/src/main/java/controlP5/Slider.java
-/Users/gabrielsalvador/Code/controlp5/src/main/java/controlP5/layout/LayoutBuilder.java
 /Users/gabrielsalvador/Code/controlp5/src/main/java/controlP5/MultiList.java
 /Users/gabrielsalvador/Code/controlp5/src/main/java/controlP5/ControllerGroup.java
 /Users/gabrielsalvador/Code/controlp5/src/main/java/controlP5/Textfield.java
@@ -74,6 +74,7 @@
 /Users/gabrielsalvador/Code/controlp5/src/main/java/controlP5/ControllerView.java
 /Users/gabrielsalvador/Code/controlp5/src/main/java/controlP5/ControlWindowCanvas.java
 /Users/gabrielsalvador/Code/controlp5/src/main/java/controlP5/ControlTimer.java
+/Users/gabrielsalvador/Code/controlp5/src/main/java/controlP5/MultilineTextfield.java
 /Users/gabrielsalvador/Code/controlp5/src/main/java/controlP5/ControlWindow.java
 /Users/gabrielsalvador/Code/controlp5/src/main/java/controlP5/ControlBroadcaster.java
 /Users/gabrielsalvador/Code/controlp5/src/main/java/controlP5/Pointer.java

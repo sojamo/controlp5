@@ -31,6 +31,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import controlP5.events.ReleasedOutsideListener;
 import processing.core.PApplet;
 import processing.core.PFont;
 import processing.core.PGraphics;
@@ -48,7 +49,7 @@ import processing.event.KeyEvent;
  * @example controllers/ControlP5textfield
  * @nosuperclasses Controller Controller
  */
-public class Textfield extends Controller< Textfield > {
+public class Textfield extends Controller< Textfield > implements ReleasedOutsideListener {
 
 	/* TODO textspacing does not work properly for bitfonts sometimes first row of pixels in a
 	 * bitfont texture gets cut off */
@@ -269,7 +270,7 @@ public class Textfield extends Controller< Textfield > {
 		setFocus( true );
 	}
 
-	@Override protected void mouseReleasedOutside( ) {
+	@Override public void mouseReleasedOutside( ) {
 		if ( isKeepFocus == false ) {
 			isTexfieldActive = isActive = false;
 		}

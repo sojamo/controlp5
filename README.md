@@ -1,5 +1,8 @@
 ## this is a fork of the original controlP5 library by Andreas Schlegel
-## it provides a pom.xml for maven and can be used as a dependency in maven projects
+## My changes include:
+- it provides a pom.xml for maven and can be used as a dependency in maven projects
+- Tweeks in the getting focus/losing focus for custom controllers that extends the Controller class (See ReleasedOutsideListener.java Interface)
+
 
 
 

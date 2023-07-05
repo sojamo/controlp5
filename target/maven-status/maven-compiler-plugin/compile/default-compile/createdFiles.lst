@@ -117,7 +117,6 @@ controlP5/ColorWheel$1.class
 controlP5/FieldChangedListener$1.class
 controlP5/Slider2D$Slider2DView.class
 controlP5/TextfieldMultiline$MoveLeft.class
-controlP5/layout/LayoutBuilder.class
 controlP5/ControlBroadcaster$EmptyController.class
 controlP5/Chart$ChartViewLine.class
 controlP5/Icon$IconImageView.class

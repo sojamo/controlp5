@@ -1,9 +1,6 @@
 package sketch;
 
-import controlP5.ControlEvent;
-import controlP5.ControlP5;
-import controlP5.RadioButton;
-import controlP5.TextfieldMultiline;
+import controlP5.*;
 import processing.core.PApplet;
 
 public class Sketch extends PApplet {
@@ -20,21 +17,8 @@ public class Sketch extends PApplet {
     public void setup(){
         cp5 = new ControlP5(this);
 
-        RadioButton b = new RadioButton(cp5,"radioButton")
-                .setPosition(100,100)
-                .setSize(40,20)
-                .setColorForeground(color(120))
-                .setColorActive(color(255))
-                .setColorLabel(color(255))
-                .setItemsPerRow(3)
-                .setSpacingColumn(50)
-                .addItem("foo",1)
-                .addItem("bar",2)
-                .addItem("baz",3)
-                .activate(0)
-                ;
-
-        b.plugTo(this,"radioButton");
+        Button b = new Button(cp5,"").setSize(100,100);
+        MultilineTextfield ml = new MultilineTextfield(cp5,"mlt");
 
 
     }

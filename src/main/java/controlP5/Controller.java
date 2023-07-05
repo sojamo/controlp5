@@ -31,6 +31,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import controlP5.events.ReleasedOutsideListener;
 import processing.core.PApplet;
 import processing.core.PFont;
 import processing.core.PGraphics;
@@ -583,7 +584,7 @@ public abstract class Controller< T > implements ControllerInterface< T > , CDra
 			return false;
 		}
 		if ( theStatus == true ) {
-			if ( isInside ) {
+			if ( inside() ) {
 				isMousePressed = true;
 				if ( !cp5.isAltDown( ) ) {
 					mousePressed( );
@@ -629,7 +630,7 @@ public abstract class Controller< T > implements ControllerInterface< T > , CDra
 					cp5.getControlBroadcaster( ).invokeAction( new CallbackEvent( this , ACTION_RELEASE_OUTSIDE ) );
 					callListener( ACTION_RELEASE_OUTSIDE );
 				}
-				if ( this instanceof Textfield ) {
+				if ( this instanceof ReleasedOutsideListener) {
 					mouseReleasedOutside( );
 					onReleaseOutside( );
 					callListener( ACTION_RELEASE_OUTSIDE );
@@ -1216,7 +1217,7 @@ public abstract class Controller< T > implements ControllerInterface< T > , CDra
 	 * 
 	 * @param KeyEvent theEvent
 	 */
-	@ControlP5.Invisible public void keyEvent( final KeyEvent theEvent ) {
+	 public void keyEvent( final KeyEvent theEvent ) {
 	}
 
 	/**
