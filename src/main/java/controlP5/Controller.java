@@ -1197,6 +1197,7 @@ public abstract class Controller< T > implements ControllerInterface< T > , CDra
 	}
 
 	protected void mousePressed( ) {
+		( (ControllerGroup<?>) _myParent).setActiveController(this);
 	}
 
 	protected void mouseReleased( ) {

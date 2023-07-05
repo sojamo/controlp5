@@ -260,6 +260,8 @@ public class Textfield extends Controller< Textfield > implements ReleasedOutsid
 	}
 
 	@Override protected void mousePressed( ) {
+		super.mousePressed();
+
 		if ( isActive ) {
 			// TODO System.out.println("adjust cursor");
 		}
@@ -268,6 +270,8 @@ public class Textfield extends Controller< Textfield > implements ReleasedOutsid
 
 		// TODO System.out.println(x + ":" + y);
 		setFocus( true );
+
+
 	}
 
 	@Override public void mouseReleasedOutside( ) {
