@@ -32,6 +32,7 @@ import java.util.List;
 import java.util.Map;
 
 import controlP5.events.ReleasedOutsideListener;
+import controlP5.textfield.TextfieldCommand;
 import processing.core.PApplet;
 import processing.core.PFont;
 import processing.core.PGraphics;
@@ -394,9 +395,7 @@ public class Textfield extends Controller< Textfield > implements ReleasedOutsid
 		return this;
 	}
 
-	interface TextfieldCommand {
-		void execute( );
-	}
+
 
 	class InsertCharacter implements TextfieldCommand {
 

@@ -1,0 +1,14 @@
+SELF_CLOSING=1
+SPACE=2
+OPEN=3
+OPEN_SLASH=4
+CLOSE=5
+SLASH_CLOSE=6
+EQUALS=7
+Name=8
+STRING=9
+'<'=3
+'</'=4
+'>'=5
+'/>'=6
+'='=7
