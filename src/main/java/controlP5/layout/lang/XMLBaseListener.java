@@ -84,6 +84,18 @@ public class XMLBaseListener implements XMLListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitContent(XMLParser.ContentContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterValue(XMLParser.ValueContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitValue(XMLParser.ValueContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

@@ -1,23 +1,26 @@
 grammar XML;
 
-document  : element EOF ;
+document  : '<Window>' element+ '</Window>' ;
 
-element   : startTag (content | SPACE)* endTag
+element   : startTag (content )? endTag
           | SELF_CLOSING
           ;
 
-startTag  : OPEN Name attribute* CLOSE ;
+startTag  : OPEN Name  attribute* CLOSE ;
 
 endTag    : OPEN_SLASH Name CLOSE ;
 
 SELF_CLOSING : OPEN Name SLASH_CLOSE ;
 
-attribute : Name EQUALS STRING ;
+attribute : Name EQUALS value ;
 
 content   : element | STRING ;
 
+value: STRING
+     | NUMBER UNIT;
 
-SPACE     : [ \t\r\n] ;
+UNIT: 'px' | '%';
+WS : [ \t\r\n]+ -> skip;
 OPEN      : '<' ;
 OPEN_SLASH: '</' ;
 CLOSE     : '>' ;
@@ -26,6 +29,7 @@ EQUALS    : '=' ;
 
 Name      : ALPHA (ALPHA | DIGIT | '.' | '-' | '_')* ;
 STRING    : '"' ( ~'"' )* '"' | '\'' ( ~'\'' )* '\'' ;
+NUMBER : DIGIT+ ;
 
 fragment DIGIT : [0-9] ;
 fragment ALPHA : [a-zA-Z] ;
