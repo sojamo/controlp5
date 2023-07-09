@@ -1,4 +1,4 @@
-package main.java.controlp5.layout;
+package controlP5.layout;
 
 
 import main.java.controlp5.ControlP5;

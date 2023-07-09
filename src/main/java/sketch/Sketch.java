@@ -1,16 +1,17 @@
-package main.java.sketch;
+package sketch;
 
 
-import main.java.controlp5.Button;
-import main.java.controlp5.ControlP5;
-import main.java.controlp5.MultilineTextfield;
+
+import controlP5.Button;
+import controlP5.ControlP5;
+import controlP5.MultilineTextfield;
 import processing.core.PApplet;
 
 public class Sketch extends PApplet {
 
     static public void main (String[] args){
 
-        PApplet.main("main.java.sketch.Sketch");
+        PApplet.main("sketch.Sketch");
     }
 
     ControlP5 cp5;

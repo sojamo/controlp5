@@ -1,5 +1,5 @@
 // Generated from XML.g4 by ANTLR 4.13.0
-package main.java.controlp5.layout.lang;
+package controlP5.layout.lang;
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;

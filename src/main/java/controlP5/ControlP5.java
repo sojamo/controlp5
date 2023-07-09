@@ -1,4 +1,4 @@
-package main.java.controlp5;
+package controlP5;
 
 /**
  * controlP5 is a processing gui library.
@@ -50,7 +50,7 @@ import processing.core.PFont;
 import processing.core.PGraphics;
 import processing.event.KeyEvent;
 import processing.event.MouseEvent;
-import main.java.controlp5.ControlWindow.Pointer;
+import controlP5.ControlWindow.Pointer;
 
 /**
  * <p>

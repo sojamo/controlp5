@@ -1,4 +1,4 @@
-package main.java.controlp5;
+package controlP5;
 
 /**
  * controlP5 is a processing gui library.

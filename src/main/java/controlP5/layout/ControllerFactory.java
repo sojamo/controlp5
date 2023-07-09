@@ -1,4 +1,4 @@
-package main.java.controlp5.layout;
+package controlP5.layout;
 
 import controlP5.*;
 import main.java.controlp5.layout.lang.XMLParser;
