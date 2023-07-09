@@ -1,4 +1,4 @@
-package controlP5;
+package main.java.controlp5;
 
 /**
  * controlP5 is a processing gui library.
@@ -31,7 +31,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import controlP5.events.ReleasedOutsideListener;
+import main.java.controlp5.events.ReleasedOutsideListener;
 import processing.core.PApplet;
 import processing.core.PFont;
 import processing.core.PGraphics;
@@ -51,28 +51,28 @@ import processing.event.KeyEvent;
  * <ul>
  * <li>(1) add method controlEvent(ControlEvent theEvent) to your sketch. ControlP5 will automatically detect this
  * method and will used it to forward any controlEvent triggered by a controller - you can disable forwarding by using
- * setBroadcast(false) {@link controlP5.Controller#setBroadcast(boolean)}</li>
+ * setBroadcast(false) {@link Controller#setBroadcast(boolean)}</li>
  * <li>(2) each controller requires a unique name when being create. In case an existing name is used for a newly
  * created Controller, the existing one will be overwritten. each unique name can be used to automatically link a
  * controller to either a method or a field within your program.</li>
  * </ul>
  * 
- * @see controlP5.Bang
- * @see controlP5.Button
- * @see controlP5.Knob
- * @see controlP5.Matrix
- * @see controlP5.MultiList
- * @see controlP5.Numberbox
- * @see controlP5.RadioButton
- * @see controlP5.ListBox
- * @see controlP5.Slider
- * @see controlP5.Textarea
- * @see controlP5.Textfield
- * @see controlP5.Textlabel
- * @see controlP5.Toggle
- * @see controlP5.ControlGroup
- * @see controlP5.ControlBehavior
- * @see controlP5.ControlEvent
+ * @see Bang
+ * @see Button
+ * @see Knob
+ * @see Matrix
+ * @see MultiList
+ * @see Numberbox
+ * @see RadioButton
+ * @see ListBox
+ * @see Slider
+ * @see Textarea
+ * @see Textfield
+ * @see Textlabel
+ * @see Toggle
+ * @see ControlGroup
+ * @see ControlBehavior
+ * @see ControlEvent
  * 
  * @example use/ControlP5basics
  */
@@ -663,7 +663,7 @@ public abstract class Controller< T > implements ControllerInterface< T > , CDra
 	/**
 	 * returns true or false for the current listening status. by default it is set to false
 	 * 
-	 * @see controlP5.Controller#listen(boolean)
+	 * @see Controller#listen(boolean)
 	 * 
 	 * @return boolean
 	 */
@@ -711,7 +711,7 @@ public abstract class Controller< T > implements ControllerInterface< T > , CDra
 	 * this particular controller.
 	 * 
 	 * @exclude
-	 * @see controlP5.ControllerView
+	 * @see ControllerView
 	 * @param theApplet PApplet
 	 */
 	@ControlP5.Invisible @Override public void draw( final PGraphics theGraphics ) {
@@ -1532,7 +1532,7 @@ public abstract class Controller< T > implements ControllerInterface< T > , CDra
 	}
 
 	/**
-	 * @see controlP5.ControlListener
+	 * @see ControlListener
 	 * @param theListener ControlListener
 	 * @return Controller
 	 */
@@ -1542,7 +1542,7 @@ public abstract class Controller< T > implements ControllerInterface< T > , CDra
 	}
 
 	/**
-	 * @see controlP5.ControlListener
+	 * @see ControlListener
 	 * @param theListener ControlListener
 	 * @return Controller
 	 */
@@ -1800,7 +1800,7 @@ public abstract class Controller< T > implements ControllerInterface< T > , CDra
 	 * use setDisplay to customize your controller look. A new controller-display class required to implement interface
 	 * ControllerView. By default the display mode will be set to CUSTOM when setting a new display.
 	 * 
-	 * @see controlP5.ControllerView
+	 * @see ControllerView
 	 * @param theView
 	 * @return Controller
 	 */
@@ -1819,7 +1819,7 @@ public abstract class Controller< T > implements ControllerInterface< T > , CDra
 	}
 
 	/**
-	 * @see controlP5.Label
+	 * @see Label
 	 * @return Label
 	 */
 	@ControlP5.Layout public Label getCaptionLabel( ) {
@@ -2060,7 +2060,7 @@ public abstract class Controller< T > implements ControllerInterface< T > , CDra
 	}
 
 	/**
-	 * @see controlP5.Controller#registerTooltip(String)
+	 * @see Controller#registerTooltip(String)
 	 * @return Controller
 	 */
 	public T unregisterTooltip( ) {

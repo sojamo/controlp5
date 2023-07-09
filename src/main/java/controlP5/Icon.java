@@ -1,4 +1,4 @@
-package controlP5;
+package main.java.controlp5;
 
 /**
  * controlP5 is a processing gui library.
@@ -142,7 +142,7 @@ public class Icon extends Controller< Icon > {
 	/**
 	 * If the Icon acts as a switch, setOn will turn on
 	 * the switch. Use
-	 * {@link controlP5.Icon#setSwitch(boolean) setSwitch}
+	 * {@link Icon#setSwitch(boolean) setSwitch}
 	 * to turn a Icon into a Switch.
 	 */
 	public Icon setOn( ) {
@@ -157,7 +157,7 @@ public class Icon extends Controller< Icon > {
 	/**
 	 * If the Icon acts as a switch, setOff will turn off
 	 * the switch. Use
-	 * {@link controlP5.Icon#setSwitch(boolean) setSwitch}
+	 * {@link Icon#setSwitch(boolean) setSwitch}
 	 * to turn a Icon into a Switch.
 	 */
 	public Icon setOff( ) {

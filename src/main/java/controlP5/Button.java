@@ -1,4 +1,4 @@
-package controlP5;
+package main.java.controlp5;
 
 /**
  * controlP5 is a processing gui library.
@@ -168,7 +168,7 @@ public class Button extends Controller< Button > {
 	/**
 	 * If the button acts as a switch, setOn will turn on
 	 * the switch. Use
-	 * {@link controlP5.Button#setSwitch(boolean) setSwitch}
+	 * {@link Button#setSwitch(boolean) setSwitch}
 	 * to turn a Button into a Switch.
 	 * 
 	 * @return Button
@@ -185,7 +185,7 @@ public class Button extends Controller< Button > {
 	/**
 	 * If the button acts as a switch, setOff will turn off
 	 * the switch. Use
-	 * {@link controlP5.Button#setSwitch(boolean) setSwitch}
+	 * {@link Button#setSwitch(boolean) setSwitch}
 	 * to turn a Button into a Switch.
 	 * 
 	 * @return Button
@@ -222,7 +222,7 @@ public class Button extends Controller< Button > {
 	 * of the button. {@link setSwitch(boolean) setSwitch}
 	 * should have been set before.
 	 * 
-	 * @see controlP5.Button#setSwitch(boolean)
+	 * @see Button#setSwitch(boolean)
 	 * @return boolean
 	 */
 	public boolean getBooleanValue( ) {

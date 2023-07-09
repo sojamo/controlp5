@@ -1,10 +1,10 @@
-package controlP5.layout;
+package main.java.controlp5.layout;
 
 
-import controlP5.ControlP5;
-import controlP5.layout.lang.XMLBaseVisitor;
-import controlP5.layout.lang.XMLLexer;
-import controlP5.layout.lang.XMLParser;
+import main.java.controlp5.ControlP5;
+import main.java.controlp5.layout.lang.XMLBaseVisitor;
+import main.java.controlp5.layout.lang.XMLLexer;
+import main.java.controlp5.layout.lang.XMLParser;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;

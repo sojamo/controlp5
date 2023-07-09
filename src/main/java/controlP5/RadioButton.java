@@ -1,4 +1,4 @@
-package controlP5;
+package main.java.controlp5;
 
 /**
  * controlP5 is a processing gui library.
@@ -107,7 +107,7 @@ public class RadioButton extends ControlGroup< RadioButton > {
 	public RadioButton addItem( final String theName , final float theValue ) {
 		Toggle t = cp5.addToggle( theName , 0 , 0 , itemWidth , itemHeight );
 		t.getCaptionLabel( ).align( alignX , alignY ).setPadding( _myPaddingX , _myPaddingY );
-		t.setMode( ControlP5.DEFAULT );
+		t.setMode(DEFAULT);
 		t.setImages( images[ 0 ] , images[ 1 ] , images[ 2 ] );
 		t.setSize( images[ 0 ] );
 		addItem( t , theValue );
@@ -564,7 +564,7 @@ public class RadioButton extends ControlGroup< RadioButton > {
 		}
 		if ( theBroadcastFlag ) {
 			ControlEvent myEvent = new ControlEvent( this );
-			cp5.getControlBroadcaster( ).broadcast( myEvent , ControlP5Constants.FLOAT );
+			cp5.getControlBroadcaster( ).broadcast( myEvent , FLOAT);
 		}
 
 	}

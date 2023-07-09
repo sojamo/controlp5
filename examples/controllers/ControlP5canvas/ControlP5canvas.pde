@@ -76,9 +76,9 @@ Format:
 ClassName : returnType methodName(parameter type)
 
 
-controlP5.Canvas : void moveTo(ControlWindow) 
-controlP5.Canvas : void setup(PGraphics) 
-controlP5.Canvas : void update(PApplet) 
+main.java.controlp5.Canvas : void moveTo(ControlWindow)
+main.java.controlp5.Canvas : void setup(PGraphics)
+main.java.controlp5.Canvas : void update(PApplet)
 java.lang.Object : String toString() 
 java.lang.Object : boolean equals(Object) 
 

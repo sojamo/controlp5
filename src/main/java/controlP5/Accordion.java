@@ -1,4 +1,4 @@
-package controlP5;
+package main.java.controlp5;
 
 /**
  * controlP5 is a processing gui library.
@@ -29,8 +29,8 @@ package controlP5;
  * <p>
  * An Accordion here is a list of ControlGroups which can be expanded and collapsed. 
  * 
- * @see controlP5.ControllerGroup
- * @see controlP5.ControlGroup
+ * @see ControllerGroup
+ * @see ControlGroup
  * @example controllers/ControlP5accordion
  */
 @SuppressWarnings( "rawtypes" ) public class Accordion extends ControlGroup< Accordion > {
@@ -77,7 +77,7 @@ package controlP5;
 	 * theGroup) overwrites it's super method. if you want to remove a ControlGroup only from the
 	 * accordion, use removeItem(ControlGroup).
 	 * 
-	 * @see controlP5.Accordion#removeItem(ControlGroup)
+	 * @see Accordion#removeItem(ControlGroup)
 	 * @return ControllerInterface
 	 */
 	@Override public Accordion remove( ControllerInterface< ? > theGroup ) {

@@ -1,4 +1,4 @@
-package controlP5;
+package main.java.controlp5;
 
 /**
  * controlP5 is a processing gui library.
@@ -32,7 +32,7 @@ package controlP5;
  * </p>
  * 
  * @example use/ControlP5callback
- * @see controlP5.ControlP5#addCallback(CallbackListener)
+ * @see ControlP5#addCallback(CallbackListener)
  */
 public interface CallbackListener {
 

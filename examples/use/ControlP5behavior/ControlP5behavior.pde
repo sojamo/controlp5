@@ -113,10 +113,10 @@ Format:
 ClassName : returnType methodName(parameter type)
 
 
-controlP5.ControlBehavior : Controller controller() 
-controlP5.ControlBehavior : boolean isActive() 
-controlP5.ControlBehavior : void setActive(boolean) 
-controlP5.ControlBehavior : void setValue(float) 
+main.java.controlp5.ControlBehavior : Controller controller()
+main.java.controlp5.ControlBehavior : boolean isActive()
+main.java.controlp5.ControlBehavior : void setActive(boolean)
+main.java.controlp5.ControlBehavior : void setValue(float)
 java.lang.Object : String toString() 
 java.lang.Object : boolean equals(Object) 
 

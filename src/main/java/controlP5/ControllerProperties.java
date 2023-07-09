@@ -1,4 +1,4 @@
-package controlP5;
+package main.java.controlp5;
 
 /**
  * controlP5 is a processing gui library.
@@ -35,7 +35,6 @@ import java.io.ObjectOutputStream;
 import java.io.StringReader;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -348,7 +347,7 @@ public class ControllerProperties {
 	 * logs all registered properties in memory. Here, clones of properties are stored inside a map and can be accessed
 	 * by key using the getLog method.
 	 * 
-	 * @see controlP5.ControllerProperties#getSnapshot(String)
+	 * @see ControllerProperties#getSnapshot(String)
 	 * @param theKey
 	 * @return ControllerProperties
 	 */
@@ -415,7 +414,7 @@ public class ControllerProperties {
 	/**
 	 * restores properties previously stored as snapshot in memory.
 	 * 
-	 * @see controlP5.ControllerProperties#setSnapshot(String)
+	 * @see ControllerProperties#setSnapshot(String)
 	 */
 	public ControllerProperties getSnapshot( String theKey ) {
 		Set< ControllerProperty > l = _mySnapshots.get( theKey );

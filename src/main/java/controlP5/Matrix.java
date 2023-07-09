@@ -1,4 +1,4 @@
-package controlP5;
+package main.java.controlp5;
 
 /**
  * controlP5 is a processing gui library.
@@ -81,7 +81,7 @@ public class Matrix extends Controller< Matrix > {
 
 		_myPlug = cp5.papplet;
 		_myPlugName = getName( );
-		_myCaptionLabel.align( ControlP5.LEFT , ControlP5.BOTTOM_OUTSIDE );
+		_myCaptionLabel.align(LEFT, BOTTOM_OUTSIDE);
 		_myCaptionLabel.setPadding( 0 , 4 );
 		runThread( );
 	}

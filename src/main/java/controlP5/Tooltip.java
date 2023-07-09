@@ -1,4 +1,4 @@
-package controlP5;
+package main.java.controlp5;
 
 /**
  * controlP5 is a processing gui library.
@@ -187,7 +187,7 @@ public class Tooltip {
 	 * view class can be found at the bottom of the Tooltip
 	 * source.
 	 * 
-	 * @see controlP5.ControllerView
+	 * @see ControllerView
 	 * @param theDisplay
 	 * @return Tooltip
 	 */
@@ -248,8 +248,8 @@ public class Tooltip {
 	 * any effect without changing the default display to a
 	 * custom ControllerView.
 	 * 
-	 * @see controlP5.ControllerView
-	 * @see controlP5.Tooltip#setDisplay(ControllerView)
+	 * @see ControllerView
+	 * @see Tooltip#setDisplay(ControllerView)
 	 * @return Tooltip
 	 */
 	public Tooltip setWidth( int theWidth ) {
@@ -263,7 +263,7 @@ public class Tooltip {
 	}
 
 	/**
-	 * @see controlP5.Tooltip#setWidth(int)
+	 * @see Tooltip#setWidth(int)
 	 * @param theHeight
 	 * @return Tooltip
 	 */
@@ -294,7 +294,7 @@ public class Tooltip {
 	 * controller. to disable a tooltip for aparticular
 	 * controller, used unregister(Controller)
 	 * 
-	 * @see controlP5.Tooltip#unregister(Controller)
+	 * @see Tooltip#unregister(Controller)
 	 * @return Tooltip
 	 */
 	public Tooltip disable( ) {

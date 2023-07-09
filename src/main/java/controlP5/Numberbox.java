@@ -1,4 +1,4 @@
-package controlP5;
+package main.java.controlp5;
 
 /**
  * controlP5 is a processing gui library.
@@ -113,7 +113,7 @@ public class Numberbox extends Controller< Numberbox > {
 
 	/* (non-Javadoc)
 	 * 
-	 * @see controlP5.Controller#mousePressed() */
+	 * @see main.java.controlp5.Controller#mousePressed() */
 	@Override
 	@ControlP5.Invisible
 	public void mousePressed( ) {
@@ -122,7 +122,7 @@ public class Numberbox extends Controller< Numberbox > {
 
 	/* (non-Javadoc)
 	 * 
-	 * @see controlP5.Controller#mouseReleased() */
+	 * @see main.java.controlp5.Controller#mouseReleased() */
 	@Override
 	@ControlP5.Invisible
 	public void mouseReleased( ) {
@@ -131,7 +131,7 @@ public class Numberbox extends Controller< Numberbox > {
 
 	/* (non-Javadoc)
 	 * 
-	 * @see controlP5.Controller#mouseReleasedOutside() */
+	 * @see main.java.controlp5.Controller#mouseReleasedOutside() */
 	@Override
 	@ControlP5.Invisible
 	public void mouseReleasedOutside( ) {
@@ -237,7 +237,7 @@ public class Numberbox extends Controller< Numberbox > {
 
 	/* (non-Javadoc)
 	 * 
-	 * @see controlP5.Controller#update() */
+	 * @see main.java.controlp5.Controller#update() */
 	@Override
 	public Numberbox update( ) {
 		return setValue( _myValue );
@@ -290,7 +290,7 @@ public class Numberbox extends Controller< Numberbox > {
 	}
 
 	/**
-	 * @see controlP5.Numberbox#setScrollSensitivity(float)
+	 * @see Numberbox#setScrollSensitivity(float)
 	 * 
 	 * @param theValue
 	 * @return

@@ -95,7 +95,7 @@ You can find further details about class ControllerView in the javadoc.
 Format:
 ClassName : returnType methodName(parameter type)
 
-controlP5.ControllerView : void display(PApplet, T)
+main.java.controlp5.ControllerView : void display(PApplet, T)
 
 */
 

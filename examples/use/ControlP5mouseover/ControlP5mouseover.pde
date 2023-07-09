@@ -89,9 +89,9 @@ You can find further details about class ControlP5 in the javadoc.
 Format:
 ClassName : returnType methodName(parameter type)
 
-controlP5.ControlP5 : List getMouseOverList() 
-controlP5.ControlP5 : boolean isMouseOver() 
-controlP5.ControlP5 : boolean isMouseOver(ControllerInterface) 
+main.java.controlp5.ControlP5 : List getMouseOverList()
+main.java.controlp5.ControlP5 : boolean isMouseOver()
+main.java.controlp5.ControlP5 : boolean isMouseOver(ControllerInterface)
 
 */
 

@@ -1,4 +1,4 @@
-package controlP5;
+package main.java.controlp5;
 
 /**
  * controlP5 is a processing gui library.
@@ -167,7 +167,7 @@ public class ColorPicker extends ControlGroup< ColorPicker > {
 	private ColorPicker broadcast( ) {
 		ControlEvent ev = new ControlEvent( this );
 		setValue( getColorValue( ) );
-		cp5.getControlBroadcaster( ).broadcast( ev , ControlP5Constants.EVENT );
+		cp5.getControlBroadcaster( ).broadcast( ev , EVENT);
 		if ( _myPlug != null ) {
 			try {
 				Method method = _myPlug.getClass( ).getMethod( _myPlugName , int.class );

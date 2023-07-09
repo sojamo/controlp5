@@ -11,7 +11,7 @@
  */
  
 import controlP5.*;
-import static controlP5.ControlP5.*;
+import static main.java.controlp5.ControlP5.*;
 import java.util.*;
 import java.util.Map.Entry;
 

@@ -1,4 +1,4 @@
-package controlP5;
+package main.java.controlp5;
 
 /**
  * controlP5 is a processing gui library.
@@ -28,7 +28,7 @@ package controlP5;
 import java.util.ArrayList;
 
 import processing.core.PApplet;
-import static controlP5.Controller.*;
+import static main.java.controlp5.Controller.*;
 
 public class ControlP5Legacy {
 

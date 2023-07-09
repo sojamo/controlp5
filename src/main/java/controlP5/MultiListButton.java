@@ -1,4 +1,4 @@
-package controlP5;
+package main.java.controlp5;
 
 /**
  * controlP5 is a processing gui library.
@@ -25,9 +25,6 @@ package controlP5;
  * 
  */
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Used by MultiList.
  * 
@@ -41,7 +38,7 @@ public class MultiListButton extends Button implements MultiListInterface {
 	private Controller parent;
 	private MultiList root;
 	private int[] _myRect = new int[ 4 ];
-	protected int _myDirection = ControlP5Constants.RIGHT;
+	protected int _myDirection = RIGHT;
 	private boolean isUpperCase = true;
 
 	/**

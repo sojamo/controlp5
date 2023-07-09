@@ -1,4 +1,4 @@
-package controlP5;
+package main.java.controlp5;
 
 /**
  * controlP5 is a processing gui library.
@@ -31,7 +31,7 @@ import java.io.Serializable;
 /**
  * Labels use the ControllerStyle class to store margin and padding information.
  * 
- * @see controlP5.Label#getStyle()
+ * @see Label#getStyle()
  * 
  * @example extra/ControlP5style
  */

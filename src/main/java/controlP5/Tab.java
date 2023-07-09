@@ -1,4 +1,4 @@
-package controlP5;
+package main.java.controlp5;
 
 /**
  * controlP5 is a processing gui library.
@@ -30,7 +30,7 @@ import processing.core.PGraphics;
 /**
  * Tabs are used to organize controllers. Tabs are arranged horizontally from the top-left corner by
  * default, Tab extends ControllerGroup, for more available methods see the ControllerGroup
- * documentation. Reposition tabs with {@link controlP5.ControlWindow#setPositionOfTabs(int, int)}
+ * documentation. Reposition tabs with {@link ControlWindow#setPositionOfTabs(int, int)}
  * 
  * @example controllers/ControlP5tab
  * @nosuperclasses ControllerGroup ControllerGroup
@@ -137,7 +137,7 @@ public class Tab extends ControllerGroup< Tab > {
 	@ControlP5.Invisible public void mousePressed( ) {
 		cp5.getWindow( ).activateTab( this );
 		if ( isEventActive ) {
-			cp5.getControlBroadcaster( ).broadcast( new ControlEvent( this ) , ControlP5Constants.METHOD );
+			cp5.getControlBroadcaster( ).broadcast( new ControlEvent( this ) , METHOD);
 		}
 	}
 

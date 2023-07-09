@@ -28,11 +28,11 @@
     </repositories>
 
     <dependencies>
-        <dependency>
+        <!--<dependency>
             <groupId>com.github.micycle1</groupId>
             <artifactId>processing-core-4</artifactId>
             <version>4.2</version>
-        </dependency>
+        </dependency>-->
 
 
         <!-- ANTLR4 runtime -->

@@ -1,4 +1,4 @@
-package controlP5;
+package main.java.controlp5;
 
 /**
  * controlP5 is a processing gui library.
@@ -82,7 +82,7 @@ public class Knob extends Controller< Knob > {
 		setMax( theMax );
 		_myDiameter = theWidth;
 		_myRadius = _myDiameter / 2;
-		_myUnit = ( _myMax - _myMin ) / ControlP5Constants.TWO_PI;
+		_myUnit = ( _myMax - _myMin ) / TWO_PI;
 		startAngle = HALF_PI + PI * 0.25f;
 		angleRange = PI + HALF_PI;
 		myAngle = startAngle;
@@ -450,16 +450,16 @@ public class Knob extends Controller< Knob > {
 			theGraphics.popMatrix( );
 			int c = isActive( ) ? getColor( ).getActive( ) : getColor( ).getForeground( );
 			theGraphics.pushMatrix( );
-			if ( getViewStyle( ) == Controller.LINE ) {
+			if ( getViewStyle( ) == LINE) {
 				theGraphics.rotate( getAngle( ) );
 				theGraphics.stroke( c );
 				theGraphics.strokeWeight( getTickMarkWeight( ) );
 				theGraphics.line( 0 , 0 , getRadius( ) , 0 );
-			} else if ( getViewStyle( ) == Controller.ELLIPSE ) {
+			} else if ( getViewStyle( ) == ELLIPSE) {
 				theGraphics.rotate( getAngle( ) );
 				theGraphics.fill( c );
 				theGraphics.ellipse( getRadius( ) * 0.75f , 0 , getRadius( ) * 0.2f , getRadius( ) * 0.2f );
-			} else if ( getViewStyle( ) == Controller.ARC ) {
+			} else if ( getViewStyle( ) == ARC) {
 				theGraphics.fill( c );
 				theGraphics.arc( 0 , 0 , getRadius( ) * 1.8f , getRadius( ) * 1.8f , getStartAngle( ) , getAngle( ) + ( ( getStartAngle( ) == getAngle( ) ) ? 0.06f : 0f ) );
 				theGraphics.fill( theGraphics.red( getColor( ).getBackground( ) ) , theGraphics.green( getColor( ).getBackground( ) ) , theGraphics.blue( getColor( ).getBackground( ) ) , 255 );
@@ -494,7 +494,7 @@ public class Knob extends Controller< Knob > {
 			theGraphics.translate( -getWidth( ) / 2 , -getHeight( ) / 2 );
 			if ( isLabelVisible ) {
 				_myCaptionLabel.draw( theGraphics , 0 , 0 , theController );
-				_myValueLabel.align( ControlP5.CENTER , ControlP5.CENTER );
+				_myValueLabel.align(CENTER, CENTER);
 				_myValueLabel.draw( theGraphics , 0 , 0 , theController );
 			}
 			theGraphics.popMatrix( );
@@ -569,4 +569,4 @@ public class Knob extends Controller< Knob > {
 
 /* (non-Javadoc)
  * 
- * @see controlP5.Controller#updateInternalEvents(processing.core.PApplet) */
+ * @see main.java.controlp5.Controller#updateInternalEvents(processing.core.PApplet) */

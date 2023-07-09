@@ -1,4 +1,4 @@
-package controlP5;
+package main.java.controlp5;
 
 import processing.event.KeyEvent;
 

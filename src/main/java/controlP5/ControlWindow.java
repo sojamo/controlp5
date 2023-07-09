@@ -1,4 +1,4 @@
-package controlP5;
+package main.java.controlp5;
 
 /**
  * controlP5 is a processing gui library.
@@ -36,7 +36,6 @@ import processing.core.PConstants;
 import processing.core.PGraphics;
 import processing.event.KeyEvent;
 import processing.event.MouseEvent;
-import controlP5.ControlP5Base.KeyCode;
 
 // TODO ! add mouse-button mask for left, center, right; also see Controller #mouse-button ^1
 
@@ -484,7 +483,7 @@ public final class ControlWindow {
 					c[ n++ ] = ( ( char ) i );
 				}
 			}
-			KeyCode code = new KeyCode( c );
+			ControlP5Base.KeyCode code = new ControlP5Base.KeyCode( c );
 
 			if ( cp5.keymap.containsKey( code ) ) {
 				for ( ControlKey ck : cp5.keymap.get( code ) ) {
@@ -622,7 +621,7 @@ public final class ControlWindow {
 	 * Adds a custom context to a ControlWindow. Use a
 	 * custom class which implements the CDrawable interface
 	 *
-	 * @see controlP5.CDrawable
+	 * @see CDrawable
 	 * @param theDrawable CDrawable
 	 */
 	public ControlWindow setContext( CDrawable theDrawable ) {
@@ -883,13 +882,13 @@ public final class ControlWindow {
 	 * and released state. The pointer can be accessed by
 	 * its getter method {@link ControlWindow#getPointer()}.
 	 * Then use
-	 * {@link controlP5.ControlWindow#set(int, int)} to
+	 * {@link ControlWindow#set(int, int)} to
 	 * alter its position or invoke {
-	 * {@link controlP5.ControlWindow#pressed()} or
-	 * {@link controlP5.ControlWindow#released()} to change
+	 * {@link ControlWindow#pressed()} or
+	 * {@link ControlWindow#released()} to change
 	 * its state. To disable the mouse and enable the
-	 * Pointer use {@link controlP5.ControlWindow#enable()}
-	 * and {@link controlP5.ControlWindow#disable()} to
+	 * Pointer use {@link ControlWindow#enable()}
+	 * and {@link ControlWindow#disable()} to
 	 * default back to the mouse as input parameter.
 	 */
 	// TODO offset against pgx and pgy

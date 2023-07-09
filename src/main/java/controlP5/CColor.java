@@ -1,4 +1,4 @@
-package controlP5;
+package main.java.controlp5;
 
 /**
  * controlP5 is a processing gui library.
@@ -103,7 +103,7 @@ public class CColor implements Serializable {
 	 * @param theAlpha
 	 */
 	public CColor setAlpha( int theAlpha ) {
-		System.out.println( "controlP5.CColor.setAlpha: setting alpha values disabled for this version of controlP5." );
+		System.out.println( "main.java.controlp5.CColor.setAlpha: setting alpha values disabled for this version of controlP5." );
 		return this;
 	}
 

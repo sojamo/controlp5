@@ -1,4 +1,4 @@
-package controlP5;
+package main.java.controlp5;
 
 /**
  * controlP5 is a processing gui library.
@@ -47,7 +47,7 @@ public class MultiList extends Controller< MultiList > implements MultiListInter
 	protected boolean isUpdateLocation = false;
 	protected MultiListInterface mostRecent;
 	protected int[] _myRect = new int[ 4 ];
-	protected int _myDirection = ControlP5Constants.RIGHT;
+	protected int _myDirection = RIGHT;
 	public int closeDelay = 30;
 	protected int _myDefaultButtonHeight = 10;
 	protected boolean isUpperCase = true;
@@ -164,7 +164,7 @@ public class MultiList extends Controller< MultiList > implements MultiListInter
 		if ( theEvent.getController( ) instanceof MultiListButton ) {
 			_myValue = theEvent.getController( ).getValue( );
 			ControlEvent myEvent = new ControlEvent( this );
-			cp5.getControlBroadcaster( ).broadcast( myEvent , ControlP5Constants.FLOAT );
+			cp5.getControlBroadcaster( ).broadcast( myEvent , FLOAT);
 		}
 	}
 

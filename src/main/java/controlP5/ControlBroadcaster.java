@@ -1,4 +1,4 @@
-package controlP5;
+package main.java.controlp5;
 
 /**
  * controlP5 is a processing gui library.
@@ -42,7 +42,7 @@ import java.util.Set;
  * through an instance of the ControlP5 class. Instead of accessing the ControlBroadcaster directly,
  * use the convenience methods available from the ControlP5 class.
  * 
- * @see controlP5.ControlP5#getControlBroadcaster()
+ * @see ControlP5#getControlBroadcaster()
  */
 public class ControlBroadcaster {
 

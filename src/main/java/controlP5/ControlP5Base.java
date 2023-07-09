@@ -1,4 +1,4 @@
-package controlP5;
+package main.java.controlp5;
 
 /**
  * controlP5 is a processing gui library.
@@ -39,7 +39,7 @@ import java.util.TreeSet;
 import processing.core.PApplet;
 import processing.event.Event;
 
-import static controlP5.Controller.*;
+import static main.java.controlp5.Controller.*;
 
 /**
  * The ControlP5Base supports the ControlP5 class and

@@ -1,4 +1,4 @@
-package controlP5;
+package main.java.controlp5;
 
 /**
  * controlP5 is a processing gui library.
@@ -29,8 +29,8 @@ package controlP5;
  * ControlListener is an interface that can be implemented by a custom class to be notified when
  * controller values change. To add a ControlListener to a controller use Controller.addListner()
  * 
- * @see controlP5.Controller#addListener(ControlListener)
- * @see controlP5.CallbackListener
+ * @see Controller#addListener(ControlListener)
+ * @see CallbackListener
  * 
  * @example use/ControlP5listenerForSingleController
  */
@@ -41,8 +41,8 @@ public interface ControlListener {
 	 * value changes. Use the CallbackListener to get informed when actions such as pressed,
 	 * release, drag, etc are performed.
 	 * 
-	 * @see controlP5.CallbackListener
-	 * @see controlP5.CallbackEvent
+	 * @see CallbackListener
+	 * @see CallbackEvent
 	 * @param theEvent
 	 *            ControlEvent
 	 * @example ControlP5listener

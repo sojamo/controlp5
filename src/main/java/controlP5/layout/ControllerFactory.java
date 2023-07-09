@@ -1,12 +1,11 @@
-package controlP5.layout;
+package main.java.controlp5.layout;
 
 import controlP5.*;
-import controlP5.layout.lang.XMLParser;
+import main.java.controlp5.layout.lang.XMLParser;
 import processing.core.PApplet;
 
 import java.lang.reflect.Constructor;
 import java.util.*;
-import java.lang.reflect.*;
 
 public class ControllerFactory {
     private final PApplet applet;

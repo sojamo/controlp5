@@ -1,4 +1,4 @@
-package controlP5;
+package main.java.controlp5;
 
 /**
  * controlP5 is a processing gui library.
@@ -31,7 +31,6 @@ import java.util.logging.Level;
 import processing.core.PApplet;
 import processing.core.PFont;
 import processing.core.PGraphics;
-import controlP5.ControlP5.Invisible;
 
 /**
  * A range slider works just like a slider but can be adjusted on both ends.
@@ -179,7 +178,8 @@ public class Range extends Controller< Range > {
 		return this;
 	}
 
-	@Override @Invisible public void mousePressed( ) {
+	@Override @ControlP5.Invisible
+    public void mousePressed( ) {
 
 		final float posX = x( _myParent.getAbsolutePosition( ) ) + x( position );
 		final float posY = y( _myParent.getAbsolutePosition( ) ) + y( position );

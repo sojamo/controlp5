@@ -1,4 +1,4 @@
-package controlP5;
+package main.java.controlp5;
 
 /**
  * controlP5 is a processing gui library.
@@ -72,7 +72,7 @@ public class Slider2D extends Controller< Slider2D > {
 
 	/* (non-Javadoc)
 	 * 
-	 * @see controlP5.Controller#updateInternalEvents(processing.core.PApplet) */
+	 * @see main.java.controlp5.Controller#updateInternalEvents(processing.core.PApplet) */
 	@ControlP5.Invisible public Slider2D updateInternalEvents( PApplet theApplet ) {
 		if ( isInside( ) ) {
 			if ( !cp5.isAltDown( ) ) {
@@ -188,7 +188,7 @@ public class Slider2D extends Controller< Slider2D > {
 
 	/* (non-Javadoc) TODO see https://forum.processing.org/topic/controlp5-slider2d-questions
 	 * 
-	 * @see controlP5.Controller#setArrayValue(float[]) */
+	 * @see main.java.controlp5.Controller#setArrayValue(float[]) */
 	@Override public Slider2D setArrayValue( float[] theArray ) {
 		_myArrayValue = theArray;
 		float rX = ( getWidth( ) - cursorWidth ) / ( float ) ( _myMaxX - _myMinX );
@@ -212,7 +212,7 @@ public class Slider2D extends Controller< Slider2D > {
 
 	/* (non-Javadoc)
 	 * 
-	 * @see controlP5.Controller#setValue(float) */
+	 * @see main.java.controlp5.Controller#setValue(float) */
 	public Slider2D setValue( float theValue ) {
 		_myArrayValue[ 0 ] = cursorX / ( ( float ) ( getWidth( ) - cursorWidth ) / ( float ) getWidth( ) );
 		_myArrayValue[ 1 ] = cursorY / ( ( float ) ( getHeight( ) - cursorHeight ) / ( float ) getHeight( ) );

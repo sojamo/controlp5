@@ -51,7 +51,7 @@ void setup() {
 
   // the following CallbackListener will listen to any controlP5 
   // action such as enter, leave, pressed, released, releasedoutside, broadcast
-  // see static variables starting with ACTION_ inside class controlP5.ControlP5Constants
+  // see static variables starting with ACTION_ inside class main.java.controlp5.ControlP5Constants
 
   cb = new CallbackListener() {
     public void controlEvent(CallbackEvent theEvent) {
@@ -166,8 +166,8 @@ a list of all methods available for the CallbackEvent Controller
  ClassName : returnType methodName(parameter type)
  
  
- controlP5.CallbackEvent : Controller getController() 
- controlP5.CallbackEvent : int getAction() 
+ main.java.controlp5.CallbackEvent : Controller getController()
+ main.java.controlp5.CallbackEvent : int getAction()
  java.lang.Object : String toString() 
  java.lang.Object : boolean equals(Object) 
  

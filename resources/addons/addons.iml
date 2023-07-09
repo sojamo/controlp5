@@ -8,5 +8,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="controlp5" />
+    <orderEntry type="library" name="processing" level="project" />
   </component>
 </module>

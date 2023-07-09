@@ -1,4 +1,4 @@
-package controlP5;
+package main.java.controlp5;
 
 /**
  * controlP5 is a processing gui library.
@@ -50,7 +50,7 @@ import processing.core.PFont;
 import processing.core.PGraphics;
 import processing.event.KeyEvent;
 import processing.event.MouseEvent;
-import controlP5.ControlWindow.Pointer;
+import main.java.controlp5.ControlWindow.Pointer;
 
 /**
  * <p>
@@ -63,7 +63,7 @@ import controlP5.ControlWindow.Pointer;
  * ControlP5Base class.
  * </p>
  * 
- * @see controlP5.ControlP5Base
+ * @see ControlP5Base
  * @example use/ControlP5basics
  */
 public class ControlP5 extends ControlP5Base {
@@ -326,14 +326,14 @@ public class ControlP5 extends ControlP5Base {
 
 	/**
 	 * 
-	 * @see controlP5.ControlBroadcaster
+	 * @see ControlBroadcaster
 	 */
 	public ControlBroadcaster getControlBroadcaster( ) {
 		return _myControlBroadcaster;
 	}
 
 	/**
-	 * @see controlP5.ControlListener
+	 * @see ControlListener
 	 */
 	public ControlP5 addListener( ControlListener ... theListeners ) {
 		getControlBroadcaster( ).addListener( theListeners );
@@ -341,7 +341,7 @@ public class ControlP5 extends ControlP5Base {
 	}
 
 	/**
-	 * @see controlP5.ControlListener
+	 * @see ControlListener
 	 */
 	public ControlP5 removeListener( ControlListener ... theListeners ) {
 		getControlBroadcaster( ).removeListener( theListeners );
@@ -349,7 +349,7 @@ public class ControlP5 extends ControlP5Base {
 	}
 
 	/**
-	 * @see controlP5.ControlListener
+	 * @see ControlListener
 	 */
 	public ControlP5 removeListener( ControlListener theListener ) {
 		getControlBroadcaster( ).removeListener( theListener );
@@ -357,15 +357,15 @@ public class ControlP5 extends ControlP5Base {
 	}
 
 	/**
-	 * @see controlP5.ControlListener
+	 * @see ControlListener
 	 */
 	public ControlListener getListener( int theIndex ) {
 		return getControlBroadcaster( ).getListener( theIndex );
 	}
 
 	/**
-	 * @see controlP5.CallbackEvent
-	 * @see controlP5.CallbackListener
+	 * @see CallbackEvent
+	 * @see CallbackListener
 	 */
 	public ControlP5 addCallback( CallbackListener ... theListeners ) {
 		getControlBroadcaster( ).addCallback( theListeners );
@@ -373,8 +373,8 @@ public class ControlP5 extends ControlP5Base {
 	}
 
 	/**
-	 * @see controlP5.CallbackEvent
-	 * @see controlP5.CallbackListener
+	 * @see CallbackEvent
+	 * @see CallbackListener
 	 */
 	public ControlP5 addCallback( CallbackListener theListener ) {
 		getControlBroadcaster( ).addCallback( theListener );
@@ -382,8 +382,8 @@ public class ControlP5 extends ControlP5Base {
 	}
 
 	/**
-	 * @see controlP5.CallbackEvent
-	 * @see controlP5.CallbackListener
+	 * @see CallbackEvent
+	 * @see CallbackListener
 	 */
 	public ControlP5 addCallback( CallbackListener theListener , Controller< ? > ... theControllers ) {
 		getControlBroadcaster( ).addCallback( theListener , theControllers );
@@ -391,8 +391,8 @@ public class ControlP5 extends ControlP5Base {
 	}
 
 	/**
-	 * @see controlP5.CallbackEvent
-	 * @see controlP5.CallbackListener
+	 * @see CallbackEvent
+	 * @see CallbackListener
 	 */
 	public ControlP5 removeCallback( CallbackListener ... theListeners ) {
 		getControlBroadcaster( ).removeCallback( theListeners );
@@ -400,8 +400,8 @@ public class ControlP5 extends ControlP5Base {
 	}
 
 	/**
-	 * @see controlP5.CallbackEvent
-	 * @see controlP5.CallbackListener
+	 * @see CallbackEvent
+	 * @see CallbackListener
 	 */
 	public ControlP5 removeCallback( Controller< ? > ... theControllers ) {
 		getControlBroadcaster( ).removeCallback( theControllers );
@@ -409,8 +409,8 @@ public class ControlP5 extends ControlP5Base {
 	}
 
 	/**
-	 * @see controlP5.CallbackEvent
-	 * @see controlP5.CallbackListener
+	 * @see CallbackEvent
+	 * @see CallbackListener
 	 */
 	public ControlP5 removeCallback( Controller< ? > theController ) {
 		getControlBroadcaster( ).removeCallback( theController );
@@ -649,7 +649,7 @@ public class ControlP5 extends ControlP5Base {
 
 	/**
 	 * @exclude
-	 * @see controlP5.ControlP5#getAll(Class)
+	 * @see ControlP5#getAll(Class)
 	 * @return List<ControllerInterface>
 	 */
 	@ControlP5.Invisible public List< ControllerInterface< ? >> getList( ) {
@@ -806,7 +806,7 @@ public class ControlP5 extends ControlP5Base {
 	/**
 	 * adds a Canvas to the default sketch window.
 	 * 
-	 * @see controlP5.Canvas
+	 * @see Canvas
 	 */
 	public ControlP5 addCanvas( Canvas theCanvas ) {
 		getWindow( ).addCanvas( theCanvas );
@@ -910,7 +910,7 @@ public class ControlP5 extends ControlP5Base {
 	 * Saves the current values of controllers into a
 	 * default properties file
 	 * 
-	 * @see controlP5.ControllerProperties
+	 * @see ControllerProperties
 	 */
 	public boolean saveProperties( ) {
 		return _myProperties.save( );
@@ -920,7 +920,7 @@ public class ControlP5 extends ControlP5Base {
 	 * Saves the current values of controllers into a file,
 	 * the filepath is given by parameter theFilePath.
 	 * 
-	 * @see controlP5.ControllerProperties
+	 * @see ControllerProperties
 	 */
 	public boolean saveProperties( String theFilePath ) {
 		return _myProperties.saveAs( theFilePath );
@@ -934,7 +934,7 @@ public class ControlP5 extends ControlP5Base {
 	 * Loads properties from a default properties file and
 	 * changes values of controllers accordingly.
 	 * 
-	 * @see controlP5.ControllerProperties
+	 * @see ControllerProperties
 	 * @return
 	 */
 	public boolean loadProperties( ) {
@@ -1002,8 +1002,8 @@ public class ControlP5 extends ControlP5Base {
 	/**
 	 * shows all controllers and tabs in your sketch.
 	 * 
-	 * @see controlP5.ControlP5#isVisible()
-	 * @see controlP5.ControlP5#hide()
+	 * @see ControlP5#isVisible()
+	 * @see ControlP5#hide()
 	 */
 
 	public void show( ) {
@@ -1019,8 +1019,8 @@ public class ControlP5 extends ControlP5Base {
 	 * returns true or false according to the current
 	 * visibility flag.
 	 * 
-	 * @see controlP5.ControlP5#show()
-	 * @see controlP5.ControlP5#hide()
+	 * @see ControlP5#show()
+	 * @see ControlP5#hide()
 	 */
 	public boolean isVisible( ) {
 		return controlWindow.isVisible( );
@@ -1039,8 +1039,8 @@ public class ControlP5 extends ControlP5Base {
 	 * hide all controllers and tabs inside your sketch
 	 * window.
 	 * 
-	 * @see controlP5.ControlP5#show()
-	 * @see controlP5.ControlP5#isVisible()
+	 * @see ControlP5#show()
+	 * @see ControlP5#isVisible()
 	 */
 	public void hide( ) {
 		controlWindow.hide( );
@@ -1049,8 +1049,8 @@ public class ControlP5 extends ControlP5Base {
 	/**
 	 * forces all controllers to update.
 	 * 
-	 * @see controlP5.ControlP5#isUpdate()
-	 * @see controlP5.ControlP5#setUpdate()
+	 * @see ControlP5#isUpdate()
+	 * @see ControlP5#setUpdate()
 	 */
 	public void update( ) {
 		controlWindow.update( );
@@ -1060,8 +1060,8 @@ public class ControlP5 extends ControlP5Base {
 	 * checks if automatic updates are enabled. By default
 	 * this is true.
 	 * 
-	 * @see controlP5.ControlP5#update()
-	 * @see controlP5.ControlP5#setUpdate(boolean)
+	 * @see ControlP5#update()
+	 * @see ControlP5#setUpdate(boolean)
 	 * @return
 	 */
 	public boolean isUpdate( ) {
@@ -1072,8 +1072,8 @@ public class ControlP5 extends ControlP5Base {
 	 * changes the update behavior according to parameter
 	 * theFlag
 	 * 
-	 * @see controlP5.ControlP5#update()
-	 * @see controlP5.ControlP5#isUpdate()
+	 * @see ControlP5#update()
+	 * @see ControlP5#isUpdate()
 	 * @param theFlag
 	 */
 	public void setUpdate( boolean theFlag ) {

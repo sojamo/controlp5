@@ -3,7 +3,7 @@ import java.util.*;
 import java.text.*;
 import java.io.*;
 
-import static controlP5.ControlP5Legacy.*;
+import static main.java.controlp5.ControlP5Legacy.*;
 
 public class AddMethodList {
 

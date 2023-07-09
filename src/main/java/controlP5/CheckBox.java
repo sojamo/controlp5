@@ -1,4 +1,4 @@
-package controlP5;
+package main.java.controlp5;
 
 /**
  * controlP5 is a processing gui library.
@@ -38,7 +38,7 @@ import processing.core.PImage;
  * 
  * @example controllers/ControlP5checkBox
  * 
- * @see controlP5.Toggle
+ * @see Toggle
  * 
  */
 public class CheckBox extends ControlGroup< CheckBox > {
@@ -246,7 +246,7 @@ public class CheckBox extends ControlGroup< CheckBox > {
 	public CheckBox addItem( final String theName , final float theValue ) {
 		Toggle t = cp5.addToggle( theName , 0 , 0 , itemWidth , itemHeight );
 		t.getCaptionLabel( ).align( RIGHT_OUTSIDE , CENTER ).setPadding( Label.paddingX , 0 );
-		t.setMode( ControlP5.DEFAULT );
+		t.setMode(DEFAULT);
 		t.setImages( images[ 0 ] , images[ 1 ] , images[ 2 ] );
 		t.setSize( images[ 0 ] );
 		addItem( t , theValue );
@@ -561,7 +561,7 @@ public class CheckBox extends ControlGroup< CheckBox > {
 		}
 		if ( theBroadcastFlag ) {
 			ControlEvent myEvent = new ControlEvent( this );
-			cp5.getControlBroadcaster( ).broadcast( myEvent , ControlP5Constants.FLOAT );
+			cp5.getControlBroadcaster( ).broadcast( myEvent , FLOAT);
 		}
 	}
 

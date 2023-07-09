@@ -1,4 +1,4 @@
-package controlP5;
+package main.java.controlp5;
 
 /**
  * controlP5 is a processing gui library.
@@ -31,10 +31,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import controlP5.events.ReleasedOutsideListener;
-import controlP5.textfield.TextfieldCommand;
+import main.java.controlp5.events.ReleasedOutsideListener;
 import processing.core.PApplet;
-import processing.core.PFont;
 import processing.core.PGraphics;
 import processing.event.Event;
 import processing.event.KeyEvent;
@@ -114,7 +112,7 @@ public class Textfield extends Controller< Textfield > implements ReleasedOutsid
 
 		_myCaptionLabel = new Label( cp5 , theName , 0 , 0 , color.getCaptionLabel( ) );
 		_myValueLabel.setFont( cp5.controlFont == cp5.defaultFont ? cp5.defaultFontForText : cp5.controlFont );
-		_myCaptionLabel.align( ControlP5.LEFT , ControlP5.BOTTOM_OUTSIDE );
+		_myCaptionLabel.align(LEFT, BOTTOM_OUTSIDE);
 		_myCaptionLabel.setPaddingX( 0 );
 
 		_myBroadcastType = STRING;

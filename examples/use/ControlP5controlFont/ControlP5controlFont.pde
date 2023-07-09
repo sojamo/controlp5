@@ -12,7 +12,7 @@ import controlP5.*;
 
 ControlP5 cp5;
 
-controlP5.Button b;
+main.java.controlp5.Button b;
 
 int buttonValue = 1;
 
@@ -108,22 +108,22 @@ Format:
 ClassName : returnType methodName(parameter type)
 
 
-controlP5.ControlFont : PFont getFont() 
-controlP5.ControlFont : int getBaseline() 
-controlP5.ControlFont : int getBottom() 
-controlP5.ControlFont : int getCenter() 
-controlP5.ControlFont : int getHeight() 
-controlP5.ControlFont : int getOffset(int) 
-controlP5.ControlFont : int getOverflow() 
-controlP5.ControlFont : int getSize() 
-controlP5.ControlFont : int getTextHeight() 
-controlP5.ControlFont : int getTop() 
-controlP5.ControlFont : int getWidth() 
-controlP5.ControlFont : void adjust(PGraphics, Label) 
-controlP5.ControlFont : void draw(ControlP5, Label) 
-controlP5.ControlFont : void draw(PGraphics, Label) 
-controlP5.ControlFont : void init(Label) 
-controlP5.ControlFont : void setSize(int) 
+main.java.controlp5.ControlFont : PFont getFont()
+main.java.controlp5.ControlFont : int getBaseline()
+main.java.controlp5.ControlFont : int getBottom()
+main.java.controlp5.ControlFont : int getCenter()
+main.java.controlp5.ControlFont : int getHeight()
+main.java.controlp5.ControlFont : int getOffset(int)
+main.java.controlp5.ControlFont : int getOverflow()
+main.java.controlp5.ControlFont : int getSize()
+main.java.controlp5.ControlFont : int getTextHeight()
+main.java.controlp5.ControlFont : int getTop()
+main.java.controlp5.ControlFont : int getWidth()
+main.java.controlp5.ControlFont : void adjust(PGraphics, Label)
+main.java.controlp5.ControlFont : void draw(ControlP5, Label)
+main.java.controlp5.ControlFont : void draw(PGraphics, Label)
+main.java.controlp5.ControlFont : void init(Label)
+main.java.controlp5.ControlFont : void setSize(int)
 java.lang.Object : String toString() 
 java.lang.Object : boolean equals(Object) 
 

@@ -1,4 +1,4 @@
-package controlP5;
+package main.java.controlp5;
 
 /**
  * controlP5 is a processing gui library.
@@ -35,7 +35,7 @@ import processing.core.PGraphics;
  * ControlFonts.
  * 
  * 
- * @see controlP5.ControlFont
+ * @see ControlFont
  * @example controllers/ControlP5Textlabel
  * 
  */

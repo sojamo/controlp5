@@ -1,4 +1,4 @@
-package controlP5;
+package main.java.controlp5;
 
 /**
  * controlP5 is a processing gui library.
@@ -157,7 +157,7 @@ public class ControlEvent {
 	/**
 	 * Checks if the ControlEvent was triggered by a tab
 	 * 
-	 * @see controlP5.Tab
+	 * @see Tab
 	 * @return boolean
 	 */
 	public boolean isTab( ) {
@@ -167,7 +167,7 @@ public class ControlEvent {
 	/**
 	 * Checks if the ControlEvent was triggered by a controller
 	 * 
-	 * @see controlP5.Controller
+	 * @see Controller
 	 * @return boolean
 	 */
 	public boolean isController( ) {
@@ -177,7 +177,7 @@ public class ControlEvent {
 	/**
 	 * Checks if the ControlEvent was triggered by a ControlGroup
 	 * 
-	 * @see controlP5.ControllerGroup
+	 * @see ControllerGroup
 	 * @return boolean
 	 */
 	public boolean isGroup( ) {

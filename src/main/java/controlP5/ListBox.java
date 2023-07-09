@@ -1,4 +1,4 @@
-package controlP5;
+package main.java.controlp5;
 
 /**
  * controlP5 is a processing gui library.
@@ -25,7 +25,7 @@ package controlP5;
  * 
  */
 
-import static controlP5.ControlP5.b;
+import static main.java.controlp5.ControlP5.b;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -41,7 +41,7 @@ import processing.event.KeyEvent;
 /**
  * A ListBox is a list of vertically aligned items which can be scrolled if required.
  * 
- * @see controlP5.ListBox
+ * @see ListBox
  * @example controllers/ControlP5listBox
  */
 public class ListBox extends Controller< ListBox > implements ControlListener {
@@ -415,7 +415,7 @@ public class ListBox extends Controller< ListBox > implements ControlListener {
 				for ( int i = m0 ; i < m1 ; i++ ) {
 					Map< String , Object > item = c.items.get( i );
 					CColor color = ( CColor ) item.get( "color" );
-					g.fill( ( b( item.get( "state" ) ) ) ? color.getActive( ) : ( i == c.itemHover ) ? ( c.isMousePressed ? color.getActive( ) : color.getForeground( ) ) : color.getBackground( ) );
+					g.fill( ( ControlP5.b( item.get( "state" ) ) ) ? color.getActive( ) : ( i == c.itemHover ) ? ( c.isMousePressed ? color.getActive( ) : color.getForeground( ) ) : color.getBackground( ) );
 					g.rect( 0 , 0 , c.getWidth( ) , c.itemHeight - 1 );
 					c.getValueLabel( ).align( PApplet.LEFT , PApplet.CENTER ).set( item.get( "text" ).toString( ) ).draw( g , 4 , c.itemHeight / 2 );
 					g.translate( 0 , c.itemHeight );
@@ -446,19 +446,19 @@ public class ListBox extends Controller< ListBox > implements ControlListener {
 	public void keyEvent( KeyEvent theKeyEvent ) {
 		if ( isInside && theKeyEvent.getAction( ) == KeyEvent.PRESS ) {
 			switch ( theKeyEvent.getKeyCode( ) ) {
-			case ( ControlP5.UP ):
+			case (UP):
 				scroll( theKeyEvent.isAltDown( ) ? -itemIndexOffset : theKeyEvent.isShiftDown( ) ? -10 : -1 );
 				updateHover( );
 				break;
-			case ( ControlP5.DOWN ):
+			case (DOWN):
 				scroll( theKeyEvent.isAltDown( ) ? items.size( ) - itemRange : theKeyEvent.isShiftDown( ) ? 10 : 1 );
 				updateHover( );
 				break;
-			case ( ControlP5.LEFT ):
+			case (LEFT):
 				break;
-			case ( ControlP5.RIGHT ):
+			case (RIGHT):
 				break;
-			case ( ControlP5.ENTER ):
+			case (ENTER):
 				onRelease( );
 				break;
 			}

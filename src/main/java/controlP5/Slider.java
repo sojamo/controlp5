@@ -1,4 +1,4 @@
-package controlP5;
+package main.java.controlp5;
 
 /**
  * controlP5 is a processing gui library.
@@ -636,7 +636,7 @@ public class Slider extends Controller< Slider > {
 	}
 
 	/**
-	 * @see controlP5.Slider#setScrollSensitivity(float)
+	 * @see Slider#setScrollSensitivity(float)
 	 * 
 	 * @param theValue
 	 * @return Slider
