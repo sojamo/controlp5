@@ -1,6 +1,6 @@
 grammar XML;
 
-document  : '<Window>' element+ '</Window>' ;
+document  : '<Window>' element* '</Window>' ;
 
 element   : startTag (content )? endTag
           | SELF_CLOSING
@@ -10,14 +10,19 @@ startTag  : OPEN Name  attribute* CLOSE ;
 
 endTag    : OPEN_SLASH Name CLOSE ;
 
+content   : element | STRING ;
+
 SELF_CLOSING : OPEN Name SLASH_CLOSE ;
 
 attribute : Name EQUALS value ;
 
-content   : element | STRING ;
+
 
 value: STRING
-     | NUMBER UNIT;
+     | NUMBER UNIT
+     | rgb;
+
+rgb: 'rgb' '(' NUMBER ',' NUMBER ',' NUMBER ')';
 
 UNIT: 'px' | '%';
 WS : [ \t\r\n]+ -> skip;

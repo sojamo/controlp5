@@ -61,4 +61,11 @@ public class XMLBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements XM
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
 	@Override public T visitValue(XMLParser.ValueContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitRgb(XMLParser.RgbContext ctx) { return visitChildren(ctx); }
 }

@@ -52,4 +52,10 @@ public interface XMLVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitValue(XMLParser.ValueContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link XMLParser#rgb}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitRgb(XMLParser.RgbContext ctx);
 }
